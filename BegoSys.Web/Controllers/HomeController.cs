@@ -15,7 +15,7 @@ namespace BegoSys.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "BegoSystem - JuiceBar.co ";
 
             return View();
         }
