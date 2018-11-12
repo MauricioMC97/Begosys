@@ -15,7 +15,7 @@ namespace BegoSys.Domain.Entidades
         /// <summary>
         /// Identificador del departamento se usa como indice para EntityFramework
         /// </summary>
-        [Key]
+        //[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("IdDepartamento")]
         public long IdDepartamento { get; set; }
@@ -23,6 +23,7 @@ namespace BegoSys.Domain.Entidades
         /// <summary>
         /// Código del departamento de la DIAN
         /// </summary>
+        [Key]
         [Required]
         [StringLength(2)]
         [Column("CodigoDian")]
@@ -49,7 +50,7 @@ namespace BegoSys.Domain.Entidades
         /// </summary>
         [Required]
         [Column("IdPais")]
-        public string IdPais { get; set; }
+        public long IdPais { get; set; }
 
 
         #region Propiedades de navegación

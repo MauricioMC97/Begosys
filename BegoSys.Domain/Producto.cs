@@ -20,6 +20,7 @@ namespace BegoSys.Domain.Entidades
         public long IdProducto { get; set; }
 
         [Required]
+        [StringLength(200)]
         [Column("NombreProducto")]
         public string NombreProducto { get; set; }
 
@@ -28,8 +29,16 @@ namespace BegoSys.Domain.Entidades
         public long IdTipoProducto { get; set; }
 
         [Required]
+        [StringLength(2000)]
         [Column("Receta")]
         public string Receta { get; set; }
+
+        #region Propiedades de Navegación
+        ///<summary>
+        ///Clave foranea a la tabla de tipos de producto
+        ///</summary>
+
+        #endregion
 
     }
 }

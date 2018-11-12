@@ -63,8 +63,8 @@ namespace BegoSys.Domain.Entidades
         /// Identificador del País al que pertenece el municipio
         /// </summary>
         [Required]
-        [Column("IdPais")]
-        public long IdPais { get; set; }
+        [Column("NroPais")]
+        public long NroPais { get; set; }
 
 
         #region Propiedades de navegación
@@ -78,7 +78,7 @@ namespace BegoSys.Domain.Entidades
         /// <summary>
         /// Clave foranea con la tabla de paises
         /// </summary>
-        [ForeignKey("IdPais")]
+        [ForeignKey("NroPais")]
         public virtual Pais Paises { get; set; }
 
         #endregion

@@ -18,5 +18,10 @@ namespace BegoSys.Domain.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("idTipoProducto")]
         public long IdTipoProducto { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string nombreTipoProducto { get; set; }
+
     }
 }

@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\MonitorOperaciones\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\MonitorOperaciones\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\MonitorOperaciones\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -57,20 +57,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidades\Departamento.cs" />
-    <Compile Include="Entidades\Municipio.cs" />
-    <Compile Include="Entidades\Pais.cs" />
-    <Compile Include="Entidades\Producto.cs" />
-    <Compile Include="Entidades\TipoProducto.cs" />
+    <Compile Include="Clases\FunctionParameter.cs" />
+    <Compile Include="EntidadesJuicebar.cs" />
+    <Compile Include="Entidades\Local.cs" />
+    <Compile Include="Entidades\Persona.cs" />
+    <Compile Include="Entidades\PersonasLocal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Clases\" />
     <Folder Include="TiposComplejos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BegoSys.Common\BegoSys.Common.csproj">
+      <Project>{6A48768E-2B84-4C23-87F9-AB5F4A6FF95F}</Project>
+      <Name>BegoSys.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
