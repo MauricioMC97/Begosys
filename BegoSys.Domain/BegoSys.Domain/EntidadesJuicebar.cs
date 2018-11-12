@@ -53,7 +53,7 @@ namespace BegoSys.Domain
         ///<summary>
         ///Municipios
         ///</summary>
-        //public DbSet<Municipio> Municipios { get; set; }
+        public DbSet<Municipio> Municipios { get; set; }
 
         ///<summary>
         ///Tipo Productos
@@ -132,14 +132,18 @@ namespace BegoSys.Domain
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             try
-            { 
+            {
+                modelBuilder.HasDefaultSchema("JUICEBAR");
                 modelBuilder.Properties().Configure(cppc => cppc.HasColumnName(cppc.ClrPropertyInfo.Name.ToUpper()));
 
                 modelBuilder.HasDefaultSchema(AuxiliarBegoSys.ObtenerAtributoDeConfiguracion("EsquemaBaseDatos", true));
+
+                modelBuilder.Entity<Local>().ToTable("JBLOCALES");
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.ReadKey();
             }
                 
         }

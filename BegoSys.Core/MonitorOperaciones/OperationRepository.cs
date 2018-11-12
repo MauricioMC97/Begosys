@@ -16,6 +16,7 @@ namespace BegoSys.Core
 {
     public class OperationRepository : IOperationRepository
     {
+
         public DatosLocalTO ConsultarDatosLocal(long lIdenLocal)
         {
             DatosLocalTO DatEstablecimiento;
@@ -25,43 +26,62 @@ namespace BegoSys.Core
             {
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
-                    DatEstablecimiento = (from l in db.Locales
-                                          where l.idLocal == lIdenLocal
-                                          select new DatosLocalTO
-                                          {
-                                              IdLocal = l.idLocal,
-                                              idMoneda = l.idMoneda,
-                                              HoraAbre = l.HoraAbre,
-                                              HoraCierra = l.HoraCierra,
-                                              HoraIInventario = l.HoraIInventario,
-                                              HoraFInventario = l.HoraFInventario,
-                                              HoraIPulpa = l.HoraIPulpa,
-                                              HoraFPulpa = l.HoraFPulpa,
-                                              HoraIVentas = l.HoraIVentas,
-                                              HoraFVentas = l.HoraFVentas
-                                          }).FirstOrDefault();
-
-                    if (DatEstablecimiento != null)
+                    try
                     {
-                        DatosPersonas = (from p in db.Personas
-                                         join pl in db.PersonasLocal on p.idPersona equals pl.idPersona
-                                         where pl.idLocal == DatEstablecimiento.IdLocal
-                                         select new PersonasLocalTO
-                                         {
-                                             idLocalComercial = pl.idLocal,
-                                             idPersona = p.idPersona,
-                                             documento = p.docPersona,
-                                             nombre = p.nombrecompleto
-                                         }).FirstOrDefault();
+                        var Usuario = db.Database.SqlQuery<string>("select user from dual").First();
+                        //var Prueba = (from p in db.Personas where p.idPersona == lIdenLocal select (p)).ToList();
 
-                        DatEstablecimiento.ListaPersonas.Add(DatosPersonas);
+                        DatEstablecimiento = (from l in db.Locales
+                                              where l.IdLocal == lIdenLocal
+                                              select new DatosLocalTO
+                                              {
+                                                  IdLocal = l.IdLocal,
+                                                  idMoneda = l.IdMoneda,
+                                                  HoraAbre = l.HoraAbre,
+                                                  HoraCierra = l.HoraCierra,
+                                                  HoraIInventario = l.HoraIInventario,
+                                                  HoraFInventario = l.HoraFInventario,
+                                                  HoraIPulpa = l.HoraIPulpa,
+                                                  HoraFPulpa = l.HoraFPulpa,
+                                                  HoraIVentas = l.HoraIVentas,
+                                                  HoraFVentas = l.HoraFVentas
+                                              }).FirstOrDefault();
+
+                        if (DatEstablecimiento != null)
+                        {
+                            DatosPersonas = (from p in db.Personas
+                                             join pl in db.PersonasLocal on p.idPersona equals pl.idPersona
+                                             where pl.idLocal == DatEstablecimiento.IdLocal
+                                             select new PersonasLocalTO
+                                             {
+                                                 idLocalComercial = pl.idLocal,
+                                                 idPersona = p.idPersona,
+                                                 documento = p.docPersona,
+                                                 nombre = p.nombrecompleto
+                                             }).FirstOrDefault();
+
+                            DatEstablecimiento.ListaPersonas.Add(DatosPersonas);
+                        }
+                        
                     }
+                    catch (Exception Ex)
+                    {
+                        db.Database.Log = s => {
+                            System.Diagnostics.Debug.WriteLine(s);
+                            Console.WriteLine(s);
+                            Console.ReadKey();
+                        };
+                        Console.WriteLine("Error" + Ex.Message);
+                        return null;
+                    }
+
                 }
                 return DatEstablecimiento;
             }
             catch (Exception Ex)
             {
                 Console.WriteLine("Error" + Ex.Message);
+
                 return null;
             }
         }
