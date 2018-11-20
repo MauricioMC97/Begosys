@@ -61,6 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contabilidad\AccountingRepository.cs" />
+    <Compile Include="Contabilidad\IAccountingRepository.cs" />
+    <Compile Include="Inventario\IInventoryRepository.cs" />
+    <Compile Include="Inventario\InventoryRepository.cs" />
     <Compile Include="MonitorOperaciones\IOperationRepository.cs" />
     <Compile Include="MonitorOperaciones\OperationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,7 +8,7 @@ namespace BegoSys.Domain.Entidades
     /// <summary>
     /// Tabla que contiene las medidas para ser usadas en los envases recetas y costos
     /// </summary>
-    [Table("jbMedidas")]
+    [Table("JBMEDIDAS")]
     public partial class Medida
     {
         /// <summary>
@@ -16,7 +16,7 @@ namespace BegoSys.Domain.Entidades
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("idMedida")]
+        [Column("IDMEDIDA")]
         public long idMedida { get; set; }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace BegoSys.Domain.Entidades
         /// </summary>
         [Required]
         [StringLength(200)]
-        [Column("nombreMedida")]
+        [Column("NOMBREMEDIDA")]
         public string nombreMedida { get; set; }
     }
 }

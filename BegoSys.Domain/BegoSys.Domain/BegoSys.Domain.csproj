@@ -60,12 +60,18 @@
     <Compile Include="Clases\FunctionParameter.cs" />
     <Compile Include="EntidadesJuicebar.cs" />
     <Compile Include="Entidades\Departamento.cs" />
+    <Compile Include="Entidades\DetalleInventario.cs" />
+    <Compile Include="Entidades\Ingrediente.cs" />
+    <Compile Include="Entidades\Inventario.cs" />
     <Compile Include="Entidades\Local.cs" />
+    <Compile Include="Entidades\Medida.cs" />
+    <Compile Include="Entidades\MedidasReceta.cs" />
     <Compile Include="Entidades\Moneda.cs" />
     <Compile Include="Entidades\Municipio.cs" />
     <Compile Include="Entidades\Pais.cs" />
     <Compile Include="Entidades\Persona.cs" />
     <Compile Include="Entidades\PersonasLocal.cs" />
+    <Compile Include="Entidades\TipoIngrediente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

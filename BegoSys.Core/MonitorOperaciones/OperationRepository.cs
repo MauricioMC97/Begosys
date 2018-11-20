@@ -16,11 +16,11 @@ namespace BegoSys.Core
 {
     public class OperationRepository : IOperationRepository
     {
-
+        //Consulta los datos del establecimiento como moneda, fecha y hora de apertura fecha y hora de cierre
         public DatosLocalTO ConsultarDatosLocal(long lIdenLocal)
         {
             DatosLocalTO DatEstablecimiento;
-            PersonasLocalTO DatosPersonas;
+            List<PersonasLocalTO> DatosPersonas;
 
             try
             {
@@ -36,7 +36,8 @@ namespace BegoSys.Core
                                               select new DatosLocalTO
                                               {
                                                   IdLocal = l.IdLocal,
-                                                  idMoneda = l.IdMoneda,
+                                                  NombreLocal = l.NombreLocal,
+                                                  IdMoneda = l.IdMoneda,
                                                   HoraAbre = l.HoraAbre,
                                                   HoraCierra = l.HoraCierra,
                                                   HoraIInventario = l.HoraIInventario,
@@ -49,6 +50,7 @@ namespace BegoSys.Core
 
                         if (DatEstablecimiento != null)
                         {
+                            //Busca a las personas que trabajan en el local
                             DatosPersonas = (from p in db.Personas
                                              join pl in db.PersonasLocal on p.idPersona equals pl.idPersona
                                              where pl.idLocal == DatEstablecimiento.IdLocal
@@ -58,9 +60,9 @@ namespace BegoSys.Core
                                                  idPersona = p.idPersona,
                                                  documento = p.docPersona,
                                                  nombre = p.nombrecompleto
-                                             }).FirstOrDefault();
+                                             }).ToList();
 
-                            DatEstablecimiento.ListaPersonas.Add(DatosPersonas);
+                            DatEstablecimiento.ListaPersonas = DatosPersonas;
                         }
                         
                     }
@@ -86,10 +88,48 @@ namespace BegoSys.Core
             }
         }
 
-
-        public void RealizarInventario ()
+        public bool ValidarPersonaProceso(string doc, DatosLocalTO DatLoc, long idProc)
         {
-            return;
+            bool bPerteneceLocal = false;
+            bool bEsValidaPersona = false; //Identifica si la persona cumple con el perfil para realizar el proceso
+
+            //Valida si la persona si pertenece al local donde está solicitando el permiso
+            foreach(PersonasLocalTO Person in DatLoc.ListaPersonas)
+            {
+                //Si el documento de la persona es igual al documento ingresado
+                if (Person.documento == doc)
+                {
+                    bPerteneceLocal = true;
+
+                    using (var db = EntidadesJuicebar.GetDbContext())
+                    {
+                        bEsValidaPersona = true;
+                        //(from dr in db.DetalleRoles where dr.IdPersona == Persona.idpersona).
+                    }
+
+                }
+            }
+
+            if (!bPerteneceLocal)
+            {
+                bEsValidaPersona = false;
+                Console.WriteLine("Error la persona con cédula " + doc + "no pertenece al local " + DatLoc.NombreLocal);
+            }
+            return bEsValidaPersona;
+        }
+
+
+        public long ConsultarMedidasenReceta(long id)
+        {
+            long lMedida = 0;
+
+            using (var db = EntidadesJuicebar.GetDbContext())
+            {
+                //Se consulta la medida en el vaso de 16 onzas (codigo 1) que es el mas pequeño que se va a usar
+                lMedida = (from mr in db.MedidasRecetas where (mr.IdIngrediente == id && mr.IdEnvase == 1) select mr.Cantidad).FirstOrDefault();
+            }
+
+            return lMedida;
         }
 
         public void ElaborarPulpa()

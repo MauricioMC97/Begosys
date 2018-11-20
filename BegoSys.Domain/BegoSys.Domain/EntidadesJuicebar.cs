@@ -43,12 +43,12 @@ namespace BegoSys.Domain
         /// <summary>
         /// Paises
         /// </summary>
-        //public DbSet<Pais> Paises{ get; set; }
+        public DbSet<Pais> Paises{ get; set; }
 
         ///<summary>
         ///Departamentos
         ///</summary>
-        //public DbSet<Departamento> Departamentos { get; set; }
+        public DbSet<Departamento> Departamentos { get; set; }
 
         ///<summary>
         ///Municipios
@@ -68,17 +68,17 @@ namespace BegoSys.Domain
         ///<summary>
         ///Tipo Ingredientes
         ///</summary>
-        //public DbSet<TipoIngrediente> TipoIngredientes { get; set; }
+        public DbSet<TipoIngrediente> TipoIngredientes { get; set; }
 
         ///<summary>
         ///Ingredientes
         ///</summary>
-        //public DbSet<Ingrediente> Ingredientes { get; set; }
+        public DbSet<Ingrediente> Ingredientes { get; set; }
 
         ///<summary>
         ///Medidas
         ///</summary>
-        //public DbSet<Medida> Medidas { get; set; }
+        public DbSet<Medida> Medidas { get; set; }
 
         ///<summary>
         ///Envases
@@ -96,11 +96,12 @@ namespace BegoSys.Domain
         ///<summary>
         ///MedidasRecetas
         ///</summary>
+        public DbSet<MedidasReceta> MedidasRecetas { get; set; }
 
         ///<summary>
         ///Monedas
         ///</summary>
-        
+
         ///<summary>
         ///Locales
         ///</summary>
@@ -119,7 +120,12 @@ namespace BegoSys.Domain
         ///<summary>
         ///Inventarios
         ///</summary>
-        //public DbSet<Inventario> Inventarios { get; set; }
+        public DbSet<Inventario> Inventarios { get; set; }
+
+        ///<summary>
+        ///Detalle de los movimientos del inventario
+        ///</summary>
+        public DbSet<DetalleInventario> DetalleInventarios { get; set; }
 
         #endregion
 

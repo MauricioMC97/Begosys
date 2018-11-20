@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatosLocalTO.cs" />
+    <Compile Include="InventarioTO.cs" />
     <Compile Include="PersonasLocalTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

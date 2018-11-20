@@ -4,37 +4,37 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BegoSys.Domain.Entidades
 {
-    [Table("jbPersonasLocal")]
+    [Table("JBPERSONASLOCAL")]
     public partial class PersonasLocal
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("idRegistro")]
+        [Column("IDREGISTRO")]
         public long idRegistro { get; set; }
 
         [Required]
-        [Column("idPersona")]
+        [Column("IDPERSONA")]
         public long idPersona { get; set; }
 
         [Required]
-        [Column("idLocal")]
+        [Column("IDLOCAL")]
         public long idLocal { get; set; }
 
 
         [Required]
-        [Column("FechaInicio")]
+        [Column("FECHAINICIO")]
         public DateTime FechaInicio { get; set; }
 
         [Required]
-        [Column("FechaFin")]
+        [Column("FECHAFIN")]
         public DateTime FechaFin{ get; set; }
 
-        [Required]
-        [Column("HoraEntrada")]
-        public DateTime HoraEntrada { get; set; }
+        //[Required]
+        //[Column("HORAENTRADA")]
+        //public DateTime HoraEntrada { get; set; }
 
-        [Required]
-        [Column("HoraSalida")]
-        public DateTime HoraSalida { get; set; }
+        //[Required]
+        //[Column("HORASALIDA")]
+        //public DateTime HoraSalida { get; set; }
     }
 }

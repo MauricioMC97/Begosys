@@ -11,8 +11,11 @@ namespace BegoSys.TO
         //Identificador del Local comercial
         public long IdLocal { get; set; }
 
+        //Nombre del local comercial
+        public string NombreLocal { get; set; }
+
         //Moneda en la que trabaja el local comercial
-        public long idMoneda { get; set; }
+        public long IdMoneda { get; set; }
 
         //Hora en la que abre el local comercial
         public DateTime HoraAbre { get; set; }
