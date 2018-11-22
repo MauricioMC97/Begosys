@@ -127,6 +127,16 @@ namespace BegoSys.Domain
         ///</summary>
         public DbSet<DetalleInventario> DetalleInventarios { get; set; }
 
+        ///<summary>
+        ///Detalla a cuales procesos tiene acceso el rol
+        ///</summary>
+        public DbSet<DetalleRol> DetalleRoles { get; set; }
+
+        ///<summary>
+        ///Tabla que contiene los costos asociados a la mano de obra para ser usada en calculos durante la operación
+        ///</summary>
+        public DbSet<CostoManoObra> CostoManoObra { get; set; }
+
         #endregion
 
         #region Métodos públicos

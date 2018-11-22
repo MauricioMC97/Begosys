@@ -19,5 +19,11 @@ namespace BegoSys.TO
 
         //Nombre Completo
         public string nombre { get; set; }
+
+        //Rol
+        public long idRol { get; set; }
+
+        //Salario por segundo de la persona usado para calculos de costos
+        public long SalarioSeg { get; set; }
     }
 }

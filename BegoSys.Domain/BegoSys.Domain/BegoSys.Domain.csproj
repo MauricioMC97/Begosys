@@ -59,8 +59,10 @@
   <ItemGroup>
     <Compile Include="Clases\FunctionParameter.cs" />
     <Compile Include="EntidadesJuicebar.cs" />
+    <Compile Include="Entidades\CostoManoObra.cs" />
     <Compile Include="Entidades\Departamento.cs" />
     <Compile Include="Entidades\DetalleInventario.cs" />
+    <Compile Include="Entidades\DetalleRol.cs" />
     <Compile Include="Entidades\Ingrediente.cs" />
     <Compile Include="Entidades\Inventario.cs" />
     <Compile Include="Entidades\Local.cs" />

@@ -53,13 +53,17 @@ namespace BegoSys.Core
                             //Busca a las personas que trabajan en el local
                             DatosPersonas = (from p in db.Personas
                                              join pl in db.PersonasLocal on p.idPersona equals pl.idPersona
+                                             join dr in db.DetalleRoles on p.idPersona equals dr.IdPersona
+                                             join cmo in db.CostoManoObra on p.idPersona equals cmo.IdPersona
                                              where pl.idLocal == DatEstablecimiento.IdLocal
                                              select new PersonasLocalTO
                                              {
                                                  idLocalComercial = pl.idLocal,
                                                  idPersona = p.idPersona,
                                                  documento = p.docPersona,
-                                                 nombre = p.nombrecompleto
+                                                 nombre = p.nombrecompleto,
+                                                 idRol = dr.IdRol,
+                                                 SalarioSeg = cmo.SalarioSegundo
                                              }).ToList();
 
                             DatEstablecimiento.ListaPersonas = DatosPersonas;
@@ -88,7 +92,8 @@ namespace BegoSys.Core
             }
         }
 
-        public bool ValidarPersonaProceso(string doc, DatosLocalTO DatLoc, long idProc)
+        //Verifica que las personas pertenezcan al local desde donde están solicitando ejecutar el proceso
+        public bool ValidarPersonaProceso(long? idp, string doc, DatosLocalTO DatLoc, long idProc)
         {
             bool bPerteneceLocal = false;
             bool bEsValidaPersona = false; //Identifica si la persona cumple con el perfil para realizar el proceso
@@ -97,16 +102,32 @@ namespace BegoSys.Core
             foreach(PersonasLocalTO Person in DatLoc.ListaPersonas)
             {
                 //Si el documento de la persona es igual al documento ingresado
-                if (Person.documento == doc)
+                if (doc != null)
                 {
-                    bPerteneceLocal = true;
-
-                    using (var db = EntidadesJuicebar.GetDbContext())
+                    if (Person.documento == doc)
                     {
-                        bEsValidaPersona = true;
-                        //(from dr in db.DetalleRoles where dr.IdPersona == Persona.idpersona).
-                    }
+                        bPerteneceLocal = true;
 
+                        using (var db = EntidadesJuicebar.GetDbContext())
+                        {
+                            bEsValidaPersona = true;
+                            //(from dr in db.DetalleRoles where dr.IdPersona == Persona.idpersona).
+                        }
+
+                    }
+                }
+                if (idp != null)
+                {
+                    if (Person.idPersona == idp)
+                    {
+                        bPerteneceLocal = true;
+
+                        using (var db = EntidadesJuicebar.GetDbContext())
+                        {
+                            bEsValidaPersona = true;
+                            //(from dr in db.DetalleRoles where dr.IdPersona == Persona.idpersona).
+                        }
+                    }
                 }
             }
 
@@ -116,6 +137,15 @@ namespace BegoSys.Core
                 Console.WriteLine("Error la persona con cédula " + doc + "no pertenece al local " + DatLoc.NombreLocal);
             }
             return bEsValidaPersona;
+        }
+
+        //Verifica si hay empleados disponibles de acuerdo al rol y al local solicitados
+        public bool HayEmpleadosDisponibles(long idRol, long idLoc)
+        {
+            using (var db = EntidadesJuicebar.GetDbContext())
+            {
+                return bHayDisponibles;
+            }
         }
 
 
