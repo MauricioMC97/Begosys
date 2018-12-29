@@ -8,9 +8,9 @@ namespace BegoSys.Core.Contabilidad
 {
     public class AccountingRepository: IAccountingRepository
     {
-        public bool RegistrarLibroMayor(string sNroSubCuenta, long Debito, long Credito)
-        {
-            return true;
-        }
+        //public bool RegistrarLibroMayor(DatosLibroMayorTO DLM)
+        //{
+        //    return true;
+        //}
     }
 }

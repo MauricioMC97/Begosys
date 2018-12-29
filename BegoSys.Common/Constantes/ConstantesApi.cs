@@ -11,5 +11,9 @@ namespace BegoSys.Common.Constantes
         #region Operacion
         public const string ConsultarDatosLocalUri = "api/Operation/ConsultarDatosLocal/{id}";
         #endregion
+
+        #region Accounting
+        public const string GuardarenLibroMayor = "api/Operation/GuardarenLibroMayor/{subcuenta}{debito}{personadebito}{credito}{personacredito}{fecha}{observaciones}";
+        #endregion
     }
 }

@@ -1,90 +1,940 @@
 ﻿
 @{
-    ViewBag.Title = "Facturacion";
+    ViewBag.Title = "Facturación";
 }
 
-<h2>Facturacion</h2>
-<select name="Producto">
-    <option value="1">Jugo de Mango en Agua pequeño</option>
-    <option value="2">Jugo de Mango en Agua grande</option>
-    <option value="3">Jugo de Mango en Leche pequeño</option>
-    <option value="4">Jugo de Mango en Leche grande</option>
-    <option value="5">Mango Bebes</option>
-    <option value="6">Jugo de Maracuya en Agua pequeño</option>
-    <option value="7">Jugo de Maracuya en Agua grande</option>
-    <option value="8">Jugo de Maracuya en Leche pequeño</option>
-    <option value="9">Jugo de Maracuya en Leche grande</option>
-    <option value="10">Jugo de Tamarindo en Agua pequeño</option>
-    <option value="11">Jugo de Tamarindo en Agua grande</option>
-    <option value="12">Jugo de Mandarina en Agua pequeño</option>
-    <option value="13">Jugo de Mandarina en Agua grande</option>
-    <option value="14">Mandarina Bebes</option>
-    <option value="15">Jugo de Guanabana en Agua pequeño</option>
-    <option value="16">Jugo de Guanabana en Agua grande</option>
-    <option value="17">Jugo de Guanabana en Leche pequeño</option>
-    <option value="18">Jugo de Guanabana en Leche grande</option>
-    <option value="19">Jugo de Fresa en Agua pequeño</option>
-    <option value="20">Jugo de Fresa en Agua grande</option>
-    <option value="21">Jugo de Fresa en Leche pequeño</option>
-    <option value="22">Jugo de Fresa en Leche grande</option>
-    <option value="23">Jugo de Mora en Agua pequeño</option>
-    <option value="24">Jugo de Mora en Agua grande</option>
-    <option value="25">Jugo de Mora en Leche pequeño</option>
-    <option value="26">Jugo de Mora en Leche grande</option>
-    <option value="27">Jugo de Uva en Agua pequeño</option>
-    <option value="28">Jugo de Uva en Agua grande</option>
-    <option value="29">Jugo de Guayaba en Agua pequeño</option>
-    <option value="30">Jugo de Guayaba en Agua grande</option>
-    <option value="31">Jugo de Guayaba en Leche pequeño</option>
-    <option value="32">Jugo de Guayaba en Leche grande</option>
-    <option value="33">Jugo de Piña en Agua pequeño</option>
-    <option value="34">Jugo de Piña en Agua grande</option>
-    <option value="35">Jugo de Curuba en Leche pequeño</option>
-    <option value="36">Jugo de Curuba en Leche grande</option>
-    <option value="37">Jugo de Lulo en Agua pequeño</option>
-    <option value="38">Jugo de Lulo en Agua grande</option>
-    <option value="39">Jugo de Lulo en Leche pequeño</option>
-    <option value="40">Jugo de Lulo en Leche grande</option>
-    <option value="41">Limonada Natural pequeño</option>
-    <option value="42">Limonada Natural grande</option>
-    <option value="43">Sorbete de Banano en Leche pequeño</option>
-    <option value="44">Sorbete de Banano en Leche grande</option>
-    <option value="45">Banano Bebes</option>
-    <option value="46">Jugo de Naranja pequeño</option>
-    <option value="47">Jugo de Naranja grande</option>
-    <option value="48">Jugo de Tomate de Arbol pequeño</option>
-    <option value="49">Jugo de Tomate de Arbol grande</option>
-    <option value="50">Milo Frio pequeño</option>
-    <option value="51">Milo Frio grande</option>
-    <option value="52">Manzana Bebes</option>
-    <option value="53">Jugo de Papaya en Agua pequeño</option>
-    <option value="54">Jugo de Papaya en Agua grande</option>
-    <option value="55">Jugo de Papaya en Leche pequeño</option>
-    <option value="56">Jugo de Papaya en Leche grande</option>
-    <option value="57">Salpicon con Helado pequeño</option>
-    <option value="58">Salpicon con Helado grande</option>
-    <option value="59">Salpicon sin Helado pequeño</option>
-    <option value="60">Salpicon sin Helado grande</option>
-    <option value="61">Agua con Gas</option>
-    <option value="62">Agua sin Gas</option>
-    <option value="63">Ensalada Navideña</option>
-    <option value="64">Ensalada Halloween</option>
-    <option value="65">Ensalada Amor y Amistad</option>
-    <option value="66">Ensalada Antioqueña</option>
-    <option value="67">Ensalada de Verano</option>
-    <option value="68">Ensalada de Invierno</option>
-    <option value="69">Ensalada Cumpleaños</option>
-    <option value="70">Antigripal de la abuela</option>
+<h2>Facturación</h2>
+<form id="frmPedidos" action="~/Controllers/Billing/GuardarPedido" method="post">
+    <table style="height: 97px;" width="2000">
+        @*Producto 1*@
+        <tr>
+            <td>
+                <label>Producto 1</label>
+                <select id="Producto1" name="Producto1" class="form-control" onchange="asignavalunitario('Producto1')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad1" id="Cantidad1" onchange="calculateLineTotal('Cantidad1','ValorUnitario1','Subtotal1')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario1" id="ValorUnitario1">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal1">
+                <label>Para</label>
+                <select name="TipoDespacho1" id="TipoDespacho1">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio1" id="dirdomicilio1">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones1" id="observaciones1">
+
+            </td>
+        </tr>
+        @*Producto 2*@
+        <tr>
+            <td>
+                <label>Producto 2</label>
+                <select id="Producto2" class="form-control"  onchange="asignavalunitario('Producto2')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad2" id="Cantidad2" onchange="calculateLineTotal('Cantidad2','ValorUnitario2','Subtotal2')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario2" id="ValorUnitario2">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal2">
+                <label>Para</label>
+                <select name="TipoDespacho2" id="TipoDespacho2">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio2" id="dirdomicilio2">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones2" id="observaciones2">
+            </td>
+        </tr>
+        @*Producto 3*@
+        <tr>
+            <td>
+                <label>Producto 3</label>
+                <select id="Producto3" class="form-control" onchange="asignavalunitario('Producto3')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad3" id="Cantidad3" onchange="calculateLineTotal('Cantidad3','ValorUnitario3','Subtotal3')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario3" id="ValorUnitario3">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal3">
+                <label>Para</label>
+                <select name="TipoDespacho3" id="TipoDespacho3">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio3" id="dirdomicilio3">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones3" id="observaciones3">
+            </td>
+        </tr>
+        @*Producto 4*@
+        <tr>
+            <td>
+                <label>Producto 4</label>
+                <select id="Producto4" class="form-control" onchange="asignavalunitario('Producto4')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad4" id="Cantidad4" onchange="calculateLineTotal('Cantidad4','ValorUnitario4','Subtotal4')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario4" id="ValorUnitario4">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal4">
+                <label>Para</label>
+                <select name="TipoDespacho4" id="TipoDespacho4">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio4" id="dirdomicilio4">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones4" id="observaciones4">
+            </td>
+        </tr>
+        @*Producto 5*@
+        <tr>
+            <td>
+                <label>Producto 5</label>
+                <select id="Producto5" class="form-control" onchange="asignavalunitario('Producto5')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad5" id="Cantidad5" onchange="calculateLineTotal('Cantidad5','ValorUnitario5','Subtotal5')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario5" id="ValorUnitario5">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal5">
+                <label>Para</label>
+                <select name="TipoDespacho5" id="TipoDespacho5">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio5" id="dirdomicilio5">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones5" id="observaciones5">
+            </td>
+        </tr>
+        @*Producto 6*@
+        <tr>
+            <td>
+                <label>Producto 6</label>
+                <select id="Producto6" class="form-control" onchange="asignavalunitario('Producto6')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad6" id="Cantidad6" onchange="calculateLineTotal('Cantidad6','ValorUnitario6','Subtotal6')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario6" id="ValorUnitario6">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal6">
+                <label>Para</label>
+                <select name="TipoDespacho6" id="TipoDespacho6">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                <input type="text" name="dirdomicilio6" id="dirdomicilio6">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones6" id="observaciones6">
+            </td>
+        </tr>
+        @*Producto 7*@
+        <tr>
+            <td>
+                <label>Producto 7</label>
+                <select id="Producto7" class="form-control" onchange="asignavalunitario('Producto7')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad7" id="Cantidad7" onchange="calculateLineTotal('Cantidad7','ValorUnitario7','Subtotal7')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario7" id="ValorUnitario7">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal7">
+                <label>Para</label>
+                <select name="TipoDespacho7" id="TipoDespacho7">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                <input type="text" name="dirdomicilio7" id="dirdomicilio7">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones7" id="observaciones7">
+            </td>
+        </tr>
+        @*Producto 8*@
+        <tr>
+            <td>
+                <label>Producto 8</label>
+                <select id="Producto8" class="form-control" onchange="asignavalunitario('Producto8')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad8" id="Cantidad8" onchange="calculateLineTotal('Cantidad8','ValorUnitario8','Subtotal8')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario8" id="ValorUnitario8">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal8">
+                <label>Para</label>
+                <select name="TipoDespacho8" id="TipoDespacho8">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                <input type="text" name="dirdomicilio8" id="dirdomicilio8">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones8" id="observaciones8">
+            </td>
+        </tr>
+        @*Producto 9*@
+        <tr>
+            <td>
+                <label>Producto 9</label>
+                <select id="Producto9" class="form-control" onchange="asignavalunitario('Producto9')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad9" id="Cantidad9" onchange="calculateLineTotal('Cantidad9','ValorUnitario9','Subtotal9')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario9" id="ValorUnitario9">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal9">
+                <label>Para</label>
+                <select name="TipoDespacho9" id="TipoDespacho9">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                <input type="text" name="dirdomicilio9" id="dirdomicilio9">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones9" id="observaciones9">
+            </td>
+        </tr>
+        @*Producto 10*@
+        <tr>
+            <td>
+                <label>Producto 10</label>
+                <select id="Producto10" class="form-control" onchange="asignavalunitario('Producto10')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="1" data-valoru="3000">Jugo de Mango en Agua pequeño</option>
+                    <option value="2" data-valoru="4000">Jugo de Mango en Agua grande</option>
+                    <option value="3" data-valoru="3000">Jugo de Mango en Leche pequeño</option>
+                    <option value="4" data-valoru="4000">Jugo de Mango en Leche grande</option>
+                    <option value="5" data-valoru="1000">Mango Bebes</option>
+                    <option value="6" data-valoru="3000">Jugo de Maracuya en Agua pequeño</option>
+                    <option value="7" data-valoru="4000">Jugo de Maracuya en Agua grande</option>
+                    <option value="8" data-valoru="3000">Jugo de Maracuya en Leche pequeño</option>
+                    <option value="9" data-valoru="4000">Jugo de Maracuya en Leche grande</option>
+                    <option value="12" data-valoru="3000">Jugo de Mandarina en Agua pequeño</option>
+                    <option value="13" data-valoru="4000">Jugo de Mandarina en Agua grande</option>
+                    <option value="14" data-valoru="1000">Mandarina Bebes</option>
+                    <option value="15" data-valoru="3000">Jugo de Guanabana en Agua pequeño</option>
+                    <option value="16" data-valoru="4000">Jugo de Guanabana en Agua grande</option>
+                    <option value="17" data-valoru="3000">Jugo de Guanabana en Leche pequeño</option>
+                    <option value="18" data-valoru="4000">Jugo de Guanabana en Leche grande</option>
+                    <option value="19" data-valoru="3000">Jugo de Fresa en Agua pequeño</option>
+                    <option value="20" data-valoru="4000">Jugo de Fresa en Agua grande</option>
+                    <option value="21" data-valoru="3000">Jugo de Fresa en Leche pequeño</option>
+                    <option value="22" data-valoru="4000">Jugo de Fresa en Leche grande</option>
+                    <option value="23" data-valoru="3000">Jugo de Mora en Agua pequeño</option>
+                    <option value="24" data-valoru="4000">Jugo de Mora en Agua grande</option>
+                    <option value="25" data-valoru="3000">Jugo de Mora en Leche pequeño</option>
+                    <option value="26" data-valoru="4000">Jugo de Mora en Leche grande</option>
+                    <option value="29" data-valoru="3000">Jugo de Guayaba en Agua pequeño</option>
+                    <option value="30" data-valoru="4000">Jugo de Guayaba en Agua grande</option>
+                    <option value="31" data-valoru="3000">Jugo de Guayaba en Leche pequeño</option>
+                    <option value="32" data-valoru="4000">Jugo de Guayaba en Leche grande</option>
+                    <option value="33" data-valoru="3000">Jugo de Piña en Agua pequeño</option>
+                    <option value="34" data-valoru="4000">Jugo de Piña en Agua grande</option>
+                    <option value="37" data-valoru="3000">Jugo de Lulo en Agua pequeño</option>
+                    <option value="38" data-valoru="4000">Jugo de Lulo en Agua grande</option>
+                    <option value="39" data-valoru="3000">Jugo de Lulo en Leche pequeño</option>
+                    <option value="40" data-valoru="4000">Jugo de Lulo en Leche grande</option>
+                    <option value="41" data-valoru="3000">Limonada Natural pequeño</option>
+                    <option value="42" data-valoru="4000">Limonada Natural grande</option>
+                    <option value="43" data-valoru="3000">Sorbete de Banano en Leche pequeño</option>
+                    <option value="44" data-valoru="4000">Sorbete de Banano en Leche grande</option>
+                    <option value="45" data-valoru="1000">Banano Bebes</option>
+                    <option value="46" data-valoru="3000">Jugo de Naranja pequeño</option>
+                    <option value="47" data-valoru="4000">Jugo de Naranja grande</option>
+                    <option value="48" data-valoru="3000">Jugo de Tomate de Arbol en Agua pequeño</option>
+                    <option value="49" data-valoru="4000">Jugo de Tomate de Arbol en Agua grande</option>
+                    <option value="50" data-valoru="2000">Milo Frio pequeño</option>
+                    <option value="51" data-valoru="3000">Milo Frio grande</option>
+                    <option value="52" data-valoru="1000">Manzana Bebes</option>
+                    <option value="55" data-valoru="3000">Jugo de Papaya en Leche pequeño</option>
+                    <option value="56" data-valoru="4000">Jugo de Papaya en Leche grande</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad10" id="Cantidad10" onchange="calculateLineTotal('Cantidad10','ValorUnitario10','Subtotal10')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario10" id="ValorUnitario10">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal10">
+                <label>Para</label>
+                <select name="TipoDespacho10" id="TipoDespacho10">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                <input type="text" name="dirdomicilio10" id="dirdomicilio10">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones10" id="observaciones10">
+            </td>
+        </tr>
 
 
-    <option value="-">Other</option>
-</select>
-<label>Observaciones</label>
-<input type="text" name="observaciones">
-<label>Cantidad</label>
-<input type="text" name="Cantidad">
-<label>Valor Unitario</label>
-<input type="text" name="ValorUnitario">
-<label>Valor Total</label>
-<input type="text" name="ValorTotal">
+    </table>
+
+    <label>Impoconsumo</label>
+    <input type="text" name="Impoconsumo" id="Impoconsumo">
+
+
+    <label>Valor Total</label>
+    <input type="text" name="ValorTotal" id="ValorTotal">
+
+    <input type="submit" id="pedido" value="Solicitar Pedido">
+
+    <script>
+            $(document).ready(function () {
+
+                //get button by ID
+                $('#pedido').submit(function () {
+
+                    //call a function with parameters
+                    $.ajax({
+                        url: 'Billing/GuardarPedido',  //(Billing)= Controller's-name
+                        //(GuardarPedido) = Action's method name
+                        type: 'POST',
+                        timeout: '12000',
+                        datatype: 'text',
+                        data: {
+                            //Get the input from Document Object Model
+                            //by their ID
+                            Producto1: frmPedidos.Producto1.value,
+                            Cantidad1: frmPedidos.Cantidad1.value,
+                            ValorUnitario1: frmPedidos.ValorUnitario1.value,
+                            Subtotal1: frmPedidos.dirdomicilio1.value,
+                            TipoDespacho1: frmPedidos.TipoDespacho1.value,
+                            observaciones1: frmPedidos.observaciones1.value,
+                            Producto2: frmPedidos.Producto2.value,
+                            Cantidad2: frmPedidos.Cantidad2.value,
+                            ValorUnitario2: frmPedidos.ValorUnitario2.value,
+                            Subtotal2: frmPedidos.dirdomicilio2.value,
+                            TipoDespacho2: frmPedidos.TipoDespacho2.value,
+                            observaciones2: frmPedidos.observaciones2.value,
+                            Producto3: frmPedidos.Producto3.value,
+                            Cantidad3: frmPedidos.Cantidad3.value,
+                            ValorUnitario3: frmPedidos.ValorUnitario3.value,
+                            Subtotal3: frmPedidos.dirdomicilio3.value,
+                            TipoDespacho3: frmPedidos.TipoDespacho3.value,
+                            observaciones3: frmPedidos.observaciones3.value,
+                            Producto4: frmPedidos.Producto3.value,
+                            Cantidad4: frmPedidos.Cantidad3.value,
+                            ValorUnitario4: frmPedidos.ValorUnitario3.value,
+                            Subtotal4: frmPedidos.dirdomicilio3.value,
+                            TipoDespacho4: frmPedidos.TipoDespacho3.value,
+                            observaciones4: frmPedidos.observaciones3.value,
+                            Producto5: frmPedidos.Producto3.value,
+                            Cantidad5: frmPedidos.Cantidad3.value,
+                            ValorUnitario5: frmPedidos.ValorUnitario3.value,
+                            Subtotal5: frmPedidos.dirdomicilio3.value,
+                            TipoDespacho5: frmPedidos.TipoDespacho3.value,
+                            observaciones5: frmPedidos.observaciones3.value,
+                            Producto6: frmPedidos.Producto3.value,
+                            Cantidad6: frmPedidos.Cantidad3.value,
+                            ValorUnitario6: frmPedidos.ValorUnitario3.value,
+                            Subtotal6: frmPedidos.dirdomicilio3.value,
+                            TipoDespacho6: frmPedidos.TipoDespacho3.value,
+                            observaciones6: frmPedidos.observaciones3.value,
+                            Producto7: frmPedidos.Producto3.value,
+                            Cantidad7: frmPedidos.Cantidad3.value,
+                            ValorUnitario7: frmPedidos.ValorUnitario3.value,
+                            Subtotal7: frmPedidos.dirdomicilio3.value,
+                            TipoDespacho7: frmPedidos.TipoDespacho3.value,
+                            observaciones7: frmPedidos.observaciones3.value,
+                            Producto8: frmPedidos.Producto3.value,
+                            Cantidad8: frmPedidos.Cantidad3.value,
+                            ValorUnitario8: frmPedidos.ValorUnitario3.value,
+                            Subtotal8: frmPedidos.dirdomicilio7.value,
+                            TipoDespacho8: frmPedidos.TipoDespacho7.value,
+                            observaciones8: frmPedidos.observaciones7.value,
+                            Producto8: frmPedidos.Producto8.value,
+                            Cantidad8: frmPedidos.Cantidad8.value,
+                            ValorUnitario8: frmPedidos.ValorUnitario8.value,
+                            Subtotal8: frmPedidos.dirdomicilio8.value,
+                            TipoDespacho8: frmPedidos.TipoDespacho8.value,
+                            observaciones8: frmPedidos.observaciones8.value,
+                        }
+
+                    });
+                });
+            });
+
+        </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto1").onchange = function () {
+            document.getElementById("Cantidad1").setAttribute("value", 1);
+            document.getElementById("ValorUnitario1").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad1', 'ValorUnitario1', 'Subtotal1');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto2").onchange = function () {
+            document.getElementById("Cantidad2").setAttribute("value", 1);
+            document.getElementById("ValorUnitario2").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad2', 'ValorUnitario2', 'Subtotal2');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto3").onchange = function () {
+            document.getElementById("Cantidad3").setAttribute("value", 1);
+            document.getElementById("ValorUnitario3").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad3', 'ValorUnitario3', 'Subtotal3');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto4").onchange = function () {
+            document.getElementById("Cantidad4").setAttribute("value", 1);
+            document.getElementById("ValorUnitario4").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad4', 'ValorUnitario4', 'Subtotal4');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto5").onchange = function () {
+            document.getElementById("Cantidad5").setAttribute("value", 1);
+            document.getElementById("ValorUnitario5").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad5', 'ValorUnitario5', 'Subtotal5');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto6").onchange = function () {
+            document.getElementById("Cantidad6").setAttribute("value", 1);
+            document.getElementById("ValorUnitario6").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad6', 'ValorUnitario6', 'Subtotal6');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto7").onchange = function () {
+            document.getElementById("Cantidad7").setAttribute("value", 1);
+            document.getElementById("ValorUnitario7").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad7', 'ValorUnitario7', 'Subtotal7');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto8").onchange = function () {
+            document.getElementById("Cantidad8").setAttribute("value", 1);
+            document.getElementById("ValorUnitario8").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad8', 'ValorUnitario8', 'Subtotal8');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto9").onchange = function () {
+            document.getElementById("Cantidad9").setAttribute("value", 1);
+            document.getElementById("ValorUnitario9").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad9', 'ValorUnitario9', 'Subtotal9');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto10").onchange = function () {
+            document.getElementById("Cantidad10").setAttribute("value", 1);
+            document.getElementById("ValorUnitario10").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad10', 'ValorUnitario10', 'Subtotal10');
+        };
+    </script>
+
+    <script type="text/javascript">
+
+        function calculateLineTotal(numunit, rate, total) {
+            var rate = document.getElementById(rate).value;
+            var numunit = document.getElementById(numunit).value;
+
+
+            var sum = numunit * rate;
+
+
+            document.getElementById(total).value = sum;
+            findTotal();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function findTotal() {
+            var arr = document.getElementsByName('Subtotal');
+            var tot = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (parseInt(arr[i].value))
+                    tot += parseInt(arr[i].value);
+            }
+            document.getElementById('ValorTotal').value = tot;
+            document.getElementById('Impoconsumo').value = tot * 0.08;
+        }
+
+    </script>
+</form>
 

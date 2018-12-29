@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BegoSys.TO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +7,27 @@ using System.Web.Mvc;
 
 namespace BegoSys.Web.Controllers
 {
-    public class BillingController : Controller
+    public class BillingController : ControladorJsonNet
     {
+        /// <summary>
+        /// Permite guardar un pedido nuevo
+        /// </summary>
+        /// <param name="DatosFactura">Datos de la factura y del detalle de la factura</param>
+        /// <returns>Retorna OK si la operación es exitosa</returns>
+        [HttpPost]
+        public JsonResult GuardarPedido(FacturaTO DatosFactura)
+        {
+            _proxy.PostForObject<EntidadTo>(ConstantesApi.GuardarEntidadUri, DatosFactura);
+            return Json(new { status = "ok" });
+        }
+
+        [HttpPost]
+        public JsonResult ImprimirPedido(FacturaTO DatosFactura)
+        {
+            return Json(new { status = "ok" });
+        }
+
+
         // GET: Facturacion
         public ActionResult Index()
         {

@@ -137,6 +137,10 @@ namespace BegoSys.Domain
         ///</summary>
         public DbSet<CostoManoObra> CostoManoObra { get; set; }
 
+        /// <summary>
+        /// Tabla que contiene la información básica de los proveedores a los cuales se les compra algun producto o servicio
+        /// </summary>
+        public DbSet<Proveedor> Proveedores { get; set; }
         #endregion
 
         #region Métodos públicos

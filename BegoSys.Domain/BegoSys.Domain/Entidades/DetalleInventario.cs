@@ -16,6 +16,32 @@ namespace BegoSys.Domain.Entidades
         [Column("IDREGISTRO")]
         public long IdRegistroDetInv { get; set; }
 
+        [Required]
+        [Column("FECHAHORA")]
+        public DateTime FechaHora { get; set; }
+
+        [Required]
+        [Column("TRANSACCION")]
+        public string Transaccion { get; set; }
+
+        [Required]
+        [Column("CANTIDAD")]
+        public double Cantidad { get; set; }
+
+        [Column("UNIDADES")]
+        public double? Unidades { get; set; }
+
+        [Required]
+        [Column("COSTOTOTAL")]
+        public double CostoTotal { get; set; }
+
+        [Column("COSTOUNIDAD")]
+        public double? CostoUnidad { get; set; }
+
+        [Required]
+        [Column("IDMEDIDA")]
+        public long IdMedida { get; set; }
+        
         [Column("IDINGREDIENTE")]
         public long? IdIngrediente { get; set; }
         
@@ -26,31 +52,8 @@ namespace BegoSys.Domain.Entidades
         public long? IdInsumo { get; set; }
 
         [Required]
-        [Column("TRANSACCION")]
-        public string Transaccion { get; set; }
-
-        [Required]
-        [Column("FECHAHORA")]
-        public DateTime FechaHora { get; set; }
-
-        [Required]
-        [Column("CANTIDAD")]
-        public long Cantidad { get; set; }
-
-        [Column("UNIDADES")]
-        public long? Unidades { get; set; }
-
-        [Required]
-        [Column("COSTOMEDIDA")]
-        public long CostoMedida { get; set; }
-        
-        [Column("COSTOUNIDAD")]
-        public long? CostoUnidad { get; set; }
-
-        [Required]
         [Column("IDLOCAL")]
         public long IdLocal { get; set; }
-
 
         [Column("IDPROVEEDOR")]
         public long? IdProveedor { get; set; }

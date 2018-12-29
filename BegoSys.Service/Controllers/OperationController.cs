@@ -33,9 +33,9 @@ namespace BegoSys.Service.Controllers
         [ResponseType(typeof(DatosLocalTO))]
         [Route(ConstantesApi.ConsultarDatosLocalUri)]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public IHttpActionResult ConsultarDatosLocal(long id)
+        public IHttpActionResult ConsultarDatosLocal(long idLocal)
         {
-            DatosLocalTO infoLocal = _repository.ConsultarDatosLocal(id);
+            DatosLocalTO infoLocal = _repository.ConsultarDatosLocal(idLocal);
 
             if (infoLocal != null)
             {

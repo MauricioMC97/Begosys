@@ -49,10 +49,11 @@ namespace BegoSys.Service.Tests
         public async Task ConsultarDatosLocalTest()
         {
             //arrange
-            long id = 1;
+            long idLocal = 1;
+            long idProceso = 1;
 
             //act
-            OkNegotiatedContentResult<DatosLocalTO> resultadoConvertido = controller.ConsultarDatosLocal(id) as OkNegotiatedContentResult<DatosLocalTO>;
+            OkNegotiatedContentResult<DatosLocalTO> resultadoConvertido = controller.ConsultarDatosLocal(idLocal) as OkNegotiatedContentResult<DatosLocalTO>;
 
             //assert
             Assert.IsNotNull(resultadoConvertido);

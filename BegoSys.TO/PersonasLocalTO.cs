@@ -24,6 +24,6 @@ namespace BegoSys.TO
         public long idRol { get; set; }
 
         //Salario por segundo de la persona usado para calculos de costos
-        public long SalarioSeg { get; set; }
+        public double SalarioSeg { get; set; }
     }
 }

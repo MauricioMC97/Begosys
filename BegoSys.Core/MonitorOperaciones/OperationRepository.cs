@@ -53,7 +53,6 @@ namespace BegoSys.Core
                             //Busca a las personas que trabajan en el local
                             DatosPersonas = (from p in db.Personas
                                              join pl in db.PersonasLocal on p.idPersona equals pl.idPersona
-                                             join dr in db.DetalleRoles on p.idPersona equals dr.IdPersona
                                              join cmo in db.CostoManoObra on p.idPersona equals cmo.IdPersona
                                              where pl.idLocal == DatEstablecimiento.IdLocal
                                              select new PersonasLocalTO
@@ -62,7 +61,6 @@ namespace BegoSys.Core
                                                  idPersona = p.idPersona,
                                                  documento = p.docPersona,
                                                  nombre = p.nombrecompleto,
-                                                 idRol = dr.IdRol,
                                                  SalarioSeg = cmo.SalarioSegundo
                                              }).ToList();
 
@@ -96,6 +94,7 @@ namespace BegoSys.Core
         public bool ValidarPersonaProceso(long? idp, string doc, DatosLocalTO DatLoc, long idProc)
         {
             bool bPerteneceLocal = false;
+            int iPersonaTieneRol = 0;
             bool bEsValidaPersona = false; //Identifica si la persona cumple con el perfil para realizar el proceso
 
             //Valida si la persona si pertenece al local donde está solicitando el permiso
@@ -110,8 +109,11 @@ namespace BegoSys.Core
 
                         using (var db = EntidadesJuicebar.GetDbContext())
                         {
-                            bEsValidaPersona = true;
-                            //(from dr in db.DetalleRoles where dr.IdPersona == Persona.idpersona).
+                            iPersonaTieneRol = (from dr in db.DetalleRoles where dr.IdPersona == Person.idPersona && dr.IdProceso == idProc select dr).Count();
+
+                            if (iPersonaTieneRol > 0)
+                                bEsValidaPersona = true;
+                            
                         }
 
                     }
@@ -139,9 +141,22 @@ namespace BegoSys.Core
             return bEsValidaPersona;
         }
 
+        public DatosLocalTO BuscarRoles(DatosLocalTO Lista, long idProc)
+        {
+            using (var db = EntidadesJuicebar.GetDbContext())
+            {
+                foreach (PersonasLocalTO Persona in Lista.ListaPersonas)
+                {
+                    Persona.idRol = (from dr in db.DetalleRoles where dr.IdPersona == Persona.idPersona && dr.IdProceso == idProc select dr.IdRol).FirstOrDefault();
+                }
+            }
+            return Lista;
+        }
+
         //Verifica si hay empleados disponibles de acuerdo al rol y al local solicitados
         public bool HayEmpleadosDisponibles(long idRol, long idLoc)
         {
+            bool bHayDisponibles = false;
             using (var db = EntidadesJuicebar.GetDbContext())
             {
                 return bHayDisponibles;
@@ -160,11 +175,6 @@ namespace BegoSys.Core
             }
 
             return lMedida;
-        }
-
-        public void ElaborarPulpa()
-        {
-            return;
         }
 
         public void AtenderPedidos()

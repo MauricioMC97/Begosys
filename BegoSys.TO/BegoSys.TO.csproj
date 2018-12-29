@@ -45,10 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatosLocalTO.cs" />
+    <Compile Include="DetalleFacturaTO.cs" />
+    <Compile Include="FacturaTO.cs" />
     <Compile Include="InventarioTO.cs" />
     <Compile Include="PersonasLocalTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PulpasTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

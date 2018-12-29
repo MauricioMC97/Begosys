@@ -2,5 +2,6 @@
 {
     public interface IAccountingRepository
     {
+       // bool RegistrarLibroMayor(DatosLibroMayorTO datosLM);
     }
 }

@@ -28,6 +28,25 @@ namespace BegoSys.TO
         /// </summary>
         public string NombreMedida { get; set; }
 
+        /// <summary>
+        /// Persona que está elaborando el inventario de este producto
+        /// </summary>
+        public long idPersona { get; set; }
+
+        /// <summary>
+        /// Hora en la que comienza la elaboración del ingrediente procesado como las pulpas
+        /// </summary>
+        public DateTime HoraInicio { get; set; }
+
+        /// <summary>
+        /// Se guarda el valor de la medida que va en las recetas normalmente para descargarla del inventario
+        /// </summary>
+        public long MedidaReceta { get; set; }
+
+        /// <summary>
+        /// Guarda el identificador de la medida para enlazar los datos correctamente en el inventario
+        /// </summary>
+        public long IdMedida { get; set; }
 
     }
 }
