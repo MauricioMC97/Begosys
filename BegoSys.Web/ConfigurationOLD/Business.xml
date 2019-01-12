@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>Declaración de servicios de negocio.</description>
+
+  <!-- MVC Controllers -->
+  <object id="UsuariosController" type="IDEAM.SGDHM.Web.Controllers.UsuariosController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+    
+  <object id="CapturasController" type="IDEAM.SGDHM.Web.Controllers.CapturasController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="ComunController" type="IDEAM.SGDHM.Web.Controllers.ComunController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="HomeController" type="IDEAM.SGDHM.Web.Controllers.HomeController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="EntidadesController" type="IDEAM.SGDHM.Web.Controllers.EntidadesController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="EstacionesController" type="IDEAM.SGDHM.Web.Controllers.EstacionesController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="ListasController" type="IDEAM.SGDHM.Web.Controllers.ListasController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="TransversalController" type="IDEAM.SGDHM.Web.Controllers.TransversalController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="HidrologiaController" type="IDEAM.SGDHM.Web.Controllers.HidrologiaController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+
+  <object id="RosadelosVientosController" type="IDEAM.SGDHM.Web.Controllers.RosadelosVientosController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+  
+  <object id="ReportesController" type="IDEAM.SGDHM.Web.Controllers.ReportesController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+  
+  <object id="ItinerarioController" type="IDEAM.SGDHM.Web.Controllers.ItinerarioController, IDEAM.SGDHM.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
+  
+</objects>

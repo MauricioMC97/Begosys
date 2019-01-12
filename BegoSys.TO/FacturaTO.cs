@@ -8,6 +8,8 @@ namespace BegoSys.TO
 {
     public class FacturaTO
     {
+        public long IdRegistro { get; set; }
+
         public long IdPedidoDia { get; set; }
 
         public string NroResolucionDian { get; set; }
@@ -22,12 +24,21 @@ namespace BegoSys.TO
 
         public double ValorTotal { get; set; }
 
-        public long IdEstadoFactura { get; set; }
+        public string EstadoFactura { get; set; }
 
         public long IdPersona { get; set; }
 
         public long IdLocal { get; set; }
 
-        List<DetalleFacturaTO> DetallePedido { get; set; }
+        public List<DetalleFacturaTO> DetallePedido { get; set; }
+
+        public string Direccion { get; set; }
+
+        public string DocCliente { get; set; }
+
+        public string Cliente { get; set; }
+
+        public string Telefono { get; set; }
+
     }
 }

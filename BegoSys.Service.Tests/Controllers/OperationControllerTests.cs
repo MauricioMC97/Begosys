@@ -46,7 +46,7 @@ namespace BegoSys.Service.Tests
         private OperationController controller = new OperationController(new OperationRepository());
 
         [TestMethod]
-        public async Task ConsultarDatosLocalTest()
+        public void ConsultarDatosLocalTest()
         {
             //arrange
             long idLocal = 1;

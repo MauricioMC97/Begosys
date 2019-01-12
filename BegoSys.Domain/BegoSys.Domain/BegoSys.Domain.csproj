@@ -44,7 +44,7 @@
       <HintPath>..\..\MonitorOperaciones\packages\Oracle.ManagedDataAccess.18.3.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\..\MonitorOperaciones\packages\Oracle.ManagedDataAccess.EntityFramework.18.3.0\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.EntityFramework.18.3.0\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -61,10 +61,13 @@
     <Compile Include="EntidadesJuicebar.cs" />
     <Compile Include="Entidades\CostoManoObra.cs" />
     <Compile Include="Entidades\Departamento.cs" />
+    <Compile Include="Entidades\DetalleFactura.cs" />
     <Compile Include="Entidades\DetalleInventario.cs" />
     <Compile Include="Entidades\DetalleRol.cs" />
+    <Compile Include="Entidades\Factura.cs" />
     <Compile Include="Entidades\Ingrediente.cs" />
     <Compile Include="Entidades\Inventario.cs" />
+    <Compile Include="Entidades\LibroMayor.cs" />
     <Compile Include="Entidades\Local.cs" />
     <Compile Include="Entidades\Medida.cs" />
     <Compile Include="Entidades\MedidasReceta.cs" />
@@ -73,8 +76,11 @@
     <Compile Include="Entidades\Pais.cs" />
     <Compile Include="Entidades\Persona.cs" />
     <Compile Include="Entidades\PersonasLocal.cs" />
+    <Compile Include="Entidades\Producto.cs" />
     <Compile Include="Entidades\Proveedor.cs" />
+    <Compile Include="Entidades\ResolucionDian.cs" />
     <Compile Include="Entidades\TipoIngrediente.cs" />
+    <Compile Include="Entidades\TipoProducto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BegoSys.Common\BegoSys.Common.csproj">
-      <Project>{6A48768E-2B84-4C23-87F9-AB5F4A6FF95F}</Project>
+      <Project>{6a48768e-2b84-4c23-87f9-ab5f4a6ff95f}</Project>
       <Name>BegoSys.Common</Name>
     </ProjectReference>
   </ItemGroup>

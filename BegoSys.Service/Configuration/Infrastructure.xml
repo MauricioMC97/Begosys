@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:aop="http://www.springframework.net/aop"
+         xmlns:db="http://www.springframework.net/database"
+         xmlns:tx="http://www.springframework.net/tx">
+  <description>Declaración e integración de servicios de infraestructura.</description>
+  <!-- Configuración mensajes -->
+  <object id="messageSource" type="Spring.Context.Support.ResourceSetMessageSource, Spring.Core">
+    <property name="ResourceManagers">
+      <list>
+        <value>Resources.Messages, App_GlobalResources</value>
+      </list>
+    </property>
+  </object>
+
+  <!-- Configuración de Caché -->
+  <object id="CacheAspect" type="Spring.Aspects.Cache.CacheAspect, Spring.Aop"/>
+
+  <object id="BegoSysCache" type="Spring.Caching.AspNetCache, Spring.Web">
+    <property name="SlidingExpiration" value="true"/>
+    <property name="Priority" value="Low"/>
+    <property name="TimeToLive" value="00:15:00"/>
+  </object>
+
+  <object id="MethodInterceptor" type="BegoSys.Service.Interceptors.MethodInterceptor, BegoSys.Service"/>
+
+  <!-- Aplicar el ascpecto de caché a los objetos repository -->
+  <object type="Spring.Aop.Framework.AutoProxy.ObjectNameAutoProxyCreator, Spring.Aop">
+    <property name="ObjectNames">
+      <list>
+        <value>*RepositoryTarget</value>
+      </list>
+    </property>
+    <property name="InterceptorNames">
+      <list>
+        <value>CacheAspect</value>
+        <value>MethodInterceptor</value>
+      </list>
+    </property>
+    <property name="ProxyTargetType" value="true" />
+  </object>
+</objects>

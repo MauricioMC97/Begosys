@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:aop="http://www.springframework.net/aop">
+  <description>Declaración e integración de servicios de infraestructura.</description>
+  <!-- Configuración para leer variables del AppSettings -->
+  <object type="Spring.Objects.Factory.Config.VariablePlaceholderConfigurer, Spring.Core">
+    <property name="VariableSources">
+      <list>
+        <object type="Spring.Objects.Factory.Config.ConfigSectionVariableSource, Spring.Core">
+          <property name="SectionNames" value="appSettings">
+          </property>
+        </object>
+      </list>
+    </property>
+  </object>
+  
+  <!-- Configuración mensajes -->
+  <object id="messageSource" type="Spring.Context.Support.ResourceSetMessageSource, Spring.Core">
+    <property name="ResourceManagers">
+      <list>
+        <value>Resources.Messages, App_GlobalResources</value>
+      </list>
+    </property>
+  </object>
+
+  <object id="accessTokenHelper" type="BegoSys.Web.Util.AccessTokenHelper, BegoSys.Web" factory-method="GetAccessToken" singleton="false">
+  </object>
+  
+  <!--<object id="auth2Interceptor" type="Spring.Social.OAuth2.OAuth2RequestInterceptor, Spring.Social.Core" singleton="false">
+    <constructor-arg ref="accessTokenHelper" />
+    <constructor-arg type="Spring.Social.OAuth2.OAuth2Version, Spring.Social.Core">
+      <value>Bearer</value>
+    </constructor-arg>
+  </object>-->
+
+  <!-- Template para la invocación de servicios Rest -->
+  <object id="RestTemplate" type="Spring.Rest.Client.RestTemplate, Spring.Rest" singleton="false">
+    <constructor-arg name="baseAddress" value="${APIRoot}" />
+    <property name="MessageConverters">
+      <list>
+        <object type="BegoSys.Common.Auxiliares.NJsonHttpMessageConverter, BegoSys.Common" />
+      </list>
+    </property>
+    <property name="RequestInterceptors">
+      <list>
+        <!--<object id="TokenAuth" type="BegoSys.Web.Util.TokenRequestInterceptor, BegoSys.Web">
+        </object>-->
+        <!--<ref object="auth2Interceptor"/>-->
+      </list>
+    </property>
+    <!-- Timeout en milisegundos. 10000ms = 10s -->
+    <property name="RequestFactory.Timeout" value="150000"/>
+  </object>
+
+  <!-- Objeto para el manejo de las variables de sesión. -->
+  <object id="SessionObject" type="BegoSys.Web.Util.BegoSysSession, BegoSys.Web" />
+
+</objects>

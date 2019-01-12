@@ -9,7 +9,7 @@
 #endregion
 
 #region Referencias
-//using BegoSys.Common.Atributos;
+using BegoSys.Common.Atributos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -133,6 +133,24 @@ namespace BegoSys.Common.Constantes
     }
     #endregion
 
+    /// <summary>
+    /// Define los posibles estados de un proceso de carga.
+    /// </summary>
+    public enum EstadoCarga
+    {
+        [BegoSysDescripcionAttribute("EnumEstadoCarga_Error")]
+        Error = 0,
+        [BegoSysDescripcionAttribute("EnumEstadoCarga_OK")]
+        OK = 1,
+        [BegoSysDescripcionAttribute("EnumEstadoCarga_Reintentando")]
+        Reintentando = 2,
+        [BegoSysDescripcionAttribute("EnumEstadoCarga_Cancelado")]
+        Cancelado = 3,
+        [BegoSysDescripcionAttribute("EnumEstadoCarga_EnProgreso")]
+        EnProgreso = 4,
+        [BegoSysDescripcionAttribute("EnumEstadoCarga_Desconocido")]
+        Desconocido = 5
+    }
 
 }
 

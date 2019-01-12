@@ -283,7 +283,7 @@ namespace BegoSys.Common.Auxiliares
             object result = null;
 
             //Se obtiene la cache de spring
-            var cache = ContextRegistry.GetContext().GetObject("SGDHMCache") as ICache;
+            var cache = ContextRegistry.GetContext().GetObject("BegoSysCache") as ICache;
 
             if (cache != null)
                 result = cache.Get(key);
@@ -304,7 +304,7 @@ namespace BegoSys.Common.Auxiliares
             object result = null;
 
             //Se obtiene la cache de spring
-            var cache = ContextRegistry.GetContext().GetObject("SGDHMCache") as ICache;
+            var cache = ContextRegistry.GetContext().GetObject("BegoSysCache") as ICache;
 
             if (cache == null)
                 throw new ArgumentNullException("cache");
@@ -329,7 +329,7 @@ namespace BegoSys.Common.Auxiliares
                 throw new ArgumentNullException("key");
 
             //Se obtiene la cache de spring
-            var cache = ContextRegistry.GetContext().GetObject("SGDHMCache") as ICache;
+            var cache = ContextRegistry.GetContext().GetObject("BegoSysCache") as ICache;
 
             if (cache != null)
                 cache.Remove(key);

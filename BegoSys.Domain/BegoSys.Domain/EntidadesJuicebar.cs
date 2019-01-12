@@ -58,12 +58,12 @@ namespace BegoSys.Domain
         ///<summary>
         ///Tipo Productos
         ///</summary>
-        //public DbSet<TipoProducto> TipoProductos { get; set; }
+        public DbSet<TipoProducto> TipoProductos { get; set; }
 
         ///<summary>
         ///Productos
         ///</summary>
-        //public DbSet<Producto> Productos { get; set; }
+        public DbSet<Producto> Productos { get; set; }
 
         ///<summary>
         ///Tipo Ingredientes
@@ -142,6 +142,27 @@ namespace BegoSys.Domain
         /// </summary>
         public DbSet<Proveedor> Proveedores { get; set; }
         #endregion
+
+        ///<summary>
+        ///Tabla que contiene toda la información contable del libro mayor
+        ///</summary>
+        public DbSet<LibroMayor> LibroMayor { get; set; }
+
+        /// <summary>
+        /// Tabla que contiene toda la información de las facturas
+        /// </summary>
+        public DbSet<Factura> Facturas { get; set; }
+
+        /// <summary>
+        /// Tabla que contiene toda la información de los detalles
+        /// </summary>
+        public DbSet<DetalleFactura> DetalleFacturas { get; set; }
+
+        ////<summary>
+        ///Tabla que contiene las resoluciones de la Dian
+        ///</summary>
+        public DbSet<ResolucionDian> ResolucionDians { get; set; }
+
 
         #region Métodos públicos
 

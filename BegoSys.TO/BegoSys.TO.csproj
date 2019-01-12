@@ -35,6 +35,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,10 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatosLMTO.cs" />
     <Compile Include="DatosLocalTO.cs" />
     <Compile Include="DetalleFacturaTO.cs" />
     <Compile Include="FacturaTO.cs" />
     <Compile Include="InventarioTO.cs" />
+    <Compile Include="MedidaRecetaTO.cs" />
+    <Compile Include="PedidoTO.cs" />
     <Compile Include="PersonasLocalTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

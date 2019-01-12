@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BegoSys.Core.Contabilidad;
 using BegoSys.Domain;
 using BegoSys.Domain.Entidades;
 using BegoSys.TO;
@@ -45,6 +46,7 @@ namespace BegoSys.Core.Inventario
         {
             try
             {
+                var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
                     DetalleInventario DatosNuevoInventario = new DetalleInventario();
@@ -73,7 +75,47 @@ namespace BegoSys.Core.Inventario
 
 
 
-                    //Registra en el libro mayor el asiento contable de la compra
+                        //Registra en el libro mayor el asiento contable de la compra
+                        //Clase
+                        //1 Activo
+                        //Grupo
+                        //14 Inventarios
+                        //Cuenta
+                        //1405 Materias primas
+                        //Subcuenta
+                        //140599 Ajustes por inflación
+                        DatosLMTO RegistroContab = new DatosLMTO();
+
+                        //Debito de compra de materia prima
+                        RegistroContab.IdRegistro = 0;
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "14";
+                        RegistroContab.IdCuenta = "1405";
+                        RegistroContab.IdSubCuenta = "140599";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "901226468";
+                        RegistroContab.ValorDebito = valor;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = 0;
+                        RegistroContab.Observaciones = "Compra materia prima";
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                        //Crédito de compra de materia prima
+                        RegistroContab.IdRegistro = 0; 
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "11";
+                        RegistroContab.IdCuenta = "1105";
+                        RegistroContab.IdSubCuenta = "110505";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "";
+                        RegistroContab.ValorDebito = 0;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = valor;
+                        RegistroContab.Observaciones = "Compra materia prima";
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
                     }
 
                     //Se va a registrar la compra de un envase
@@ -91,9 +133,10 @@ namespace BegoSys.Core.Inventario
         }
 
         //Retira del inventario el elemento solicitado
-        public bool RetirarInventario(long? idingr, long? idenv, long? idins, double cantidad, double valor, double? nrounidades, double? costounidades, long idloc, string nitprov, long idpers, long TiempoElab, long idmed)
+        public bool RetirarInventario(long? idingr, long? idenv, long? idins, long cantidad, double valor, long nrounidades, double costounidades, long idloc, string nitprov, long idpers, long TiempoElab, long idmed, long idgrresi)
         {
             long lTipoIngr;
+            var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
             try
             {
                 using (var db = EntidadesJuicebar.GetDbContext())
@@ -105,40 +148,104 @@ namespace BegoSys.Core.Inventario
                     {
                         lTipoIngr = (from iingr in db.Ingredientes where iingr.IdTipoIngrediente == idingr select iingr.IdTipoIngrediente).FirstOrDefault();
 
+                            //Selecciona el máximo registro para aumentar en uno el valor
+                            DatosRetiroInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            DatosRetiroInventario.FechaHora = DateTime.Now;
+                            DatosRetiroInventario.Transaccion = "SALE";
+                            DatosRetiroInventario.Cantidad = cantidad;
+                            DatosRetiroInventario.CostoTotal = valor;
+                            DatosRetiroInventario.Unidades = nrounidades;
+                            DatosRetiroInventario.CostoUnidad = costounidades;
+                            DatosRetiroInventario.IdMedida = idmed;
+                            DatosRetiroInventario.IdIngrediente = idingr;
+                            DatosRetiroInventario.IdEnvase = idenv;
+                            DatosRetiroInventario.IdInsumo = idins;
+                            DatosRetiroInventario.IdLocal = idloc;
+                            DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
+                            DatosRetiroInventario.IdPersona = idpers;
+                            DatosRetiroInventario.TiempoProduccion = TiempoElab;
+
+                            //No se borran registros de la tabla siempre se adicionan
+                            db.DetalleInventarios.Add(DatosRetiroInventario);
+
                         //Si el tipo de ingrediente es una fruta se elimina y se generan residuos organicos
-                        //Selecciona el máximo registro para aumentar en uno el valor
-                        DatosRetiroInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
-                        DatosRetiroInventario.FechaHora = DateTime.Now;
-                        DatosRetiroInventario.Transaccion = "SALE";
-                        DatosRetiroInventario.Cantidad = cantidad;
-                        DatosRetiroInventario.CostoTotal = valor;
-                        DatosRetiroInventario.Unidades = nrounidades;
-                        DatosRetiroInventario.CostoUnidad = costounidades;
-                        DatosRetiroInventario.IdMedida = idmed;
-                        DatosRetiroInventario.IdIngrediente = idingr;
-                        DatosRetiroInventario.IdEnvase = idenv;
-                        DatosRetiroInventario.IdInsumo = idins;
-                        DatosRetiroInventario.IdLocal = idloc;
-                        DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
-                        DatosRetiroInventario.IdPersona = idpers;
-                        DatosRetiroInventario.TiempoProduccion = TiempoElab;
+                        //Si el tipo de ingrediente es otro se elimina solamente y no se generan residuos organicos
+                        if (lTipoIngr == 1)
+                        {
+                            //Se generan registros de Entrada y de salida de residuos solidos organicos
+                            DatosRetiroInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            DatosRetiroInventario.FechaHora = DateTime.Now;
+                            DatosRetiroInventario.Transaccion = "ENTRA";
+                            DatosRetiroInventario.Cantidad = idgrresi; //Variable que contiene los gramos que pesan los residuos solidos esto son perdidas para la empresa 
+                            DatosRetiroInventario.Unidades = idgrresi;
+                            DatosRetiroInventario.CostoTotal = 0; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
+                            DatosRetiroInventario.CostoUnidad = 0;
+                            DatosRetiroInventario.IdMedida = idmed;
+                            DatosRetiroInventario.IdIngrediente = 9999999998;
+                            DatosRetiroInventario.IdEnvase = idenv;
+                            DatosRetiroInventario.IdInsumo = idins;
+                            DatosRetiroInventario.IdLocal = idloc;
+                            DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
+                            DatosRetiroInventario.IdPersona = idpers;
+                            DatosRetiroInventario.TiempoProduccion = TiempoElab;
 
-                        //No se borran registros de la tabla siempre se adicionan
-                        db.DetalleInventarios.Add(DatosRetiroInventario);
+                            db.DetalleInventarios.Add(DatosRetiroInventario);
 
-                        db.SaveChanges();
+                            DatosRetiroInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            DatosRetiroInventario.FechaHora = DateTime.Now;
+                            DatosRetiroInventario.Transaccion = "SALE";
+                            DatosRetiroInventario.Cantidad = idgrresi; //Variable que contiene los gramos que pesan los residuos solidos esto son perdidas para la empresa
+                            DatosRetiroInventario.CostoTotal = 0; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
+                            DatosRetiroInventario.Unidades = idgrresi;
+                            DatosRetiroInventario.CostoUnidad = 0;
+                            DatosRetiroInventario.IdMedida = idmed;
+                            DatosRetiroInventario.IdIngrediente = 9999999998;
+                            DatosRetiroInventario.IdEnvase = idenv;
+                            DatosRetiroInventario.IdInsumo = idins;
+                            DatosRetiroInventario.IdLocal = idloc;
+                            DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
+                            DatosRetiroInventario.IdPersona = idpers;
+                            DatosRetiroInventario.TiempoProduccion = null;
 
+                            db.DetalleInventarios.Add(DatosRetiroInventario);
 
-                        //Si el tipo de ingrediente es otro se elimina solamente
-
-
-
-
-
-
+                            db.SaveChanges();
+                        }
 
 
                         //Registra en el libro mayor el asiento contable del cambio de materia prima a producto en proceso
+                        DatosLMTO RegistroContab = new DatosLMTO();
+                        //Debito a la 143020 en subproductos para ser vendidos
+                        RegistroContab.IdRegistro = 0; 
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "14";
+                        RegistroContab.IdCuenta = "1430";
+                        RegistroContab.IdSubCuenta = "143020";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "901226468";
+                        RegistroContab.ValorDebito = valor;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = 0;
+                        RegistroContab.Observaciones = "Elaboración pulpa";
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                        //Credito a la 1405 materia prima
+                        RegistroContab.IdRegistro = 0; 
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "14";
+                        RegistroContab.IdCuenta = "1405";
+                        RegistroContab.IdSubCuenta = "140599";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "";
+                        RegistroContab.ValorDebito = 0;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = valor;
+                        RegistroContab.Observaciones = "Uso materia prima";
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+
                     }
 
                     //Se va a registrar la compra de un envase
@@ -174,7 +281,8 @@ namespace BegoSys.Core.Inventario
                     {
                         IdIngrediente = ingr.IdIngrediente,
                         NombreIngrediente = ingr.NombreIngrediente,
-                        NombreMedida = med.nombreMedida
+                        NombreMedida = med.nombreMedida,
+                        Cantidad = inv.CantidadActual
                     }).ToList();
                 }
             }
@@ -196,5 +304,114 @@ namespace BegoSys.Core.Inventario
             }
             return lidIngr;
         }
+
+        //Retirar el producto del inventario
+        public bool RetirarProducto(long idProducto, long idLocal, long idPersona)
+        {
+            List<MedidasReceta> DatIngrR = new List<MedidasReceta>();
+            var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
+            try
+            {
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+                    
+                    AccountingRepository CoreContabilidad = new AccountingRepository();
+
+                    //Consulta las medidas de los ingredientes del producto, que se utilizarán luego para retirar del inventario
+                    DatIngrR = (from mr in db.MedidasRecetas
+                       join pr in db.Productos on mr.IdProducto equals pr.IdProducto
+                      where mr.IdProducto == idProducto
+                     select mr).ToList();
+
+                    foreach (MedidasReceta Elem in DatIngrR)
+                    {
+
+                        DetalleInventario ProductoaRetirar = new DetalleInventario();
+                        ProductoaRetirar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                        ProductoaRetirar.FechaHora = DateTime.Now;
+                        ProductoaRetirar.Transaccion = "SALE";
+                        ProductoaRetirar.Cantidad = Elem.Cantidad;
+                        ProductoaRetirar.CostoTotal = 0; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
+                        ProductoaRetirar.Unidades = Elem.Cantidad;
+                        ProductoaRetirar.CostoUnidad = 0;
+                        ProductoaRetirar.IdMedida = Elem.IdMedida;
+                        ProductoaRetirar.IdIngrediente = Elem.IdIngrediente;
+                        ProductoaRetirar.IdEnvase = Elem.IdEnvase;
+                        ProductoaRetirar.IdInsumo = null;
+                        ProductoaRetirar.IdLocal = idLocal;
+                        ProductoaRetirar.IdProveedor = null;
+                        ProductoaRetirar.IdPersona = idPersona;
+                        ProductoaRetirar.TiempoProduccion = null;
+
+                        db.DetalleInventarios.Add(ProductoaRetirar);
+
+                        db.SaveChanges();
+
+                        //Calcular Costos
+
+                        //Contabiliza la venta y los costos de la venta
+
+                        DatosLMTO RegistroContab = new DatosLMTO();
+
+                        //Crédito a la cuenta 143020 que pasa de subproducto terminado a producto vendido
+                        RegistroContab.IdRegistro = 0;
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "14";
+                        RegistroContab.IdCuenta = "1430";
+                        RegistroContab.IdSubCuenta = "143020";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "";
+                        RegistroContab.ValorDebito = 0;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = 1;
+                        RegistroContab.Observaciones = "Pulpa vendida";
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                        //Debito de la venta
+                        //Subproducto que se va para la venta
+                        RegistroContab.IdRegistro = 0; //Se pone cero porque RegistrarLibroMayor asigna el valor siguiente
+                        RegistroContab.IdClase = "4";
+                        RegistroContab.IdGrupo = "41";
+                        RegistroContab.IdCuenta = "4140";
+                        RegistroContab.IdSubCuenta = "414015";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "901226468";
+                        RegistroContab.ValorDebito = 1;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = 0;
+                        RegistroContab.Observaciones = "Venta de subproductos";
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                        ////Crédito de la venta
+                        //RegistroContab.IdRegistro = 0;
+                        //RegistroContab.IdClase = "1";
+                        //RegistroContab.IdGrupo = "11";
+                        //RegistroContab.IdCuenta = "1105";
+                        //RegistroContab.IdSubCuenta = "110505";
+                        //RegistroContab.FechaHora = DateTime.Now;
+                        //RegistroContab.NroDocPersonaDB = "";
+                        //RegistroContab.ValorDebito = 0;
+                        //RegistroContab.NroDocPersonaCR = "";
+                        //RegistroContab.ValorCredito = valor;
+                        //RegistroContab.Observaciones = "Compra materia prima";
+
+
+                        //CoreContabilidad.RegistrarLibroMayor(DatosLMTO); 
+
+                    }
+
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+
+        }
+
+
     }
 }

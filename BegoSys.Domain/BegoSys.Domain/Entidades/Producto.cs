@@ -8,7 +8,7 @@ namespace BegoSys.Domain.Entidades
     /// <summary>
     /// Contiene los datos básicos de los productos las acciones para encontrar los costos y las recetas correspondientes
     /// </summary>
-    [Table("jbProductos")]
+    [Table("JBPRODUCTOS")]
     public partial class Producto
     {
         /// <summary>
@@ -16,22 +16,35 @@ namespace BegoSys.Domain.Entidades
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("idProducto")]
+        [Column("IDPRODUCTO")]
         public long IdProducto { get; set; }
 
         [Required]
         [StringLength(200)]
-        [Column("NombreProducto")]
+        [Column("NOMBREPRODUCTO")]
         public string NombreProducto { get; set; }
 
         [Required]
-        [Column("IdTipoProducto")]
+        [Column("IDTIPOPRODUCTO")]
         public long IdTipoProducto { get; set; }
 
         [Required]
         [StringLength(2000)]
-        [Column("Receta")]
+        [Column("RECETA")]
         public string Receta { get; set; }
+
+        [Column("PRECIOCOSTOHOY")]
+        public double PrecioCostoHoy { get; set; }
+
+        [Required]
+        [Column("PRECIOVENTAHOY")]
+        public double PrecioVentaHoy { get; set; }
+
+        [Column("MARGENHOY")]
+        public double MargenHoy { get; set; }
+
+        [Column("ACTIVO")]
+        public long Activo { get; set; }
 
         #region Propiedades de Navegación
         ///<summary>

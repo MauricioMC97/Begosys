@@ -9,6 +9,7 @@ namespace BegoSys.TO
     /// <summary>
     /// Clase que contiene los elementos a los cuales se les realizará inventario, se seleccionan de la tabla jbIngredientes, en este momento se incluyen
     /// 1. Frutas
+    /// 2. Envases
     /// 3. Insumos
     /// </summary>
     public class InventarioTO
@@ -47,6 +48,11 @@ namespace BegoSys.TO
         /// Guarda el identificador de la medida para enlazar los datos correctamente en el inventario
         /// </summary>
         public long IdMedida { get; set; }
+
+        /// <summary>
+        /// Cantidad del elemento en el inventario
+        /// </summary>
+        public long Cantidad { get; set; }
 
     }
 }

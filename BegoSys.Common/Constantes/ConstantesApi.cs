@@ -13,7 +13,11 @@ namespace BegoSys.Common.Constantes
         #endregion
 
         #region Accounting
-        public const string GuardarenLibroMayor = "api/Operation/GuardarenLibroMayor/{subcuenta}{debito}{personadebito}{credito}{personacredito}{fecha}{observaciones}";
+        public const string GuardarenLibroMayor = "api/Accounting/GuardarenLibroMayor/{subcuenta}{debito}{personadebito}{credito}{personacredito}{fecha}{observaciones}";
+        #endregion
+
+        #region Billing
+        public const string GuardarPedidoUri = "api/Billing/GuardarPedido/";
         #endregion
     }
 }

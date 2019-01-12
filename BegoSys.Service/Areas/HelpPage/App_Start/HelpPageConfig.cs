@@ -1,4 +1,4 @@
-// Uncomment the following to provide samples for PageResult<T>. Must also add the Microsoft.AspNet.WebApi.OData
+﻿// Uncomment the following to provide samples for PageResult<T>. Must also add the Microsoft.AspNet.WebApi.OData
 // package to your project.
 ////#define Handle_PageResultOfT
 
@@ -26,7 +26,7 @@ namespace BegoSys.Service.Areas.HelpPage
     public static class HelpPageConfig
     {
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters",
-            MessageId = "BegoSys.Service.Areas.HelpPage.TextSample.#ctor(System.String)",
+            MessageId = "IDEAM.SGDHM.Service.Areas.HelpPage.TextSample.#ctor(System.String)",
             Justification = "End users may choose to merge this string with existing localized resources.")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly",
             MessageId = "bsonspec",

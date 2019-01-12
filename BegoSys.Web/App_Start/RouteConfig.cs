@@ -19,11 +19,11 @@ namespace BegoSys.Web
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "Billing",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Billing", action = "Index", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: "Billing",
+            //    url: "api/{controller}/{action}",
+            //    defaults: new { controller = "Billing", action = "GuardarPedido", id = UrlParameter.Optional }
+            //);
         }
     }
 }

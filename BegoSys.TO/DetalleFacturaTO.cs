@@ -8,6 +8,10 @@ namespace BegoSys.TO
 {
     public class DetalleFacturaTO
     {
+        public long IdRegistro { get; set; }
+
+        public long IdRegFactura { get; set; }
+
         public long IdProducto { get; set; }
 
         public long Cantidad { get; set; }

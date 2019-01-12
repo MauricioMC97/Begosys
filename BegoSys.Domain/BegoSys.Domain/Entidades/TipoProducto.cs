@@ -8,7 +8,7 @@ namespace BegoSys.Domain.Entidades
     /// <summary>
     /// Tabla que contiene los tipos de productos que se venden
     /// </summary>
-    [Table("jbTipoProductos")]
+    [Table("JBTIPOPRODUCTOS")]
     public partial class TipoProducto
     {
         /// <summary>
@@ -16,11 +16,12 @@ namespace BegoSys.Domain.Entidades
         /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("idTipoProducto")]
+        [Column("IDTIPOPRODUCTO")]
         public long IdTipoProducto { get; set; }
 
         [Required]
         [StringLength(200)]
+        [Column("NOMBRETIPOPRODUCTO")]
         public string nombreTipoProducto { get; set; }
 
     }

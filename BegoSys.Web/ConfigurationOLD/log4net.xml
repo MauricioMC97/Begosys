@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<log4net>
+
+  <!-- Appender general -->
+  <appender name="SGDHMRollingFileAppender" type="log4net.Appender.RollingFileAppender">
+    <file value="Logs/SGDHMWeb.log" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <param name="DatePattern" value=".yyyy-MM-dd&quot;.log&quot;" />
+    <maxSizeRollBackups value="10" />
+    <maximumFileSize value="10MB" />
+    <staticLogFileName value="true" />
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%date [%thread] %-5level %logger - %message%newline" />
+    </layout>
+  </appender>
+
+  <root>
+    <!-- Escala de menor a mayor: ALL/DEBUG/INFO/WARN/ERROR/FATAL/OFF -->
+    <!-- En producción, se cambia el valor del elemento priority a ERROR. Solo se activa
+    para propositos de diagnósticos -->
+    <priority value="DEBUG" />
+    <appender-ref ref="SGDHMRollingFileAppender" />
+  </root>
+
+  <!-- Se inactiva el Logger de Spring. Solo se activa para propositos de diagnósticos -->
+  <logger name="Spring">
+    <level value="OFF" />
+  </logger>
+
+</log4net>

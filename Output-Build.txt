@@ -1,0 +1,3 @@
+﻿1>------ Rebuild All started: Project: BegoSys.TO, Configuration: Debug Any CPU ------
+1>  BegoSys.TO -> C:\Casa\BegoInver\Sistemas\Software\BegoSys\BegoSys.TO\bin\Debug\BegoSys.TO.dll
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

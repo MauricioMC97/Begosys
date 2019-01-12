@@ -28,13 +28,21 @@ namespace BegoSys.Domain.Entidades
         [Column("CANTIDADACTUAL")]
         public long CantidadActual { get; set; }
 
+        [Column("CANTIDADMINIMA")]
+        public long CantidadMinima { get; set; }
 
-        /*CANTIDADMINIMA
-        UNIDADESACTUALES
-        UNIDADESMINIMAS
-        COSTOPROMDIAACTUAL
-        COSTOPROMEDIAUNIDAD
-        */
+        [Column("UNIDADESACTUALES")]
+        public long UnidadesActuales { get; set; }
+        
+        [Column("UNIDADESMINIMAS")]
+        public long UnidadesMinimas { get; set; }
+        
+        [Column("COSTOPROMDIAACTUAL")]
+        public double CostoPromDiaActual { get; set; }
+        
+        [Column("COSTOPROMEDIAUNIDAD")]
+        public double CostoPromDiaUnidad { get; set; }
+
         [Column("IDLOCAL")]
         public long IdLocal { get; set; }
     }
