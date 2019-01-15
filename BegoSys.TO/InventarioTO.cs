@@ -52,7 +52,11 @@ namespace BegoSys.TO
         /// <summary>
         /// Cantidad del elemento en el inventario
         /// </summary>
-        public long Cantidad { get; set; }
+        public double Cantidad { get; set; }
 
+        /// <summary>
+        /// Costo total del ingrediente para la cantidad actual
+        /// </summary>
+        public double CostoTotal { get; set; }
     }
 }

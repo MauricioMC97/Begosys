@@ -70,5 +70,8 @@ namespace BegoSys.Domain.Entidades
         [Column("IDPERSONA")]
         public long IdPersona { get; set; }
 
+        [Column("CONEXISTENCIAS")]
+        public long ConExistencias { get; set; }
+
     }
 }

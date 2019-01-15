@@ -110,9 +110,11 @@
                     <option value="3">Domicilio</option>
                 </select>
                 @*<label>Dirección domicilio</label>
-                    <input type="text" name="dirdomicilio1" id="dirdomicilio1">*@
+                <input type="text" name="dirdomicilio1" id="dirdomicilio1">*@
                 <label>Observaciones</label>
                 <input type="text" name="observaciones1" id="observaciones1">
+                <label>Fecha y Hora</label>
+                <input type="text" name="FechaHora1" id="FechaHora1">
 
             </td>
         </tr>
@@ -1231,7 +1233,7 @@
                 IdPedidoDia: 1,
                 NroResolucionDian: "X",
                 NroFacturaDian: "X",
-                Fecha: d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+                Fecha: frmPedidos.FechaHora1.value, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
                 TipoDespacho: frmPedidos.TipoDespacho1.value,
                 Impuesto: frmPedidos.Impoconsumo.value,
                 ValorTotal: frmPedidos.ValorTotal.value,
@@ -1270,7 +1272,7 @@
                     ValorUnitario: frmPedidos.ValorUnitario4.value,
                     Subtotal: frmPedidos.Subtotal4.value,
                     Observaciones: frmPedidos.observaciones4.value
-                },{
+                }, {
                     IdRegistro: 1,
                     IdRegFactura: 1,
                     IdProducto: frmPedidos.Producto5.value,
@@ -1278,7 +1280,7 @@
                     ValorUnitario: frmPedidos.ValorUnitario5.value,
                     Subtotal: frmPedidos.Subtotal5.value,
                     Observaciones: frmPedidos.observaciones5.value
-                },{
+                }, {
                     IdRegistro: 1,
                     IdRegFactura: 1,
                     IdProducto: frmPedidos.Producto6.value,
@@ -1302,7 +1304,7 @@
                     ValorUnitario: frmPedidos.ValorUnitario8.value,
                     Subtotal: frmPedidos.Subtotal8.value,
                     Observaciones: frmPedidos.observaciones8.value
-                },{
+                }, {
                     IdRegistro: 1,
                     IdRegFactura: 1,
                     IdProducto: frmPedidos.Producto9.value,
@@ -1310,7 +1312,7 @@
                     ValorUnitario: frmPedidos.ValorUnitario9.value,
                     Subtotal: frmPedidos.Subtotal9.value,
                     Observaciones: frmPedidos.observaciones9.value
-                },{
+                }, {
                     IdRegistro: 1,
                     IdRegFactura: 1,
                     IdProducto: frmPedidos.Producto10.value,

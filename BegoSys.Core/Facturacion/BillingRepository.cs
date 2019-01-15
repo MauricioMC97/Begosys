@@ -80,7 +80,7 @@ namespace BegoSys.Core.Facturacion
 
                     DatosPedidos.NroFacturaDian = DatosResol.Actual;
 
-                    DatosPedidos.Fecha = Convert.ToDateTime("09/01/2019 09:50"); // DateTime.Now;
+                    DatosPedidos.Fecha = DFac.Fecha; // Convert.ToDateTime("09/01/2019 09:50"); // DateTime.Now;
 
                     DatosPedidos.IdTipoDespacho = DFac.TipoDespacho;
 

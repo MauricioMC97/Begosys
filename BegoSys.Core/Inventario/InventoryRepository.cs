@@ -68,6 +68,7 @@ namespace BegoSys.Core.Inventario
                         DatosNuevoInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
                         DatosNuevoInventario.Transaccion = "ENTRA";
                         DatosNuevoInventario.IdPersona = idpers;
+                        DatosNuevoInventario.ConExistencias = 1; //Cuando llega nuevo hay existencias del producto
 
                         db.DetalleInventarios.Add(DatosNuevoInventario);
 
@@ -164,6 +165,7 @@ namespace BegoSys.Core.Inventario
                             DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
                             DatosRetiroInventario.IdPersona = idpers;
                             DatosRetiroInventario.TiempoProduccion = TiempoElab;
+                            DatosRetiroInventario.ConExistencias = 0;
 
                             //No se borran registros de la tabla siempre se adicionan
                             db.DetalleInventarios.Add(DatosRetiroInventario);
@@ -188,6 +190,7 @@ namespace BegoSys.Core.Inventario
                             DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
                             DatosRetiroInventario.IdPersona = idpers;
                             DatosRetiroInventario.TiempoProduccion = TiempoElab;
+                            DatosRetiroInventario.ConExistencias = 1;
 
                             db.DetalleInventarios.Add(DatosRetiroInventario);
 
@@ -206,6 +209,7 @@ namespace BegoSys.Core.Inventario
                             DatosRetiroInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
                             DatosRetiroInventario.IdPersona = idpers;
                             DatosRetiroInventario.TiempoProduccion = null;
+                            DatosRetiroInventario.ConExistencias = 0;
 
                             db.DetalleInventarios.Add(DatosRetiroInventario);
 
@@ -342,6 +346,7 @@ namespace BegoSys.Core.Inventario
                         ProductoaRetirar.IdProveedor = null;
                         ProductoaRetirar.IdPersona = idPersona;
                         ProductoaRetirar.TiempoProduccion = null;
+                        ProductoaRetirar.ConExistencias = 0;
 
                         db.DetalleInventarios.Add(ProductoaRetirar);
 
@@ -412,6 +417,42 @@ namespace BegoSys.Core.Inventario
 
         }
 
+        //Consulta el inventario del ingrediente enviado
+        public List<InventarioTO> ConsultarDatosInventario(long IdIngr, DatosLocalTO dLoc)
+        {
+            List<InventarioTO> ListaDatosI = null;
+            //Consulta el inventario del ingrediente ordenado por la existenia más vieja
+            try
+            {
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+                    //Consulta el inventario del ingrediente enviado que tengan inventario en el local actual
+                    //Consulta la entrada mas antigua que todavía tiene existencia
+                    ListaDatosI = (from di in db.DetalleInventarios
+                                   join inv in db.Inventarios on di.IdIngrediente equals inv.IdIngrediente
+                                   where (inv.IdIngrediente == IdIngr
+                                       && inv.IdLocal == dLoc.IdLocal
+                                       && di.ConExistencias == 1
+                                       && di.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now 
+                                                                                    && dii.IdIngrediente == di.IdIngrediente 
+                                                                                    && dii.IdLocal == di.IdLocal
+                                                                                    && dii.ConExistencias == di.ConExistencias).Min(diifh => diifh.FechaHora)))
+                                     select new InventarioTO
+                                     {
+                                         IdIngrediente = inv.IdIngrediente,
+                                         NombreMedida = null,
+                                         Cantidad = di.Cantidad,
+                                         CostoTotal = di.CostoTotal
+                                     }).ToList();
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine("Se presentó el siguiente error: " + Error.Message + Error.InnerException.Message);
+            }
+            return ListaDatosI;
+            //Consulta los insumos de la tabla jbInsumos
+        }
 
     }
 }
