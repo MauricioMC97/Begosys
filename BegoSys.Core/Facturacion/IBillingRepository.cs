@@ -9,5 +9,7 @@ namespace BegoSys.Core.Facturacion
         Task SalvarPedido(FacturaTO DFac);
 
         List<PedidoTO> ConsultarListaPedidos(string sDoc, DatosLocalTO dLoc);
+
+        Task AnulaPedido(long ipd);
     }
 }

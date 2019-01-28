@@ -24,11 +24,12 @@ namespace BegoSys.Core.Inventario
                     //Selecciona solamente las frutas e insumos que se estén manejando en inventario actualmente
                     datInven = (from ing in db.Ingredientes
                                 join med in db.Medidas on ing.IdMedida equals med.idMedida
-                                where (ing.IdTipoIngrediente == 1 || ing.IdTipoIngrediente == 3) && ing.Inventario == 1
+                                where (ing.IdTipoIngrediente == 1 || ing.IdTipoIngrediente == 3 || ing.IdTipoIngrediente == 5) && ing.Inventario == 1
                                 select new InventarioTO
                                 {
                                     IdIngrediente = ing.IdIngrediente,
                                     NombreIngrediente = ing.NombreIngrediente,
+                                    IdMedida = ing.IdMedida,
                                     NombreMedida = med.nombreMedida
                                 }).ToList();
                 }
@@ -42,7 +43,7 @@ namespace BegoSys.Core.Inventario
         }
 
         //Adiciona un elemento al inventario y llama al procedimiento para contabilizar su compra
-        public bool AdicionarInventario(long? idingr, long? idenv, long? idins, double cantidad, double valor, double? nrounidades, double? costounidades, long idloc, string nitprov, long idpers)
+        public bool AdicionarInventario(long? idingr, long? idenv, long? idins, double cantidad, double valor, double? nrounidades, double? costounidades, long idMed, long idloc, string nitprov, long idpers)
         {
             try
             {
@@ -51,32 +52,33 @@ namespace BegoSys.Core.Inventario
                 {
                     DetalleInventario DatosNuevoInventario = new DetalleInventario();
 
+                    //Selecciona el máximo registro para aumentar en uno el valor
+                    DatosNuevoInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                    DatosNuevoInventario.IdIngrediente = idingr;
+                    DatosNuevoInventario.IdEnvase = idenv;
+                    DatosNuevoInventario.IdInsumo = idins;
+                    DatosNuevoInventario.Cantidad = cantidad;
+                    DatosNuevoInventario.CostoTotal = valor;
+                    DatosNuevoInventario.Unidades = nrounidades;
+                    DatosNuevoInventario.CostoUnidad = costounidades;
+                    DatosNuevoInventario.IdMedida = idMed;
+                    DatosNuevoInventario.FechaHora = DateTime.Now;
+                    DatosNuevoInventario.IdLocal = idloc;
+                    DatosNuevoInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
+                    DatosNuevoInventario.Transaccion = "ENTRA";
+                    DatosNuevoInventario.IdPersona = idpers;
+                    DatosNuevoInventario.ConExistencias = 1; //Cuando llega nuevo hay existencias del producto
+
+                    db.DetalleInventarios.Add(DatosNuevoInventario);
+
+                    db.SaveChanges();
+
+
                     //Se va a registrar la compra de un ingrediente
                     if (idingr != null)
                     {
-                        //Selecciona el máximo registro para aumentar en uno el valor
-                        DatosNuevoInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
-                        DatosNuevoInventario.IdIngrediente = idingr;
-                        DatosNuevoInventario.IdEnvase = idenv;
-                        DatosNuevoInventario.IdInsumo = idins;
-                        DatosNuevoInventario.Cantidad = cantidad;
-                        DatosNuevoInventario.CostoTotal = valor;
-                        DatosNuevoInventario.Unidades = nrounidades;
-                        DatosNuevoInventario.CostoUnidad = costounidades;
-                        DatosNuevoInventario.FechaHora = DateTime.Now;
-                        DatosNuevoInventario.IdLocal = idloc;
-                        DatosNuevoInventario.IdProveedor = (from pv in db.Proveedores where pv.NitProveedor == nitprov select pv.IdProveedor).FirstOrDefault();
-                        DatosNuevoInventario.Transaccion = "ENTRA";
-                        DatosNuevoInventario.IdPersona = idpers;
-                        DatosNuevoInventario.ConExistencias = 1; //Cuando llega nuevo hay existencias del producto
 
-                        db.DetalleInventarios.Add(DatosNuevoInventario);
-
-                        db.SaveChanges();
-
-
-
-                        //Registra en el libro mayor el asiento contable de la compra
+                        //Registra en el libro mayor el asiento contable de la compra de materia prima
                         //Clase
                         //1 Activo
                         //Grupo
@@ -98,7 +100,7 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.ValorDebito = valor;
                         RegistroContab.NroDocPersonaCR = "";
                         RegistroContab.ValorCredito = 0;
-                        RegistroContab.Observaciones = "Compra materia prima";
+                        RegistroContab.Observaciones = "Compra materia prima " + (db.Ingredientes.Where(ingr => ingr.IdIngrediente == idingr).Select(dni => dni.NombreIngrediente)).FirstOrDefault(); ;
 
                         CoreContable.RegistrarLibroMayor(RegistroContab);
 
@@ -111,17 +113,56 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.FechaHora = DateTime.Now;
                         RegistroContab.NroDocPersonaDB = "";
                         RegistroContab.ValorDebito = 0;
-                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.NroDocPersonaCR = nitprov;
                         RegistroContab.ValorCredito = valor;
-                        RegistroContab.Observaciones = "Compra materia prima";
+                        RegistroContab.Observaciones = "Compra materia prima " + (db.Ingredientes.Where(ingr => ingr.IdIngrediente == idingr).Select(dni => dni.NombreIngrediente)).FirstOrDefault(); ;
 
                         CoreContable.RegistrarLibroMayor(RegistroContab);
 
                     }
 
                     //Se va a registrar la compra de un envase
+                    if (idenv != null)
+                    {
+                        //Se hace el registro contable de la compra de los envases
+                        DatosLMTO RegistroContab = new DatosLMTO();
+
+                        //Debito de compra de envases
+                        RegistroContab.IdRegistro = 0;
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "14";
+                        RegistroContab.IdCuenta = "1460";
+                        RegistroContab.IdSubCuenta = "146099";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "901226468";
+                        RegistroContab.ValorDebito = valor;
+                        RegistroContab.NroDocPersonaCR = "";
+                        RegistroContab.ValorCredito = 0;
+                        RegistroContab.Observaciones = "Compra envases " + (db.Envases.Where(env => env.IdEnvase == idenv).Select(dne => dne.NombreEnvase)).FirstOrDefault(); 
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                        //Crédito de compra de envases
+                        RegistroContab.IdRegistro = 0;
+                        RegistroContab.IdClase = "1";
+                        RegistroContab.IdGrupo = "11";
+                        RegistroContab.IdCuenta = "1105";
+                        RegistroContab.IdSubCuenta = "110505";
+                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.NroDocPersonaDB = "";
+                        RegistroContab.ValorDebito = 0;
+                        RegistroContab.NroDocPersonaCR = nitprov;
+                        RegistroContab.ValorCredito = valor;
+                        RegistroContab.Observaciones = "Compra envases " + (db.Envases.Where(env => env.IdEnvase == idenv).Select(dne => dne.NombreEnvase)).FirstOrDefault();
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+                    }
 
                     //Se va a registrar la compra de un insumo
+                    if (idins != null)
+                    {
+                        //Se hace el registro contable de la compra de los insumos
+                    }
                 }
             }
             catch
@@ -245,16 +286,16 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.ValorDebito = 0;
                         RegistroContab.NroDocPersonaCR = "";
                         RegistroContab.ValorCredito = valor;
-                        RegistroContab.Observaciones = "Uso materia prima";
+                        RegistroContab.Observaciones = "Uso materia prima en elaboración de pulpa";
 
                         CoreContable.RegistrarLibroMayor(RegistroContab);
 
 
                     }
 
-                    //Se va a registrar la compra de un envase
+                    //Se va a registrar el retiro de inventario de un envase
 
-                    //Se va a registrar la compra de un insumo
+                    //Se va a registrar el retiro de inventario de un insumo
                 }
             }
             catch

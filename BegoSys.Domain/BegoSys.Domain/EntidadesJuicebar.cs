@@ -83,7 +83,7 @@ namespace BegoSys.Domain
         ///<summary>
         ///Envases
         ///</summary>
-        //public DbSet<Envase> Envases { get; set; }
+        public DbSet<Envase> Envases { get; set; }
 
         ///<summary>
         ///Procesos

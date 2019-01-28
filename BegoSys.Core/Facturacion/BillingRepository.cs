@@ -10,6 +10,8 @@ using BegoSys.Core;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using BegoSys.Common.Auxiliares;
+using BegoSys.Common.Constantes;
 
 namespace BegoSys.Core.Facturacion
 {
@@ -50,11 +52,14 @@ namespace BegoSys.Core.Facturacion
         {
 
             BegoSys.Core.Inventario.InventoryRepository CoreInventario = new BegoSys.Core.Inventario.InventoryRepository();
-            
+            DateTime dFInicio = DateTime.Today;
+            DateTime dFFin = DateTime.Today.AddDays(1);
 
             //Guarda los datos de los pedidos 
             try
             {
+                //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
                     Factura DatosPedidos = new Factura();
@@ -71,16 +76,28 @@ namespace BegoSys.Core.Facturacion
                     //Crea la factura en la tabla correspondiente
                     //Continua en el siguiente número de registro                   
                     DatosPedidos.IdRegistro = (db.Facturas.Max(fct => fct.IdRegistro)) + 1;
-                    
+
                     //Si no existen pedidos para la fecha de hoy reinicia el contador con el valor de 1, si si existen continua en el valor siguiente
-                    DatosPedidos.IdPedidoDia = ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Max(f => f.IdPedidoDia) + 1 : 1);
+                    if (DFac.Fecha != DateTime.MinValue)
+                    {
+                        dFInicio = DFac.Fecha;
+                        dFFin = DFac.Fecha.AddDays(1);
+                    }
+                    else
+                    {
+                        dFInicio = DateTime.Now;
+                        dFFin = DateTime.Now.AddDays(1);
+                        DFac.Fecha = DateTime.Now;
+                    }
+                    
+                    DatosPedidos.IdPedidoDia = ((dFInicio != null) ? ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= dFInicio.Date).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && (fcp.Fecha >= dFInicio.Date && fcp.Fecha <= dFFin)).Max(f => f.IdPedidoDia) + 1 : 1) : ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Max(f => f.IdPedidoDia) + 1 : 1)) ;
 
                     //Busca en la tabla jbResolucionesDian para saber cual el número que continua
                     DatosPedidos.NroResolucionDian = (db.ResolucionDians.Where(rds => rds.Activa == 1).Select(rd => rd.NroResolucionDian)).FirstOrDefault();
 
                     DatosPedidos.NroFacturaDian = DatosResol.Actual;
 
-                    DatosPedidos.Fecha = DFac.Fecha; // Convert.ToDateTime("09/01/2019 09:50"); // DateTime.Now;
+                    DatosPedidos.Fecha = ((dFInicio != null) ? dFInicio : DateTime.Now); // Convert.ToDateTime("09/01/2019 09:50"); // ;
 
                     DatosPedidos.IdTipoDespacho = DFac.TipoDespacho;
 
@@ -131,6 +148,8 @@ namespace BegoSys.Core.Facturacion
                         iRegistrosP = iRegistrosP + 1;
                         await db.SaveChangesAsync();
 
+                        //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+                        
                         //Descuenta del inventario los ingredientes vendidos
                         CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona);
 
@@ -138,11 +157,13 @@ namespace BegoSys.Core.Facturacion
                     }
                     //Imprime el pedido
                     PrintReceiptForTransaction(DFac);
+                    //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
                 }
             }
             catch (Exception Error)
             {
                 Console.WriteLine("Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message);
+                //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "SalvarPedido: fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia + " Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
             }
         }
 
@@ -162,12 +183,12 @@ namespace BegoSys.Core.Facturacion
             PrintDocument recordDoc = new PrintDocument();
 
             recordDoc.DocumentName = "Recibo de compra";
-            recordDoc.PrintPage += new PrintPageEventHandler(PrintReceiptPage); // function below
+            recordDoc.PrintPage += (sender, e) => PintarRecibo(DFac, e); //new PrintPageEventHandler(PrintReceiptPage); // function below
             recordDoc.PrintController = new StandardPrintController(); // hides status dialog popup
 
             // Comment if debugging 
             //PrinterSettings ps = new PrinterSettings();
-            //ps.PrinterName = "EPSON TM-T20II Receipt";
+            //ps.PrinterName = "Bixolon";
             //recordDoc.PrinterSettings = ps;
             //recordDoc.Print();
             // --------------------------------------
@@ -183,8 +204,7 @@ namespace BegoSys.Core.Facturacion
             recordDoc.Dispose();
         }
 
-
-        private static void PrintReceiptPage(object sender, PrintPageEventArgs e)
+        private static void PintarRecibo(FacturaTO DatosF, PrintPageEventArgs e)
         {
             float x = 10;
             float y = 5;
@@ -224,7 +244,7 @@ namespace BegoSys.Core.Facturacion
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
-            text = "Resolución DIAN # 18762011519624 del 2018/12/01 desde el 0000001 hasta el 7499962 Regimen Común";
+            text = "Resolución DIAN # " + DatosF.NroResolucionDian + " del 2018/12/01 desde el 7499963 hasta el 9000000 Regimen Común";
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
@@ -232,30 +252,119 @@ namespace BegoSys.Core.Facturacion
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
-            text = "Factura de Venta # 0000001 01/12/2018 09:32:05 AM";
+            text = "Factura de Venta # " + DatosF.NroFacturaDian + " " + DatosF.Fecha.ToShortDateString();
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
-            text = "Cant.   Producto  Subtotal";
+            text = "Cant.   Producto                Subtotal";
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
 
-            //foreach (DetalleFacturaTO ProductoPedido in DFac.DetallePedido)
-            //{
+            foreach (DetalleFacturaTO ProductoPedido in DatosF.DetallePedido)
+            {
 
-            //    //Se eliminan los registros que no tienen un producto
-            //    if (ProductoPedido.IdProducto == 0 && ProductoPedido.Cantidad == 0)
-            //    {
-            //        continue;
-            //    }
+                //Se eliminan los registros que no tienen un producto
+                if (ProductoPedido.IdProducto == 0 && ProductoPedido.Cantidad == 0)
+                {
+                    continue;
+                }
 
-            //    text = ProductoPedido.Cantidad + "  " + ProductoPedido.IdProducto + "   " + ProductoPedido.Subtotal;
-            //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
-            //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+                    text = ProductoPedido.Cantidad + "  " + db.Productos.Where(np => np.IdProducto == ProductoPedido.IdProducto).Select(npd => npd.NombreProducto).FirstOrDefault() + "   " + ProductoPedido.Subtotal; 
+                }
+                e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+                y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
-            //}
+            }
+        }
 
+
+        //private static void PrintReceiptPage(object sender, PrintPageEventArgs e)
+        //{
+        //    float x = 10;
+        //    float y = 5;
+        //    float width = 270.0F; // max width I found through trial and error
+        //    float height = 0F;
+
+        //    Font drawFontArial12Bold = new Font("Arial", 12, FontStyle.Bold);
+        //    Font drawFontArial10Regular = new Font("Arial", 10, FontStyle.Regular);
+        //    SolidBrush drawBrush = new SolidBrush(Color.Black);
+
+        //    // Set format of string.
+        //    StringFormat drawFormatCenter = new StringFormat();
+        //    drawFormatCenter.Alignment = StringAlignment.Center;
+        //    StringFormat drawFormatLeft = new StringFormat();
+        //    drawFormatLeft.Alignment = StringAlignment.Near;
+        //    StringFormat drawFormatRight = new StringFormat();
+        //    drawFormatRight.Alignment = StringAlignment.Far;
+
+        //    // Draw string to screen.
+        //    string text = "JuiceBar.co Unicentro";
+        //    e.Graphics.DrawString(text, drawFontArial12Bold, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial12Bold).Height;
+
+        //    text = "Tel: 3192319827";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "Calle 34B 66 A 02";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "Bego Inversiones S.A.S";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "NIT 901.226.468-2";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "Resolución DIAN # 18762011519624 del 2018/12/01 desde el 0000001 hasta el 7499962 Regimen Común";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "Medellín, Colombia";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "Factura de Venta # 0000001 01/12/2018 09:32:05 AM";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    text = "Cant.   Producto  Subtotal";
+        //    e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //    y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+
+        //    foreach (DetalleFacturaTO ProductoPedido in DFac.DetallePedido)
+        //    {
+
+        //    //    //Se eliminan los registros que no tienen un producto
+        //        if (ProductoPedido.IdProducto == 0 && ProductoPedido.Cantidad == 0)
+        //        {
+        //            continue;
+        //        }
+
+        //        text = ProductoPedido.Cantidad + "  " + ProductoPedido.IdProducto + "   " + ProductoPedido.Subtotal;
+        //        e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+        //        y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+        //    }
+
+        //}
+
+        public async Task AnulaPedido(long ipd)
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+
+            }
         }
     }
 }

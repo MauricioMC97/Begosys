@@ -48,5 +48,21 @@ namespace BegoSys.Service.Controllers
                 return BadRequest();
             }*/
         }
+
+        [HttpPost]
+        [Route(ConstantesApi.AnularPedidoUri)]
+        public async Task<IHttpActionResult> AnularPedidoAsync(long ipd)
+        {
+            //if (ModelState.IsValid)
+            //{
+            await _repositorioFacturacion.AnulaPedido(ipd);
+            return Ok();
+            /*}
+            else
+            {
+                return BadRequest();
+            }*/
+        }
+
     }
 }

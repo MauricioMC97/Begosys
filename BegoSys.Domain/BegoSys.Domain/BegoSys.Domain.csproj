@@ -64,6 +64,7 @@
     <Compile Include="Entidades\DetalleFactura.cs" />
     <Compile Include="Entidades\DetalleInventario.cs" />
     <Compile Include="Entidades\DetalleRol.cs" />
+    <Compile Include="Entidades\Envase.cs" />
     <Compile Include="Entidades\Factura.cs" />
     <Compile Include="Entidades\Ingrediente.cs" />
     <Compile Include="Entidades\Inventario.cs" />

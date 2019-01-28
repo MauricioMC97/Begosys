@@ -1114,117 +1114,6 @@
 
     <script type="text/javascript">
         function SolicitarPedido() {
-            //var vDetallePedido =
-            //    [{
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto1.value,
-            //        Cantidad: frmPedidos.Cantidad1.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario1.value,
-            //        Subtotal: frmPedidos.Subtotal1.value,
-            //        Observaciones: frmPedidos.observaciones1.value
-            //    } ];
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto1.value,
-            //    Cantidad: frmPedidos.Cantidad1.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario1.value,
-            //    Subtotal: frmPedidos.Subtotal1.value,
-            //    Observaciones: frmPedidos.observaciones1.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto2.value,
-            //    Cantidad: frmPedidos.Cantidad2.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario2.value,
-            //    Subtotal: frmPedidos.Subtotal2.value,
-            //    Observaciones: frmPedidos.observaciones2.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto3.value,
-            //    Cantidad: frmPedidos.Cantidad3.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario3.value,
-            //    Subtotal: frmPedidos.Subtotal3.value,
-            //    Observaciones: frmPedidos.observaciones3.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto4.value,
-            //    Cantidad: frmPedidos.Cantidad4.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario4.value,
-            //    Subtotal: frmPedidos.Subtotal4.value,
-            //    Observaciones: frmPedidos.observaciones4.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto5.value,
-            //    Cantidad: frmPedidos.Cantidad5.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario5.value,
-            //    Subtotal: frmPedidos.Subtotal5.value,
-            //    Observaciones: frmPedidos.observaciones5.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto6.value,
-            //    Cantidad: frmPedidos.Cantidad6.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario6.value,
-            //    Subtotal: frmPedidos.Subtotal6.value,
-            //    Observaciones: frmPedidos.observaciones6.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto7.value,
-            //    Cantidad: frmPedidos.Cantidad7.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario7.value,
-            //    Subtotal: frmPedidos.Subtotal7.value,
-            //    Observaciones: frmPedidos.observaciones7.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto8.value,
-            //    Cantidad: frmPedidos.Cantidad8.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario8.value,
-            //    Subtotal: frmPedidos.Subtotal8.value,
-            //    Observaciones: frmPedidos.observaciones8.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto9.value,
-            //    Cantidad: frmPedidos.Cantidad9.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario9.value,
-            //    Subtotal: frmPedidos.Subtotal9.value,
-            //    Observaciones: frmPedidos.observaciones9.value
-            //});
-
-            //vDetallePedido.push({
-            //    IdRegistro: 1,
-            //    IdRegFactura: 1,
-            //    IdProducto: frmPedidos.Producto10.value,
-            //    Cantidad: frmPedidos.Cantidad10.value,
-            //    ValorUnitario: frmPedidos.ValorUnitario10.value,
-            //    Subtotal: frmPedidos.Subtotal10.value,
-            //    Observaciones: frmPedidos.observaciones10.value
-            //});
-
             var vDatosFactura = [];
             var d = new Date();
 
@@ -1453,4 +1342,6 @@
 
     </script>
 </form>
-
+<form action="../AnularFactura.cshtml">
+    <input type="submit" value="Anular Factura" />
+</form>

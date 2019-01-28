@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Anular Pedidos";
+}
+
+<h2>Facturación</h2>
+<form id="frmAnularPedidos" action="/api/Billing/AnularPedido" method="post">
+
+    <label>Nro de pedido a Anular</label>
+    <input type="text" name="NroPedidoDia" id="NroPedidoDia">
+
+    <input id="btnAnularPedido" type="button" class="btn btn-sm btn-warning" onclick="AnularPedido()" value="Anular Pedido" data-url-anular-pedido="@Url.Action("AnularPedido","Billing")" />
+
+
+    <script type="text/javascript">
+        function AnularPedido() {
+
+
+            var urlAnularPedido = $('#btnAnularPedido').data('url-anular-pedido');
+
+            //call a function with parameters
+            $.ajax({
+                type: "POST",
+                url: urlAnularPedido,
+                data: frmAnularPedidos.NroPedidoDia.value,
+
+                success: function (respuesta) {
+                    if (respuesta && respuesta.status === "ok") {
+                        alert("Se anuló exitosamente");
+                    }
+                },
+                error: function () {
+                    alert("Error al anular pedido");
+                }
+            });
+        };
+
+    </script>
+</form>
+
