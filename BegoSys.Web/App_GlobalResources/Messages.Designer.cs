@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La factura ya fue entregada no es posible anularla.
+        /// </summary>
+        internal static string Billing_FactEntregada {
+            get {
+                return ResourceManager.GetString("Billing_FactEntregada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Por favor diligenciar todos los campos.
         /// </summary>
         internal static string Comun_CamposRequeridos {

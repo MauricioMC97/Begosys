@@ -351,7 +351,7 @@ namespace BegoSys.Core.Inventario
         }
 
         //Retirar el producto del inventario
-        public bool RetirarProducto(long idProducto, long idLocal, long idPersona)
+        public bool RetirarProducto(long idProducto, long idLocal, long idPersona, DateTime dFecha)
         {
             List<MedidasReceta> DatIngrR = new List<MedidasReceta>();
             var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
@@ -373,7 +373,7 @@ namespace BegoSys.Core.Inventario
 
                         DetalleInventario ProductoaRetirar = new DetalleInventario();
                         ProductoaRetirar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
-                        ProductoaRetirar.FechaHora = DateTime.Now;
+                        ProductoaRetirar.FechaHora = dFecha;
                         ProductoaRetirar.Transaccion = "SALE";
                         ProductoaRetirar.Cantidad = Elem.Cantidad;
                         ProductoaRetirar.CostoTotal = 0; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
@@ -405,7 +405,7 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.IdGrupo = "14";
                         RegistroContab.IdCuenta = "1430";
                         RegistroContab.IdSubCuenta = "143020";
-                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.FechaHora = dFecha;
                         RegistroContab.NroDocPersonaDB = "";
                         RegistroContab.ValorDebito = 0;
                         RegistroContab.NroDocPersonaCR = "";
@@ -421,7 +421,7 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.IdGrupo = "41";
                         RegistroContab.IdCuenta = "4140";
                         RegistroContab.IdSubCuenta = "414015";
-                        RegistroContab.FechaHora = DateTime.Now;
+                        RegistroContab.FechaHora = dFecha;
                         RegistroContab.NroDocPersonaDB = "901226468";
                         RegistroContab.ValorDebito = 1;
                         RegistroContab.NroDocPersonaCR = "";

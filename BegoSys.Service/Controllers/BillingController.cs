@@ -36,7 +36,7 @@ namespace BegoSys.Service.Controllers
 
         [HttpPost]
         [Route(ConstantesApi.GuardarPedidoUri)]
-        public async Task<IHttpActionResult> GuardarPedidoAsync(FacturaTO DF)
+        public async Task<IHttpActionResult> GuardarPedido(FacturaTO DF)
         {
             //if (ModelState.IsValid)
             //{
@@ -51,7 +51,7 @@ namespace BegoSys.Service.Controllers
 
         [HttpPost]
         [Route(ConstantesApi.AnularPedidoUri)]
-        public async Task<IHttpActionResult> AnularPedidoAsync(long ipd)
+        public async Task<IHttpActionResult> AnularPedido(long ipd)
         {
             //if (ModelState.IsValid)
             //{

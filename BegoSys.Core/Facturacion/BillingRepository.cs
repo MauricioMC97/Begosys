@@ -12,6 +12,7 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 using BegoSys.Common.Auxiliares;
 using BegoSys.Common.Constantes;
+using BegoSys.Common.Excepciones;
 
 namespace BegoSys.Core.Facturacion
 {
@@ -58,7 +59,7 @@ namespace BegoSys.Core.Facturacion
             //Guarda los datos de los pedidos 
             try
             {
-                //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+               AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
 
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
@@ -148,22 +149,23 @@ namespace BegoSys.Core.Facturacion
                         iRegistrosP = iRegistrosP + 1;
                         await db.SaveChangesAsync();
 
-                        //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+                        AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                         
                         //Descuenta del inventario los ingredientes vendidos
-                        CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona);
+                        CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona, dFInicio);
 
 
                     }
                     //Imprime el pedido
-                    PrintReceiptForTransaction(DFac);
-                    //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+                    //PrintReceiptForTransaction(DFac);
+                    AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
             }
             catch (Exception Error)
             {
-                Console.WriteLine("Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message);
-                //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "SalvarPedido: fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia + " Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
+                Console.WriteLine("SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message);
+                AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message, false);
+                throw new BegoSysException("SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message);
             }
         }
 
@@ -359,11 +361,27 @@ namespace BegoSys.Core.Facturacion
         {
             try
             {
-                
-            }
-            catch
-            {
+                //Se anulan las facturas del día de hoy que estén en estado PENDIENTE solamente
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+                    Factura FactAnular = new Factura();
 
+                    FactAnular = db.Facturas.Where(fa => fa.IdPedidoDia == ipd && fa.Fecha == DateTime.Today && fa.EstadoFactura == "PENDIENTE").Select(reg => reg).FirstOrDefault();
+
+                    if (FactAnular != null)
+                    {
+                        FactAnular.EstadoFactura = "ANULADO";
+                        await db.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        throw new BegoSysException("Billing_FactEntregada");
+                    }
+                }
+            }
+            catch (Exception Error)
+            {
+                throw new BegoSysException("Se presentó el siguiente error" + Error.Message + Error.InnerException.Message);
             }
         }
     }

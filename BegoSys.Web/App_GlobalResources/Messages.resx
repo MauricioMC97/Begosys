@@ -117,7 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Billing_FactEntregada" xml:space="preserve">
+    <value>La factura ya fue entregada no es posible anularla</value>
+    <comment>Transacción de Anular Factura</comment>
+  </data>
   <data name="Comun_CamposRequeridos" xml:space="preserve">
     <value>Por favor diligenciar todos los campos</value>
+    <comment>Transversal</comment>
   </data>
 </root>

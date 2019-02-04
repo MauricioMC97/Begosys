@@ -1225,8 +1225,8 @@
                         alert("Se guardó exitosamente");
                     }
                 },
-                error: function () {
-                    alert("Error al guardar");
+                error: function (rtaerror) {
+                    alert("Error al guardar" + rtaerror.responseText);
                 }
             });
         };
