@@ -91,7 +91,7 @@ namespace BegoSys.Core.Facturacion
                         DFac.Fecha = DateTime.Now;
                     }
                     
-                    DatosPedidos.IdPedidoDia = ((dFInicio != null) ? ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= dFInicio.Date).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && (fcp.Fecha >= dFInicio.Date && fcp.Fecha <= dFFin)).Max(f => f.IdPedidoDia) + 1 : 1) : ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Max(f => f.IdPedidoDia) + 1 : 1)) ;
+                    DatosPedidos.IdPedidoDia = ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= dFInicio.Date).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && (fcp.Fecha >= dFInicio.Date && fcp.Fecha <= dFFin)).DefaultIfEmpty().Max(f => f == null ? 0 : f.IdPedidoDia) + 1 : 1); //((dFInicio != null) ? ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= dFInicio.Date).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && (fcp.Fecha >= dFInicio.Date && fcp.Fecha <= dFFin)).Max(f => f.IdPedidoDia) + 1 : 1) : ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Max(f => f.IdPedidoDia) + 1 : 1));
 
                     //Busca en la tabla jbResolucionesDian para saber cual el número que continua
                     DatosPedidos.NroResolucionDian = (db.ResolucionDians.Where(rds => rds.Activa == 1).Select(rd => rd.NroResolucionDian)).FirstOrDefault();

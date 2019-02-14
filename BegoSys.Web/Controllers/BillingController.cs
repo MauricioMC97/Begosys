@@ -58,9 +58,8 @@ namespace BegoSys.Web.Controllers
 
             //if (ModelState.IsValid)
             //{
-                //El registro acá llega inconsistente pero se van a agregar las claves correspondientes
-                 await _proxy.PostForMessageAsync(ConstantesApi.GuardarPedidoUri, DatosFactura);
-                return Ok();
+            //El registro acá llega inconsistente pero se van a agregar las claves correspondientes
+            return Ok(await _proxy.PostForMessageAsync(ConstantesApi.GuardarPedidoUri, DatosFactura));
             //}
             //else
             //{
