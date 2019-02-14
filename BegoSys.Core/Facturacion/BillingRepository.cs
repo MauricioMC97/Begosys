@@ -59,7 +59,7 @@ namespace BegoSys.Core.Facturacion
             //Guarda los datos de los pedidos 
             try
             {
-               AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
+               //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
 
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
@@ -149,7 +149,7 @@ namespace BegoSys.Core.Facturacion
                         iRegistrosP = iRegistrosP + 1;
                         await db.SaveChangesAsync();
 
-                        AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
+                        //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                         
                         //Descuenta del inventario los ingredientes vendidos
                         CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona, dFInicio);
@@ -158,13 +158,13 @@ namespace BegoSys.Core.Facturacion
                     }
                     //Imprime el pedido
                     //PrintReceiptForTransaction(DFac);
-                    AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
+                    //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
             }
             catch (Exception Error)
             {
                 Console.WriteLine("SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message);
-                AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message, false);
+                //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message, false);
                 throw new BegoSysException("SalvarPedido: Se presentó el siguiente error al guardar la factura: " + Error.Message + Error.InnerException.Message);
             }
         }
