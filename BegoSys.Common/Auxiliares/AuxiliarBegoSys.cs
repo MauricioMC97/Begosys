@@ -348,7 +348,7 @@ namespace BegoSys.Common.Auxiliares
 
             if (valor == null && esObligatorio)
             {
-                throw new BegoSysException("SGDHMError_MensajeValorConfiguracion", llaveAtributo);
+                throw new BegoSysException("BegoSysError_MensajeValorConfiguracion", llaveAtributo);
             }
 
             return valor;

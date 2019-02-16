@@ -123,13 +123,16 @@
   <data name="BegoSysDebug_RegistroInicioMetodo" xml:space="preserve">
     <value>Inicia la ejecución de la acción {0} del controller {1}. Fecha Inicio: {2} {3}</value>
   </data>
+  <data name="BegoSysError_ExcepcionNoControlada" xml:space="preserve">
+    <value>Se presento una excepción no controlada en la ejecución de la acción {0} del controller {1}. Favor verifique el log o contacte el administrador del sistema.</value>
+  </data>
+  <data name="BegoSysError_MensajeValorConfiguracion" xml:space="preserve">
+    <value>La variable {0} no se encuentra en el archivo de configuración y es obligatoria</value>
+  </data>
   <data name="Comun_No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="Comun_Si" xml:space="preserve">
     <value>SI</value>
-  </data>
-  <data name="SGDHMError_MensajeValorConfiguracion" xml:space="preserve">
-    <value>La variable {0} no se encuentra en el archivo de configuración y es obligatoria</value>
   </data>
 </root>

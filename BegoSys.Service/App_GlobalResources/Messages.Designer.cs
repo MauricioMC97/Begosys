@@ -79,6 +79,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se presento una excepción no controlada en la ejecución de la acción {0} del controller {1}. Favor verifique el log o contacte el administrador del sistema..
+        /// </summary>
+        internal static string BegoSysError_ExcepcionNoControlada {
+            get {
+                return ResourceManager.GetString("BegoSysError_ExcepcionNoControlada", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La variable {0} no se encuentra en el archivo de configuración y es obligatoria.
+        /// </summary>
+        internal static string BegoSysError_MensajeValorConfiguracion {
+            get {
+                return ResourceManager.GetString("BegoSysError_MensajeValorConfiguracion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string Comun_No {
@@ -93,15 +111,6 @@ namespace Resources {
         internal static string Comun_Si {
             get {
                 return ResourceManager.GetString("Comun_Si", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to La variable {0} no se encuentra en el archivo de configuración y es obligatoria.
-        /// </summary>
-        internal static string SGDHMError_MensajeValorConfiguracion {
-            get {
-                return ResourceManager.GetString("SGDHMError_MensajeValorConfiguracion", resourceCulture);
             }
         }
     }

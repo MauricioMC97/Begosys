@@ -63,7 +63,7 @@ namespace BegoSys.Common.Atributos
 
             if (exception == null)
             {
-                exception = new BegoSysException("SGDHMError_ExcepcionNoControlada", filterContext.Exception, actionName, controllerName);
+                exception = new BegoSysException("BegoSysError_ExcepcionNoControlada", filterContext.Exception, actionName, controllerName);
             }
 
             //Se registra en el log el detalle de la excepción

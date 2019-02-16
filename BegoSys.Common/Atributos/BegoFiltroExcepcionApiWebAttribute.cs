@@ -55,7 +55,7 @@ namespace BegoSys.Common.Atributos
                     var controllerName = context.ActionContext.ActionDescriptor.ControllerDescriptor.ControllerName;
                     var actionName = context.ActionContext.ActionDescriptor.ActionName;
 
-                    exception = new BegoSysException("SGDHMError_ExcepcionNoControlada", context.Exception, actionName, controllerName);
+                    exception = new BegoSysException("BegoSysError_ExcepcionNoControlada", context.Exception, actionName, controllerName);
                 }
 
                 AuxiliarBegoSys.EscribirError(exception.Message, exception);
