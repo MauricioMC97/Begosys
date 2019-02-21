@@ -42,6 +42,7 @@ namespace BegoSys.Core.Inventario
             //Consulta los insumos de la tabla jbInsumos
         }
 
+
         //Adiciona un elemento al inventario y llama al procedimiento para contabilizar su compra
         public bool AdicionarInventario(long? idingr, long? idenv, long? idins, double cantidad, double valor, double? nrounidades, double? costounidades, long idMed, long idloc, string nitprov, long idpers)
         {
@@ -370,15 +371,35 @@ namespace BegoSys.Core.Inventario
 
                     foreach (MedidasReceta Elem in DatIngrR)
                     {
+                        //Se busca el costo de la materia prima para calcular el costo en el momento de la venta
+                        /*select * from jbdetalleinventarios jbdia 
+                          where jbdia.idingrediente = Vidingr 
+                            and jbdia.conexistencias = Vexist 
+                            and jbdia.transaccion = 'ENTRA'
+                            and jbdia.fechahora = (select min(jbdib.fechahora) 
+                                                     from jbdetalleinventarios jbdib 
+                                                    where jbdib.idingrediente = jbdia.idingrediente 
+                                                      and jbdib.transaccion = jbdia.transaccion 
+                                                      and jbdib.fechahora <= SYSDATE)*/
+                        var iCostoIngr = (from cing in db.DetalleInventarios
+                                      where (cing.IdIngrediente == Elem.IdIngrediente
+                                         && cing.ConExistencias == 1
+                                         && cing.Transaccion == "ENTRA"
+                                         && cing.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now
+                                                                                    && dii.IdIngrediente == cing.IdIngrediente
+                                                                                    && dii.IdLocal == cing.IdLocal
+                                                                                    && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
+                                      select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
+
 
                         DetalleInventario ProductoaRetirar = new DetalleInventario();
                         ProductoaRetirar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
                         ProductoaRetirar.FechaHora = dFecha;
                         ProductoaRetirar.Transaccion = "SALE";
                         ProductoaRetirar.Cantidad = Elem.Cantidad;
-                        ProductoaRetirar.CostoTotal = 0; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
+                        ProductoaRetirar.CostoTotal = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
                         ProductoaRetirar.Unidades = Elem.Cantidad;
-                        ProductoaRetirar.CostoUnidad = 0;
+                        ProductoaRetirar.CostoUnidad = iCostoIngr.CostoU;
                         ProductoaRetirar.IdMedida = Elem.IdMedida;
                         ProductoaRetirar.IdIngrediente = Elem.IdIngrediente;
                         ProductoaRetirar.IdEnvase = Elem.IdEnvase;
@@ -409,7 +430,7 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.NroDocPersonaDB = "";
                         RegistroContab.ValorDebito = 0;
                         RegistroContab.NroDocPersonaCR = "";
-                        RegistroContab.ValorCredito = 1;
+                        RegistroContab.ValorCredito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
                         RegistroContab.Observaciones = "Pulpa vendida";
 
                         CoreContable.RegistrarLibroMayor(RegistroContab);
@@ -423,7 +444,7 @@ namespace BegoSys.Core.Inventario
                         RegistroContab.IdSubCuenta = "414015";
                         RegistroContab.FechaHora = dFecha;
                         RegistroContab.NroDocPersonaDB = "901226468";
-                        RegistroContab.ValorDebito = 1;
+                        RegistroContab.ValorDebito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
                         RegistroContab.NroDocPersonaCR = "";
                         RegistroContab.ValorCredito = 0;
                         RegistroContab.Observaciones = "Venta de subproductos";

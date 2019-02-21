@@ -14,17 +14,17 @@
     </property>
   </object>
   
-  <!-- Configuración mensajes -->
+  <!-- Configuración mensajes --><!--
   <object id="messageSource" type="Spring.Context.Support.ResourceSetMessageSource, Spring.Core">
     <property name="ResourceManagers">
       <list>
         <value>Resources.Messages, App_GlobalResources</value>
       </list>
     </property>
-  </object>
+  </object>-->
 
-  <object id="accessTokenHelper" type="BegoSys.Web.Util.AccessTokenHelper, BegoSys.Web" factory-method="GetAccessToken" singleton="false">
-  </object>
+  <!--<object id="accessTokenHelper" type="BegoSys.Web.Util.AccessTokenHelper, BegoSys.Web" factory-method="GetAccessToken" singleton="false">
+  </object>-->
   
   <!--<object id="auth2Interceptor" type="Spring.Social.OAuth2.OAuth2RequestInterceptor, Spring.Social.Core" singleton="false">
     <constructor-arg ref="accessTokenHelper" />
@@ -52,7 +52,7 @@
     <property name="RequestFactory.Timeout" value="150000"/>
   </object>
 
-  <!-- Objeto para el manejo de las variables de sesión. -->
-  <object id="SessionObject" type="BegoSys.Web.Util.BegoSysSession, BegoSys.Web" />
+  <!-- Objeto para el manejo de las variables de sesión. --><!--
+  <object id="SessionObject" type="BegoSys.Web.Util.BegoSysSession, BegoSys.Web" />-->
 
 </objects>
