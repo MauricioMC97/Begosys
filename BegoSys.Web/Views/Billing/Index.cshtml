@@ -900,10 +900,8 @@
                 url: urlGuardarPedido,
                 data: vDatosFactura,
 
-                success: function (respuesta) {
-                    if (respuesta && respuesta.status === "ok") {
-                        alert("Se guardó exitosamente");
-                    }
+                success: function () {
+                    alert("Se guardó exitosamente");
                 },
                 error: function (rtaerror) {
                     alert("Error al guardar" + rtaerror.responseText);

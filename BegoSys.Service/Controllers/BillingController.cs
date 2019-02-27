@@ -35,6 +35,7 @@ namespace BegoSys.Service.Controllers
         //}
 
         [HttpPost]
+        [ResponseType(typeof(void))]
         [Route(ConstantesApi.GuardarPedidoUri)]
         public async Task<IHttpActionResult> GuardarPedido(FacturaTO DF)
         {

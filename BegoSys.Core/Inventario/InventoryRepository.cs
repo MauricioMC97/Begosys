@@ -391,24 +391,45 @@ namespace BegoSys.Core.Inventario
                                                                                     && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
                                       select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
 
-
                         DetalleInventario ProductoaRetirar = new DetalleInventario();
-                        ProductoaRetirar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
-                        ProductoaRetirar.FechaHora = dFecha;
-                        ProductoaRetirar.Transaccion = "SALE";
-                        ProductoaRetirar.Cantidad = Elem.Cantidad;
-                        ProductoaRetirar.CostoTotal = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
-                        ProductoaRetirar.Unidades = Elem.Cantidad;
-                        ProductoaRetirar.CostoUnidad = iCostoIngr.CostoU;
-                        ProductoaRetirar.IdMedida = Elem.IdMedida;
-                        ProductoaRetirar.IdIngrediente = Elem.IdIngrediente;
-                        ProductoaRetirar.IdEnvase = Elem.IdEnvase;
-                        ProductoaRetirar.IdInsumo = null;
-                        ProductoaRetirar.IdLocal = idLocal;
-                        ProductoaRetirar.IdProveedor = null;
-                        ProductoaRetirar.IdPersona = idPersona;
-                        ProductoaRetirar.TiempoProduccion = null;
-                        ProductoaRetirar.ConExistencias = 0;
+                        if (iCostoIngr != null)
+                        {
+                            ProductoaRetirar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            ProductoaRetirar.FechaHora = dFecha;
+                            ProductoaRetirar.Transaccion = "SALE";
+                            ProductoaRetirar.Cantidad = Elem.Cantidad;
+                            ProductoaRetirar.CostoTotal = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
+                            ProductoaRetirar.Unidades = Elem.Cantidad;
+                            ProductoaRetirar.CostoUnidad = iCostoIngr.CostoU;
+                            ProductoaRetirar.IdMedida = Elem.IdMedida;
+                            ProductoaRetirar.IdIngrediente = Elem.IdIngrediente;
+                            ProductoaRetirar.IdEnvase = Elem.IdEnvase;
+                            ProductoaRetirar.IdInsumo = null;
+                            ProductoaRetirar.IdLocal = idLocal;
+                            ProductoaRetirar.IdProveedor = null;
+                            ProductoaRetirar.IdPersona = idPersona;
+                            ProductoaRetirar.TiempoProduccion = null;
+                            ProductoaRetirar.ConExistencias = 0;
+                        }
+                        else
+                        {
+                            ProductoaRetirar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            ProductoaRetirar.FechaHora = dFecha;
+                            ProductoaRetirar.Transaccion = "SALE";
+                            ProductoaRetirar.Cantidad = Elem.Cantidad;
+                            ProductoaRetirar.CostoTotal = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            ProductoaRetirar.Unidades = Elem.Cantidad;
+                            ProductoaRetirar.CostoUnidad = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            ProductoaRetirar.IdMedida = Elem.IdMedida;
+                            ProductoaRetirar.IdIngrediente = Elem.IdIngrediente;
+                            ProductoaRetirar.IdEnvase = Elem.IdEnvase;
+                            ProductoaRetirar.IdInsumo = null;
+                            ProductoaRetirar.IdLocal = idLocal;
+                            ProductoaRetirar.IdProveedor = null;
+                            ProductoaRetirar.IdPersona = idPersona;
+                            ProductoaRetirar.TiempoProduccion = null;
+                            ProductoaRetirar.ConExistencias = 0;
+                        }
 
                         db.DetalleInventarios.Add(ProductoaRetirar);
 
@@ -421,33 +442,67 @@ namespace BegoSys.Core.Inventario
                         DatosLMTO RegistroContab = new DatosLMTO();
 
                         //Crédito a la cuenta 143020 que pasa de subproducto terminado a producto vendido
-                        RegistroContab.IdRegistro = 0;
-                        RegistroContab.IdClase = "1";
-                        RegistroContab.IdGrupo = "14";
-                        RegistroContab.IdCuenta = "1430";
-                        RegistroContab.IdSubCuenta = "143020";
-                        RegistroContab.FechaHora = dFecha;
-                        RegistroContab.NroDocPersonaDB = "";
-                        RegistroContab.ValorDebito = 0;
-                        RegistroContab.NroDocPersonaCR = "";
-                        RegistroContab.ValorCredito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
-                        RegistroContab.Observaciones = "Pulpa vendida";
+                        if (iCostoIngr != null)
+                        {
+                            RegistroContab.IdRegistro = 0;
+                            RegistroContab.IdClase = "1";
+                            RegistroContab.IdGrupo = "14";
+                            RegistroContab.IdCuenta = "1430";
+                            RegistroContab.IdSubCuenta = "143020";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "";
+                            RegistroContab.ValorDebito = 0;
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
+                            RegistroContab.Observaciones = "Pulpa vendida";
+                        }
+                        else
+                        {
+                            RegistroContab.IdRegistro = 0;
+                            RegistroContab.IdClase = "1";
+                            RegistroContab.IdGrupo = "14";
+                            RegistroContab.IdCuenta = "1430";
+                            RegistroContab.IdSubCuenta = "143020";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "";
+                            RegistroContab.ValorDebito = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            RegistroContab.Observaciones = "Pulpa vendida";
+                        }
 
                         CoreContable.RegistrarLibroMayor(RegistroContab);
 
                         //Debito de la venta
                         //Subproducto que se va para la venta
-                        RegistroContab.IdRegistro = 0; //Se pone cero porque RegistrarLibroMayor asigna el valor siguiente
-                        RegistroContab.IdClase = "4";
-                        RegistroContab.IdGrupo = "41";
-                        RegistroContab.IdCuenta = "4140";
-                        RegistroContab.IdSubCuenta = "414015";
-                        RegistroContab.FechaHora = dFecha;
-                        RegistroContab.NroDocPersonaDB = "901226468";
-                        RegistroContab.ValorDebito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
-                        RegistroContab.NroDocPersonaCR = "";
-                        RegistroContab.ValorCredito = 0;
-                        RegistroContab.Observaciones = "Venta de subproductos";
+                        if (iCostoIngr != null)
+                        {
+                            RegistroContab.IdRegistro = 0; //Se pone cero porque RegistrarLibroMayor asigna el valor siguiente
+                            RegistroContab.IdClase = "4";
+                            RegistroContab.IdGrupo = "41";
+                            RegistroContab.IdCuenta = "4140";
+                            RegistroContab.IdSubCuenta = "414015";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "901226468";
+                            RegistroContab.ValorDebito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = 0;
+                            RegistroContab.Observaciones = "Venta de subproductos";
+                        }
+                        else
+                        {
+                            RegistroContab.IdRegistro = 0; //Se pone cero porque RegistrarLibroMayor asigna el valor siguiente
+                            RegistroContab.IdClase = "4";
+                            RegistroContab.IdGrupo = "41";
+                            RegistroContab.IdCuenta = "4140";
+                            RegistroContab.IdSubCuenta = "414015";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "901226468";
+                            RegistroContab.ValorDebito = 0;
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = 0;
+                            RegistroContab.Observaciones = "Venta de subproductos";
+                        }
 
                         CoreContable.RegistrarLibroMayor(RegistroContab);
 
