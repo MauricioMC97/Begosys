@@ -1,14 +1,14 @@
 ﻿#region Derechos Reservados
 // ===================================================
-// Desarrollado Por             : robert.medina
+// Desarrollado Por             : mauricio.medina
 // Fecha de Creación            : 2017/08/17
-// Modificado Por               : robert.medina
+// Modificado Por               : mauricio.medina
 // Fecha Modificación           : 2017/08/17
 // Empresa                      : MVM INGENIERIA DE SOFTWARE S.A.S
 // ===================================================
 #endregion
 
-namespace IDEAM.SGDHM.Web.Util
+namespace BegoSys.Web.Util
 {
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;

@@ -900,11 +900,16 @@
                 url: urlGuardarPedido,
                 data: vDatosFactura,
 
-                success: function () {
-                    alert("Se guardó exitosamente");
+                success: function (rtaok) {
+                    if (rtaok.status === "error") {
+                        alert("El registro se guardó correctamente pero se generó el siguiente error: " + rtaok.message);
+                    }
+                    else {
+                        alert("Se guardó exitosamente");
+                    }
                 },
                 error: function (rtaerror) {
-                    alert("Error al guardar" + rtaerror.responseText);
+                    alert("Error al guardar: " + rtaerror.responseText);
                 }
             });
         };

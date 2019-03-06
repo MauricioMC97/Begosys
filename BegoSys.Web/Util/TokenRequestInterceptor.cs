@@ -1,8 +1,8 @@
 ﻿#region Derechos Reservados
 // ===================================================
-// Desarrollado Por             : esteban.giraldo
+// Desarrollado Por             : mauricio.medina
 // Fecha de Creación            : 2017/05/19
-// Modificado Por               : esteban.giraldo
+// Modificado Por               : mauricio.medina
 // Fecha Modificación           : 2017/05/19
 // Empresa                      : MVM INGENIERIA DE SOFTWARE S.A.S
 // ===================================================
@@ -17,7 +17,7 @@ using System.Security.Claims;
 using System.Web;
 #endregion
 
-namespace IDEAM.SGDHM.Web.Util
+namespace BegoSys.Web.Util
 {
     /// <summary>
     /// Interceptor del request que se ejecuta a través del RestTemplate de Spring
