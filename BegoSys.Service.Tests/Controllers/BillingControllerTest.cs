@@ -2,6 +2,8 @@
 using BegoSys.Service.Controllers;
 using BegoSys.TO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +13,93 @@ using System.Web.Http.Results;
 
 namespace BegoSys.Service.Tests.Controllers
 {
-    class BillingControllerTest
+
+    public class Token
+    {
+        public string access_token { get; set; }
+        public string token_type { get; set; }
+        public int expires_in { get; set; }
+    }
+
+
+    [TestClass]
+    public class BillingControllerTest
     {
         private BillingController controller = new BillingController(new BillingRepository());
 
+
+
         [TestMethod]
-        public void IngresarFacturas(FacturaTO dfc)
+        public void IngresarFacturas()
         {
-            //arrange
-            //long idLocal = 1;
-            //long idProceso = 1;
+            List<FacturaTO> datos = new List<FacturaTO>();
 
-            //act
-            //OkNegotiatedContentResult<System.Web.Http.IHttpActionResult> resultadoConvertido = controller.GuardarPedido(dfc) as OkNegotiatedContentResult<System.Web.Http.IHttpActionResult>;
+            var factura = new FacturaTO
+            {
+                IdRegistro = 1,
+                IdPedidoDia = 1,
+                NroResolucionDian = "X",
+                NroFacturaDian = "X",
+                Fecha = DateTime.Now,
+                TipoDespacho = 1,
+                Impuesto = 0,
+                ValorTotal = 0,
+                EstadoFactura = "PENDIENTE",
+                IdPersona = 3,
+                IdLocal = 1
 
-            //assert
-            //Assert.IsNotNull(resultadoConvertido);
-            //Assert.IsNotNull(resultadoConvertido.Content);
+                /*IdRegistro: 1,
+                IdPedidoDia: 1,
+                NroResolucionDian: "X",
+                NroFacturaDian: "X",
+                Fecha: frmPedidos.FechaHora1.value, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+                TipoDespacho: frmPedidos.TipoDespacho1.value,
+                Impuesto: frmPedidos.Impoconsumo.value,
+                ValorTotal: frmPedidos.ValorTotal.value,
+                EstadoFactura: 'PENDIENTE',
+                IdPersona: 3,
+                IdLocal: 1,
+                DetallePedido: [{
+                IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto1.value,
+                    Cantidad: frmPedidos.Cantidad1.value,
+                    ValorUnitario: frmPedidos.ValorUnitario1.value,
+                    Subtotal: frmPedidos.Subtotal1.value,
+                    Observaciones: frmPedidos.observaciones1.value
+                }*/
+        };
+            datos.Add(factura); 
+
+
+            //token         
+            var clientToken = new RestClient("http://192.168.1.243/JBCService");
+
+
+            var requestToken = new RestRequest("token", Method.POST);
+            requestToken.AddParameter("grant_type", "password");
+            requestToken.AddParameter("username", "apiuser_sgdhm");
+            requestToken.AddParameter("password", "mvm2017*");
+
+            // execute the request
+            IRestResponse responseToken = clientToken.Execute(requestToken);
+
+            Token obj = JsonConvert.DeserializeObject<Token>(responseToken.Content);
+
+            var client = new RestClient("http://192.168.1.243/JBCService/api/Billing");
+
+            var request = new RestRequest("GuardarPedido", Method.POST);
+
+            request.AddJsonBody(datos);
+
+            request.AddHeader("Authorization", obj.token_type + " " + obj.access_token);
+
+            // execute the request
+            IRestResponse response = client.ExecuteAsPost(request, "POST");
+
+            var objEstadoRegistro = response.Content;
+
+
         }
     }
 }

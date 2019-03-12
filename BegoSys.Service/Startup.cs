@@ -51,16 +51,16 @@ namespace BegoSys.Service
                 RefreshTokenProvider = new ProviderRefreshTokenServidorSgdhm()
             };
 
-            var windowsOauthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/windowstoken"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new ProveedorAutorizacionDirectorioActivoServidorSgdhm()
-            };
+            //var windowsOauthServerOptions = new OAuthAuthorizationServerOptions()
+            //{
+            //    AllowInsecureHttp = true,
+            //    TokenEndpointPath = new PathString("/windowstoken"),
+            //    AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+            //    Provider = new ProveedorAutorizacionDirectorioActivoServidorSgdhm()
+            //};
 
-            app.UseOAuthAuthorizationServer(oauthServerOptions);
-            app.UseOAuthAuthorizationServer(windowsOauthServerOptions);
+            //app.UseOAuthAuthorizationServer(oauthServerOptions);
+            //app.UseOAuthAuthorizationServer(windowsOauthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }

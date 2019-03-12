@@ -902,7 +902,7 @@
 
                 success: function (rtaok) {
                     if (rtaok.status === "error") {
-                        alert("El registro se guardó correctamente pero se generó el siguiente error: " + rtaok.message);
+                        alert("Error al guardar: " + rtaok.message);
                     }
                     else {
                         alert("Se guardó exitosamente");
