@@ -58,5 +58,10 @@ namespace BegoSys.TO
         /// Costo total del ingrediente para la cantidad actual
         /// </summary>
         public double CostoTotal { get; set; }
+
+        /// <summary>
+        /// Identificador del tipo de ingrediente
+        /// </summary>
+        public long IdTipoIngrediente { get; set; }
     }
 }

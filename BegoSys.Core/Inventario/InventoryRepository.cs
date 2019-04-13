@@ -24,13 +24,14 @@ namespace BegoSys.Core.Inventario
                     //Selecciona solamente las frutas e insumos que se estén manejando en inventario actualmente
                     datInven = (from ing in db.Ingredientes
                                 join med in db.Medidas on ing.IdMedida equals med.idMedida
-                                where (ing.IdTipoIngrediente == 1 || ing.IdTipoIngrediente == 3 || ing.IdTipoIngrediente == 5) && ing.Inventario == 1
+                                where (ing.IdTipoIngrediente == 1 || ing.IdTipoIngrediente == 3 || ing.IdTipoIngrediente == 5 || ing.IdTipoIngrediente == 6 || ing.IdTipoIngrediente == 7) && ing.Inventario == 1
                                 select new InventarioTO
                                 {
                                     IdIngrediente = ing.IdIngrediente,
                                     NombreIngrediente = ing.NombreIngrediente,
                                     IdMedida = ing.IdMedida,
-                                    NombreMedida = med.nombreMedida
+                                    NombreMedida = med.nombreMedida,
+                                    IdTipoIngrediente = ing.IdTipoIngrediente
                                 }).ToList();
                 }
             }
