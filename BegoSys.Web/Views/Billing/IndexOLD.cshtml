@@ -1,0 +1,1050 @@
+﻿
+@{
+    ViewBag.Title = "Facturación";
+}
+
+<h2>Facturación</h2>
+<form id="frmPedidos" action="api/Billing/GuardarPedido/" method="post">
+    <table style="height: 97px;" width="1000">
+        @*Producto 1*@
+        <tr>
+            <td>
+                <label>Producto 1</label>
+                <select id="Producto1" name="Producto1" class="form-control" onchange="asignavalunitario('Producto1')" enctype="application/x-www-form-urlencoded">
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad1" id="Cantidad1" onchange="calculateLineTotal('Cantidad1','ValorUnitario1','Subtotal1')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario1" id="ValorUnitario1">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal1">
+                <label>Para</label>
+                <select name="TipoDespacho1" id="TipoDespacho1">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                <input type="text" name="dirdomicilio1" id="dirdomicilio1">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones1" id="observaciones1">
+                <label>Fecha y Hora</label>
+                <input type="text" name="FechaHora1" id="FechaHora1">
+
+            </td>
+        </tr>
+        @*Producto 2*@
+        <tr>
+            <td>
+                <label>Producto 2</label>
+                <select id="Producto2" class="form-control" onchange="asignavalunitario('Producto2')" enctype="application/x-www-form-urlencoded">
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad2" id="Cantidad2" onchange="calculateLineTotal('Cantidad2','ValorUnitario2','Subtotal2')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario2" id="ValorUnitario2">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal2">
+                <label>Para</label>
+                <select name="TipoDespacho2" id="TipoDespacho2">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio2" id="dirdomicilio2">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones2" id="observaciones2">
+            </td>
+        </tr>
+        @*Producto 3*@
+        <tr>
+            <td>
+                <label>Producto 3</label>
+                <select id="Producto3" class="form-control" onchange="asignavalunitario('Producto3')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad3" id="Cantidad3" onchange="calculateLineTotal('Cantidad3','ValorUnitario3','Subtotal3')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario3" id="ValorUnitario3">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal3">
+                <label>Para</label>
+                <select name="TipoDespacho3" id="TipoDespacho3">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio3" id="dirdomicilio3">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones3" id="observaciones3">
+            </td>
+        </tr>
+        @*Producto 4*@
+        <tr>
+            <td>
+                <label>Producto 4</label>
+                <select id="Producto4" class="form-control" onchange="asignavalunitario('Producto4')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad4" id="Cantidad4" onchange="calculateLineTotal('Cantidad4','ValorUnitario4','Subtotal4')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario4" id="ValorUnitario4">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal4">
+                <label>Para</label>
+                <select name="TipoDespacho4" id="TipoDespacho4">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio4" id="dirdomicilio4">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones4" id="observaciones4">
+            </td>
+        </tr>
+        @*Producto 5*@
+        <tr>
+            <td>
+                <label>Producto 5</label>
+                <select id="Producto5" class="form-control" onchange="asignavalunitario('Producto5')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad5" id="Cantidad5" onchange="calculateLineTotal('Cantidad5','ValorUnitario5','Subtotal5')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario5" id="ValorUnitario5">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal5">
+                <label>Para</label>
+                <select name="TipoDespacho5" id="TipoDespacho5">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio5" id="dirdomicilio5">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones5" id="observaciones5">
+            </td>
+        </tr>
+        @*Producto 6*@
+        <tr>
+            <td>
+                <label>Producto 6</label>
+                <select id="Producto6" class="form-control" onchange="asignavalunitario('Producto6')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad6" id="Cantidad6" onchange="calculateLineTotal('Cantidad6','ValorUnitario6','Subtotal6')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario6" id="ValorUnitario6">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal6">
+                <label>Para</label>
+                <select name="TipoDespacho6" id="TipoDespacho6">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio6" id="dirdomicilio6">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones6" id="observaciones6">
+            </td>
+        </tr>
+        @*Producto 7*@
+        <tr>
+            <td>
+                <label>Producto 7</label>
+                <select id="Producto7" class="form-control" onchange="asignavalunitario('Producto7')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad7" id="Cantidad7" onchange="calculateLineTotal('Cantidad7','ValorUnitario7','Subtotal7')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario7" id="ValorUnitario7">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal7">
+                <label>Para</label>
+                <select name="TipoDespacho7" id="TipoDespacho7">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio7" id="dirdomicilio7">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones7" id="observaciones7">
+            </td>
+        </tr>
+        @*Producto 8*@
+        <tr>
+            <td>
+                <label>Producto 8</label>
+                <select id="Producto8" class="form-control" onchange="asignavalunitario('Producto8')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad8" id="Cantidad8" onchange="calculateLineTotal('Cantidad8','ValorUnitario8','Subtotal8')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario8" id="ValorUnitario8">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal8">
+                <label>Para</label>
+                <select name="TipoDespacho8" id="TipoDespacho8">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio8" id="dirdomicilio8">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones8" id="observaciones8">
+            </td>
+        </tr>
+        @*Producto 9*@
+        <tr>
+            <td>
+                <label>Producto 9</label>
+                <select id="Producto9" class="form-control" onchange="asignavalunitario('Producto9')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad9" id="Cantidad9" onchange="calculateLineTotal('Cantidad9','ValorUnitario9','Subtotal9')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario9" id="ValorUnitario9">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal9">
+                <label>Para</label>
+                <select name="TipoDespacho9" id="TipoDespacho9">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio9" id="dirdomicilio9">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones9" id="observaciones9">
+            </td>
+        </tr>
+        @*Producto 10*@
+        <tr>
+            <td>
+                <label>Producto 10</label>
+                <select id="Producto10" class="form-control" onchange="asignavalunitario('Producto10')" a>
+                    <option value="0">--------------Seleccione-----------------</option>
+                    <option value="83" data-valoru="500">Adición Hielo</option>
+                    <option value="84" data-valoru="0">Adición Leche Deslactosada</option>
+                    <option value="75" data-valoru="500">Adición Vaso para llevar 2 de 16 o 1 Tarrina</option>
+                    <option value="76" data-valoru="2500">Croissant de Queso</option>
+                    <option value="85" data-valoru="1000">Domicilio 1 Km a la redonda</option>
+                    <option value="91" data-valoru="2500">Empanadas de Carne y Papa</option>
+                    <option value="88" data-valoru="500">Pan Bola</option>
+                    <option value="20" data-valoru="2500">Fresa en Agua Jarra</option>
+                    <option value="19" data-valoru="1500">Fresa en Agua Vaso</option>
+                    <option value="22" data-valoru="2500">Fresa en Leche Jarra</option>
+                    <option value="21" data-valoru="1500">Fresa en Leche Vaso</option>
+                    <option value="16" data-valoru="2500">Guanabana en Agua Jarra</option>
+                    <option value="15" data-valoru="1500">Guanabana en Agua Vaso</option>
+                    <option value="18" data-valoru="2500">Guanabana en Leche Jarra</option>
+                    <option value="17" data-valoru="1500">Guanabana en Leche Vaso</option>
+                    <option value="30" data-valoru="2500">Guayaba en Agua Jarra</option>
+                    <option value="29" data-valoru="1500">Guayaba en Agua Vaso</option>
+                    <option value="32" data-valoru="2500">Guayaba en Leche Jarra</option>
+                    <option value="31" data-valoru="1500">Guayaba en Leche Vaso</option>
+                    <option value="42" data-valoru="4000">Limonada Natural Jarra</option>
+                    <option value="41" data-valoru="1500">Limonada Natural Vaso</option>
+                    <option value="38" data-valoru="2500">Lulo en Agua Jarra</option>
+                    <option value="37" data-valoru="1500">Lulo en Agua Vaso</option>
+                    <option value="40" data-valoru="2500">Lulo en Leche Jarra</option>
+                    <option value="39" data-valoru="1500">Lulo en Leche Vaso</option>
+                    <option value="13" data-valoru="4000">Mandarina Jarra</option>
+                    <option value="12" data-valoru="2000">Mandarina Vaso</option>
+                    <option value="2" data-valoru="2500">Mango en Agua Jarra</option>
+                    <option value="1" data-valoru="1500">Mango en Agua Vaso</option>
+                    <option value="4" data-valoru="2500">Mango en Leche Jarra</option>
+                    <option value="3" data-valoru="1500">Mango en Leche Vaso</option>
+                    <option value="7" data-valoru="2500">Maracuyá en Agua Jarra</option>
+                    <option value="6" data-valoru="1500">Maracuyá en Agua Vaso</option>
+                    <option value="9" data-valoru="2500">Maracuyá en Leche Jarra</option>
+                    <option value="8" data-valoru="1500">Maracuyá en Leche Vaso</option>
+                    <option value="51" data-valoru="4000">Milo Frio Jarra</option>
+                    <option value="50" data-valoru="1500">Milo Frio Vaso</option>
+                    <option value="24" data-valoru="2500">Mora en Agua Jarra</option>
+                    <option value="23" data-valoru="1500">Mora en Agua Vaso</option>
+                    <option value="26" data-valoru="2500">Mora en Leche Jarra</option>
+                    <option value="25" data-valoru="1500">Mora en Leche Vaso</option>
+                    <option value="47" data-valoru="4000">Naranja Jarra</option>
+                    <option value="46" data-valoru="2000">Naranja Vaso</option>
+                    <option value="81" data-valoru="2000">Pan Salchicha</option>
+                    <option value="77" data-valoru="2000">Pandebono</option>
+                    <option value="78" data-valoru="2000">Pandequeso</option>
+                    <option value="34" data-valoru="2500">Piña en Agua Jarra</option>
+                    <option value="33" data-valoru="1500">Piña en Agua Vaso</option>
+                    <option value="49" data-valoru="2500">Tomate de Árbol en Agua Jarra</option>
+                    <option value="48" data-valoru="1500">Tomate de Árbol en Agua Vaso</option>
+                    <option value="73" data-valoru="2500">Tomate de Árbol en Leche Jarra</option>
+                    <option value="72" data-valoru="1500">Tomate de Árbol en Leche Vaso</option>
+                    <option value="89" data-valoru="2500">Piña en Leche Jarra</option>
+                    <option value="90" data-valoru="1500">Piña en Leche Vaso</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="text" name="Cantidad10" id="Cantidad10" onchange="calculateLineTotal('Cantidad10','ValorUnitario10','Subtotal10')">
+                <label>Valor Unitario</label>
+                <input type="text" name="ValorUnitario10" id="ValorUnitario10">
+                <label>Subtotal</label>
+                <input onchange="findTotal()" type="text" name="Subtotal" id="Subtotal10">
+                <label>Para</label>
+                <select name="TipoDespacho10" id="TipoDespacho10">
+                    <option value="1">Consumir acá</option>
+                    <option value="2">Para llevar</option>
+                    <option value="3">Domicilio</option>
+                </select>
+                @*<label>Dirección domicilio</label>
+                    <input type="text" name="dirdomicilio10" id="dirdomicilio10">*@
+                <label>Observaciones</label>
+                <input type="text" name="observaciones10" id="observaciones10">
+            </td>
+        </tr>
+
+
+    </table>
+
+    <label>Impoconsumo</label>
+    <input type="text" name="Impoconsumo" id="Impoconsumo">
+
+
+    <label>Valor Total</label>
+    <input type="text" name="ValorTotal" id="ValorTotal">
+
+    <input id="btnSolPedido" type="button" class="btn btn-sm btn-success" onclick="SolicitarPedido()" value="Solicitar Pedido" data-url-solicitar-pedido="@Url.Action("GuardarPedido","Billing")">
+
+    <script type="text/javascript">
+        function SolicitarPedido() {
+            var vDatosFactura = [];
+            var d = new Date();
+
+            vDatosFactura = {
+                IdRegistro: 1,
+                IdPedidoDia: 1,
+                NroResolucionDian: "X",
+                NroFacturaDian: "X",
+                Fecha: frmPedidos.FechaHora1.value, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+                TipoDespacho: frmPedidos.TipoDespacho1.value,
+                Impuesto: frmPedidos.Impoconsumo.value,
+                ValorTotal: frmPedidos.ValorTotal.value,
+                EstadoFactura: 'PENDIENTE',
+                IdPersona: 3,
+                IdLocal: 1,
+                DetallePedido: [{
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto1.value,
+                    Cantidad: frmPedidos.Cantidad1.value,
+                    ValorUnitario: frmPedidos.ValorUnitario1.value,
+                    Subtotal: frmPedidos.Subtotal1.value,
+                    Observaciones: frmPedidos.observaciones1.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto2.value,
+                    Cantidad: frmPedidos.Cantidad2.value,
+                    ValorUnitario: frmPedidos.ValorUnitario2.value,
+                    Subtotal: frmPedidos.Subtotal2.value,
+                    Observaciones: frmPedidos.observaciones2.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto3.value,
+                    Cantidad: frmPedidos.Cantidad3.value,
+                    ValorUnitario: frmPedidos.ValorUnitario3.value,
+                    Subtotal: frmPedidos.Subtotal3.value,
+                    Observaciones: frmPedidos.observaciones3.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto4.value,
+                    Cantidad: frmPedidos.Cantidad4.value,
+                    ValorUnitario: frmPedidos.ValorUnitario4.value,
+                    Subtotal: frmPedidos.Subtotal4.value,
+                    Observaciones: frmPedidos.observaciones4.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto5.value,
+                    Cantidad: frmPedidos.Cantidad5.value,
+                    ValorUnitario: frmPedidos.ValorUnitario5.value,
+                    Subtotal: frmPedidos.Subtotal5.value,
+                    Observaciones: frmPedidos.observaciones5.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto6.value,
+                    Cantidad: frmPedidos.Cantidad6.value,
+                    ValorUnitario: frmPedidos.ValorUnitario6.value,
+                    Subtotal: frmPedidos.Subtotal6.value,
+                    Observaciones: frmPedidos.observaciones6.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto7.value,
+                    Cantidad: frmPedidos.Cantidad7.value,
+                    ValorUnitario: frmPedidos.ValorUnitario7.value,
+                    Subtotal: frmPedidos.Subtotal7.value,
+                    Observaciones: frmPedidos.observaciones7.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto8.value,
+                    Cantidad: frmPedidos.Cantidad8.value,
+                    ValorUnitario: frmPedidos.ValorUnitario8.value,
+                    Subtotal: frmPedidos.Subtotal8.value,
+                    Observaciones: frmPedidos.observaciones8.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto9.value,
+                    Cantidad: frmPedidos.Cantidad9.value,
+                    ValorUnitario: frmPedidos.ValorUnitario9.value,
+                    Subtotal: frmPedidos.Subtotal9.value,
+                    Observaciones: frmPedidos.observaciones9.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto10.value,
+                    Cantidad: frmPedidos.Cantidad10.value,
+                    ValorUnitario: frmPedidos.ValorUnitario10.value,
+                    Subtotal: frmPedidos.Subtotal10.value,
+                    Observaciones: frmPedidos.observaciones10.value
+                },]
+            };
+
+            var urlGuardarPedido = $('#btnSolPedido').data('url-solicitar-pedido');
+
+            //call a function with parameters
+            $.ajax({
+                type: "POST",
+                url: urlGuardarPedido,
+                data: vDatosFactura,
+
+                success: function (rtaok) {
+                    if (rtaok.status === "error") {
+                        alert("Error al guardar: " + rtaok.message);
+                    }
+                    else {
+                        alert("Se guardó exitosamente");
+                    }
+                },
+                error: function (rtaerror) {
+                    alert("Error al guardar: " + rtaerror.responseText);
+                }
+            });
+        };
+
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto1").onchange = function () {
+            document.getElementById("Cantidad1").setAttribute("value", 1);
+            document.getElementById("ValorUnitario1").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad1', 'ValorUnitario1', 'Subtotal1');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto2").onchange = function () {
+            document.getElementById("Cantidad2").setAttribute("value", 1);
+            document.getElementById("ValorUnitario2").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad2', 'ValorUnitario2', 'Subtotal2');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto3").onchange = function () {
+            document.getElementById("Cantidad3").setAttribute("value", 1);
+            document.getElementById("ValorUnitario3").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad3', 'ValorUnitario3', 'Subtotal3');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto4").onchange = function () {
+            document.getElementById("Cantidad4").setAttribute("value", 1);
+            document.getElementById("ValorUnitario4").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad4', 'ValorUnitario4', 'Subtotal4');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto5").onchange = function () {
+            document.getElementById("Cantidad5").setAttribute("value", 1);
+            document.getElementById("ValorUnitario5").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad5', 'ValorUnitario5', 'Subtotal5');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto6").onchange = function () {
+            document.getElementById("Cantidad6").setAttribute("value", 1);
+            document.getElementById("ValorUnitario6").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad6', 'ValorUnitario6', 'Subtotal6');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto7").onchange = function () {
+            document.getElementById("Cantidad7").setAttribute("value", 1);
+            document.getElementById("ValorUnitario7").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad7', 'ValorUnitario7', 'Subtotal7');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto8").onchange = function () {
+            document.getElementById("Cantidad8").setAttribute("value", 1);
+            document.getElementById("ValorUnitario8").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad8', 'ValorUnitario8', 'Subtotal8');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto9").onchange = function () {
+            document.getElementById("Cantidad9").setAttribute("value", 1);
+            document.getElementById("ValorUnitario9").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad9', 'ValorUnitario9', 'Subtotal9');
+        };
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("Producto10").onchange = function () {
+            document.getElementById("Cantidad10").setAttribute("value", 1);
+            document.getElementById("ValorUnitario10").setAttribute("value", this.options[this.selectedIndex].getAttribute("data-valoru"));
+            calculateLineTotal('Cantidad10', 'ValorUnitario10', 'Subtotal10');
+        };
+    </script>
+
+    <script type="text/javascript">
+
+        function calculateLineTotal(numunit, rate, total) {
+            var rate = document.getElementById(rate).value;
+            var numunit = document.getElementById(numunit).value;
+
+
+            var sum = numunit * rate;
+
+
+            document.getElementById(total).value = sum;
+            findTotal();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function findTotal() {
+            var arr = document.getElementsByName('Subtotal');
+            var tot = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (parseInt(arr[i].value))
+                    tot += parseInt(arr[i].value);
+            }
+            document.getElementById('ValorTotal').value = tot;
+            document.getElementById('Impoconsumo').value = tot * 0.08;
+        }
+
+    </script>
+</form>
+<form action="../AnularFactura.cshtml">
+    <input type="submit" value="Anular Factura" />
+</form>

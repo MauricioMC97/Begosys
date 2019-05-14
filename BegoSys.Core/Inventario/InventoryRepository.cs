@@ -190,7 +190,7 @@ namespace BegoSys.Core.Inventario
                     //Se elimina un ingrediente del inventario porque fue procesado o fue vendido
                     if (idingr != null)
                     {
-                        lTipoIngr = (from iingr in db.Ingredientes where iingr.IdTipoIngrediente == idingr select iingr.IdTipoIngrediente).FirstOrDefault();
+                        lTipoIngr = (from iingr in db.Ingredientes where iingr.IdIngrediente == idingr select iingr.IdTipoIngrediente).FirstOrDefault();
 
                             //Selecciona el máximo registro para aumentar en uno el valor
                             DatosRetiroInventario.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
