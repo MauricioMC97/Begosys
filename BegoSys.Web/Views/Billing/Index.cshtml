@@ -6,7 +6,11 @@
     <title>Ventas</title>
 </head>
 <body>
-    <table>
+    <table border="1">
+        <tr>
+            <th>VALOR TOTAL FACTURA: </th>
+            <th><pre id="lblprnTotalFacturaU"></pre></th>
+        </tr>
         <tr>
             <th>Producto</th>
             <th>Adicionar</th>
@@ -17,87 +21,78 @@
         </tr>
 
         <!--PEGAR AQUI EXCEL-->
-        <tr> <td>Adición Hielo: </td> <td><input id="btnAdicionAdiciónHielo" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('83')" tabindex="83" data-valoru="500" value="+1"></td> <td><label for="obsbtnAdiciónHielo">Observaciones: </label> <input type="text" id="obsbtnAdiciónHielo"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('83')" tabindex="83" data-valoru="500" value="-1"></td> <td><pre id="lblprnCantidad83"></pre></td><td><pre id="lblprnSubtotal83"></pre></td>
-        <tr> <td>Adición Leche Deslactosada: </td> <td><input id="btnAdicionAdiciónLecheDeslactosada" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('84')" tabindex="84" data-valoru="0" value="+1"></td> <td><label for="obsbtnAdiciónLecheDeslactosada">Observaciones: </label> <input type="text" id="obsbtnAdiciónLecheDeslactosada"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('84')" tabindex="84" data-valoru="0" value="-1"></td> <td><pre id="lblprnCantidad84"></pre></td><td><pre id="lblprnSubtotal84"></pre></td>
-        <tr> <td>Adición Vaso para llevar 2 de 16 o 1 Tarrina: </td> <td><input id="btnAdicionAdiciónVasoparallevar2de16o1Tarrina" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('75')" tabindex="75" data-valoru="500" value="+1"></td> <td><label for="obsbtnAdiciónVasoparallevar2de16o1Tarrina">Observaciones: </label> <input type="text" id="obsbtnAdiciónVasoparallevar2de16o1Tarrina"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('75')" tabindex="75" data-valoru="500" value="-1"></td> <td><pre id="lblprnCantidad75"></pre></td><td><pre id="lblprnSubtotal75"></pre></td>
-        <tr> <td>Croissant de Queso: </td> <td><input id="btnAdicionCroissantdeQueso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('76')" tabindex="76" data-valoru="2500" value="+1"></td> <td><label for="obsbtnCroissantdeQueso">Observaciones: </label> <input type="text" id="obsbtnCroissantdeQueso"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('76')" tabindex="76" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad76"></pre></td><td><pre id="lblprnSubtotal76"></pre></td>
-        <tr> <td>Domicilio 1 Km a la redonda: </td> <td><input id="btnAdicionDomicilio1Kmalaredonda" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('85')" tabindex="85" data-valoru="1000" value="+1"></td> <td><label for="obsbtnDomicilio1Kmalaredonda">Observaciones: </label> <input type="text" id="obsbtnDomicilio1Kmalaredonda"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('85')" tabindex="85" data-valoru="1000" value="-1"></td> <td><pre id="lblprnCantidad85"></pre></td><td><pre id="lblprnSubtotal85"></pre></td>
-        <tr> <td>Pan Bola: </td> <td><input id="btnAdicionPanBola" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('88')" tabindex="88" data-valoru="500" value="+1"></td> <td><label for="obsbtnPanBola">Observaciones: </label> <input type="text" id="obsbtnPanBola"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('88')" tabindex="88" data-valoru="500" value="-1"></td> <td><pre id="lblprnCantidad88"></pre></td><td><pre id="lblprnSubtotal88"></pre></td>
-        <tr> <td>Fresa en Agua Jarra: </td> <td><input id="btnAdicionFresaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('20')" tabindex="20" data-valoru="2500" value="+1"></td> <td><label for="obsbtnFresaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnFresaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('20')" tabindex="20" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad20"></pre></td><td><pre id="lblprnSubtotal20"></pre></td>
-        <tr> <td>Fresa en Agua Vaso: </td> <td><input id="btnAdicionFresaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('19')" tabindex="19" data-valoru="1500" value="+1"></td> <td><label for="obsbtnFresaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnFresaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('19')" tabindex="19" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad19"></pre></td><td><pre id="lblprnSubtotal19"></pre></td>
-        <tr> <td>Fresa en Leche Jarra: </td> <td><input id="btnAdicionFresaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('22')" tabindex="22" data-valoru="2500" value="+1"></td> <td><label for="obsbtnFresaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnFresaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('22')" tabindex="22" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad22"></pre></td><td><pre id="lblprnSubtotal22"></pre></td>
-        <tr> <td>Fresa en Leche Vaso: </td> <td><input id="btnAdicionFresaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('21')" tabindex="21" data-valoru="1500" value="+1"></td> <td><label for="obsbtnFresaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnFresaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('21')" tabindex="21" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad21"></pre></td><td><pre id="lblprnSubtotal21"></pre></td>
-        <tr> <td>Guanabana en Agua Jarra: </td> <td><input id="btnAdicionGuanabanaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('16')" tabindex="16" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuanabanaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('16')" tabindex="16" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad16"></pre></td><td><pre id="lblprnSubtotal16"></pre></td>
-        <tr> <td>Guanabana en Agua Vaso: </td> <td><input id="btnAdicionGuanabanaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('15')" tabindex="15" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuanabanaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('15')" tabindex="15" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad15"></pre></td><td><pre id="lblprnSubtotal15"></pre></td>
-        <tr> <td>Guanabana en Leche Jarra: </td> <td><input id="btnAdicionGuanabanaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('18')" tabindex="18" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuanabanaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('18')" tabindex="18" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad18"></pre></td><td><pre id="lblprnSubtotal18"></pre></td>
-        <tr> <td>Guanabana en Leche Vaso: </td> <td><input id="btnAdicionGuanabanaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('17')" tabindex="17" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuanabanaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('17')" tabindex="17" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad17"></pre></td><td><pre id="lblprnSubtotal17"></pre></td>
-        <tr> <td>Guayaba en Agua Jarra: </td> <td><input id="btnAdicionGuayabaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('30')" tabindex="30" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuayabaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnGuayabaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('30')" tabindex="30" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad30"></pre></td><td><pre id="lblprnSubtotal30"></pre></td>
-        <tr> <td>Guayaba en Agua Vaso: </td> <td><input id="btnAdicionGuayabaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('29')" tabindex="29" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuayabaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnGuayabaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('29')" tabindex="29" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad29"></pre></td><td><pre id="lblprnSubtotal29"></pre></td>
-        <tr> <td>Guayaba en Leche Jarra: </td> <td><input id="btnAdicionGuayabaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('32')" tabindex="32" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuayabaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnGuayabaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('32')" tabindex="32" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad32"></pre></td><td><pre id="lblprnSubtotal32"></pre></td>
-        <tr> <td>Guayaba en Leche Vaso: </td> <td><input id="btnAdicionGuayabaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('31')" tabindex="31" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuayabaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnGuayabaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('31')" tabindex="31" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad31"></pre></td><td><pre id="lblprnSubtotal31"></pre></td>
-        <tr> <td>Limonada Natural Jarra: </td> <td><input id="btnAdicionLimonadaNaturalJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('42')" tabindex="42" data-valoru="4000" value="+1"></td> <td><label for="obsbtnLimonadaNaturalJarra">Observaciones: </label> <input type="text" id="obsbtnLimonadaNaturalJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('42')" tabindex="42" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad42"></pre></td><td><pre id="lblprnSubtotal42"></pre></td>
-        <tr> <td>Limonada Natural Vaso: </td> <td><input id="btnAdicionLimonadaNaturalVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('41')" tabindex="41" data-valoru="2000" value="+1"></td> <td><label for="obsbtnLimonadaNaturalVaso">Observaciones: </label> <input type="text" id="obsbtnLimonadaNaturalVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('41')" tabindex="41" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad41"></pre></td><td><pre id="lblprnSubtotal41"></pre></td>
-        <tr> <td>Lulo en Agua Jarra: </td> <td><input id="btnAdicionLuloenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('38')" tabindex="38" data-valoru="2500" value="+1"></td> <td><label for="obsbtnLuloenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnLuloenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('38')" tabindex="38" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad38"></pre></td><td><pre id="lblprnSubtotal38"></pre></td>
-        <tr> <td>Lulo en Agua Vaso: </td> <td><input id="btnAdicionLuloenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('37')" tabindex="37" data-valoru="1500" value="+1"></td> <td><label for="obsbtnLuloenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnLuloenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('37')" tabindex="37" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad37"></pre></td><td><pre id="lblprnSubtotal37"></pre></td>
-        <tr> <td>Lulo en Leche Jarra: </td> <td><input id="btnAdicionLuloenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('40')" tabindex="40" data-valoru="2500" value="+1"></td> <td><label for="obsbtnLuloenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnLuloenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('40')" tabindex="40" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad40"></pre></td><td><pre id="lblprnSubtotal40"></pre></td>
-        <tr> <td>Lulo en Leche Vaso: </td> <td><input id="btnAdicionLuloenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('39')" tabindex="39" data-valoru="1500" value="+1"></td> <td><label for="obsbtnLuloenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnLuloenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('39')" tabindex="39" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad39"></pre></td><td><pre id="lblprnSubtotal39"></pre></td>
-        <tr> <td>Mandarina Jarra: </td> <td><input id="btnAdicionMandarinaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('13')" tabindex="13" data-valoru="4000" value="+1"></td> <td><label for="obsbtnMandarinaJarra">Observaciones: </label> <input type="text" id="obsbtnMandarinaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('13')" tabindex="13" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad13"></pre></td><td><pre id="lblprnSubtotal13"></pre></td>
-        <tr> <td>Mandarina Vaso: </td> <td><input id="btnAdicionMandarinaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('12')" tabindex="12" data-valoru="2000" value="+1"></td> <td><label for="obsbtnMandarinaVaso">Observaciones: </label> <input type="text" id="obsbtnMandarinaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('12')" tabindex="12" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad12"></pre></td><td><pre id="lblprnSubtotal12"></pre></td>
-        <tr> <td>Mango en Agua Jarra: </td> <td><input id="btnAdicionMangoenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('2')" tabindex="2" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMangoenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnMangoenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('2')" tabindex="2" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad2"></pre></td><td><pre id="lblprnSubtotal2"></pre></td>
-        <tr> <td>Mango en Agua Vaso: </td> <td><input id="btnAdicionMangoenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('1')" tabindex="1" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMangoenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnMangoenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('1')" tabindex="1" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad1"></pre></td><td><pre id="lblprnSubtotal1"></pre></td>
-        <tr> <td>Mango en Leche Jarra: </td> <td><input id="btnAdicionMangoenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('4')" tabindex="4" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMangoenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnMangoenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('4')" tabindex="4" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad4"></pre></td><td><pre id="lblprnSubtotal4"></pre></td>
-        <tr> <td>Mango en Leche Vaso: </td> <td><input id="btnAdicionMangoenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('3')" tabindex="3" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMangoenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnMangoenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('3')" tabindex="3" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad3"></pre></td><td><pre id="lblprnSubtotal3"></pre></td>
-        <tr> <td>Maracuyá en Agua Jarra: </td> <td><input id="btnAdicionMaracuyáenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('7')" tabindex="7" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMaracuyáenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('7')" tabindex="7" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad7"></pre></td><td><pre id="lblprnSubtotal7"></pre></td>
-        <tr> <td>Maracuyá en Agua Vaso: </td> <td><input id="btnAdicionMaracuyáenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('6')" tabindex="6" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMaracuyáenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('6')" tabindex="6" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad6"></pre></td><td><pre id="lblprnSubtotal6"></pre></td>
-        <tr> <td>Maracuyá en Leche Jarra: </td> <td><input id="btnAdicionMaracuyáenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('9')" tabindex="9" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMaracuyáenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('9')" tabindex="9" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad9"></pre></td><td><pre id="lblprnSubtotal9"></pre></td>
-        <tr> <td>Maracuyá en Leche Vaso: </td> <td><input id="btnAdicionMaracuyáenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('8')" tabindex="8" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMaracuyáenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('8')" tabindex="8" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad8"></pre></td><td><pre id="lblprnSubtotal8"></pre></td>
-        <tr> <td>Milo Frio Jarra: </td> <td><input id="btnAdicionMiloFrioJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('51')" tabindex="51" data-valoru="4000" value="+1"></td> <td><label for="obsbtnMiloFrioJarra">Observaciones: </label> <input type="text" id="obsbtnMiloFrioJarra"></td> <td><input id="btnRetiroBebida" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('51')" tabindex="51" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad51"></pre></td><td><pre id="lblprnSubtotal51"></pre></td>
-        <tr> <td>Milo Frio Vaso: </td> <td><input id="btnAdicionMiloFrioVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('50')" tabindex="50" data-valoru="2000" value="+1"></td> <td><label for="obsbtnMiloFrioVaso">Observaciones: </label> <input type="text" id="obsbtnMiloFrioVaso"></td> <td><input id="btnRetiroBebida" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('50')" tabindex="50" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad50"></pre></td><td><pre id="lblprnSubtotal50"></pre></td>
-        <tr> <td>Mora en Agua Jarra: </td> <td><input id="btnAdicionMoraenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('24')" tabindex="24" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMoraenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnMoraenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('24')" tabindex="24" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad24"></pre></td><td><pre id="lblprnSubtotal24"></pre></td>
-        <tr> <td>Mora en Agua Vaso: </td> <td><input id="btnAdicionMoraenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('23')" tabindex="23" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMoraenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnMoraenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('23')" tabindex="23" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad23"></pre></td><td><pre id="lblprnSubtotal23"></pre></td>
-        <tr> <td>Mora en Leche Jarra: </td> <td><input id="btnAdicionMoraenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('26')" tabindex="26" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMoraenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnMoraenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('26')" tabindex="26" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad26"></pre></td><td><pre id="lblprnSubtotal26"></pre></td>
-        <tr> <td>Mora en Leche Vaso: </td> <td><input id="btnAdicionMoraenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('25')" tabindex="25" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMoraenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnMoraenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('25')" tabindex="25" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad25"></pre></td><td><pre id="lblprnSubtotal25"></pre></td>
-        <tr> <td>Naranja Jarra: </td> <td><input id="btnAdicionNaranjaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('47')" tabindex="47" data-valoru="4000" value="+1"></td> <td><label for="obsbtnNaranjaJarra">Observaciones: </label> <input type="text" id="obsbtnNaranjaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('47')" tabindex="47" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad47"></pre></td><td><pre id="lblprnSubtotal47"></pre></td>
-        <tr> <td>Naranja Vaso: </td> <td><input id="btnAdicionNaranjaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('46')" tabindex="46" data-valoru="2000" value="+1"></td> <td><label for="obsbtnNaranjaVaso">Observaciones: </label> <input type="text" id="obsbtnNaranjaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('46')" tabindex="46" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad46"></pre></td><td><pre id="lblprnSubtotal46"></pre></td>
-        <tr> <td>Pan Salchicha: </td> <td><input id="btnAdicionPanSalchicha" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('81')" tabindex="81" data-valoru="2000" value="+1"></td> <td><label for="obsbtnPanSalchicha">Observaciones: </label> <input type="text" id="obsbtnPanSalchicha"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('81')" tabindex="81" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad81"></pre></td><td><pre id="lblprnSubtotal81"></pre></td>
-        <tr> <td>Pandebono: </td> <td><input id="btnAdicionPandebono" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('77')" tabindex="77" data-valoru="2000" value="+1"></td> <td><label for="obsbtnPandebono">Observaciones: </label> <input type="text" id="obsbtnPandebono"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('77')" tabindex="77" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad77"></pre></td><td><pre id="lblprnSubtotal77"></pre></td>
-        <tr> <td>Pandequeso: </td> <td><input id="btnAdicionPandequeso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('78')" tabindex="78" data-valoru="2000" value="+1"></td> <td><label for="obsbtnPandequeso">Observaciones: </label> <input type="text" id="obsbtnPandequeso"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('78')" tabindex="78" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad78"></pre></td><td><pre id="lblprnSubtotal78"></pre></td>
-        <tr> <td>Piña en Agua Jarra: </td> <td><input id="btnAdicionPiñaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('34')" tabindex="34" data-valoru="2500" value="+1"></td> <td><label for="obsbtnPiñaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnPiñaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('34')" tabindex="34" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad34"></pre></td><td><pre id="lblprnSubtotal34"></pre></td>
-        <tr> <td>Piña en Agua Vaso: </td> <td><input id="btnAdicionPiñaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('33')" tabindex="33" data-valoru="1500" value="+1"></td> <td><label for="obsbtnPiñaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnPiñaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('33')" tabindex="33" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad33"></pre></td><td><pre id="lblprnSubtotal33"></pre></td>
-        <tr> <td>Tomate de Árbol en Agua Jarra: </td> <td><input id="btnAdicionTomatedeÁrbolenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('49')" tabindex="49" data-valoru="2500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('49')" tabindex="49" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad49"></pre></td><td><pre id="lblprnSubtotal49"></pre></td>
-        <tr> <td>Tomate de Árbol en Agua Vaso: </td> <td><input id="btnAdicionTomatedeÁrbolenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('48')" tabindex="48" data-valoru="1500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('48')" tabindex="48" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad48"></pre></td><td><pre id="lblprnSubtotal48"></pre></td>
-        <tr> <td>Tomate de Árbol en Leche Jarra: </td> <td><input id="btnAdicionTomatedeÁrbolenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('73')" tabindex="73" data-valoru="2500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('73')" tabindex="73" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad73"></pre></td><td><pre id="lblprnSubtotal73"></pre></td>
-        <tr> <td>Tomate de Árbol en Leche Vaso: </td> <td><input id="btnAdicionTomatedeÁrbolenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('72')" tabindex="72" data-valoru="1500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('72')" tabindex="72" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad72"></pre></td><td><pre id="lblprnSubtotal72"></pre></td>
-        <tr> <td>Piña en Leche Jarra: </td> <td><input id="btnAdicionPiñaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('89')" tabindex="89" data-valoru="2500" value="+1"></td> <td><label for="obsbtnPiñaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnPiñaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('89')" tabindex="89" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad89"></pre></td><td><pre id="lblprnSubtotal89"></pre></td>
-        <tr> <td>Piña en Leche Vaso: </td> <td><input id="btnAdicionPiñaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('90')" tabindex="90" data-valoru="1500" value="+1"></td> <td><label for="obsbtnPiñaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnPiñaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('90')" tabindex="90" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad90"></pre></td><td><pre id="lblprnSubtotal90"></pre></td>
-        <tr> <td>Empanadas de Carne y Papa: </td> <td><input id="btnAdicionEmpanadasdeCarneyPapa" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('91')" tabindex="91" data-valoru="2500" value="+1"></td> <td><label for="obsbtnEmpanadasdeCarneyPapa">Observaciones: </label> <input type="text" id="obsbtnEmpanadasdeCarneyPapa"></td> <td><input id="btnRetiroFritos" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('91')" tabindex="91" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad91"></pre></td><td><pre id="lblprnSubtotal91"></pre></td>
-        <tr> <td>Cerveza JuiceBar Vaso: </td> <td><input id="btnAdicionCervezaJuiceBarVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('92')" tabindex="92" data-valoru="3000" value="+1"></td> <td><label for="obsbtnCervezaJuiceBarVaso">Observaciones: </label> <input type="text" id="obsbtnCervezaJuiceBarVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('92')" tabindex="92" data-valoru="3000" value="-1"></td> <td><pre id="lblprnCantidad92"></pre></td><td><pre id="lblprnSubtotal92"></pre></td>
-        <tr>
-            <td>Cerveza JuiceBar Jarra: </td>
-            <td><input id="btnAdicionCervezaJuiceBarJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('93')" tabindex="93" data-valoru="4000" value="+1"></td>
-            <td><label for="obsbtnCervezaJuiceBarJarra">Observaciones: </label> <input type="text" id="obsbtnCervezaJuiceBarJarra"></td>
-            <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('93')" tabindex="93" data-valoru="4000" value="-1"></td>
-            <td><pre id="lblprnCantidad93"></pre></td>
-            <td><pre id="lblprnSubtotal93"></pre></td>
 
-            <!--FIN PEGAR AQUI EXCEL-->
+        <tr> <td>Adición Hielo: </td> <td><input id="btnAdicionAdiciónHielo" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('83')" tabindex="83" data-valoru="500" value="+1"></td> <td><label for="obsbtnAdiciónHielo">Observaciones: </label> <input type="text" id="obsbtnAdiciónHielo"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('83')" tabindex="83" data-valoru="500" value="-1"></td> <td><pre id="lblprnCantidad83"></pre></td><td><pre id="lblprnSubtotal83"></pre></td> </tr>
+        <tr> <td>Adición Leche Deslactosada: </td> <td><input id="btnAdicionAdiciónLecheDeslactosada" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('84')" tabindex="84" data-valoru="0" value="+1"></td> <td><label for="obsbtnAdiciónLecheDeslactosada">Observaciones: </label> <input type="text" id="obsbtnAdiciónLecheDeslactosada"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('84')" tabindex="84" data-valoru="0" value="-1"></td> <td><pre id="lblprnCantidad84"></pre></td><td><pre id="lblprnSubtotal84"></pre></td> </tr>
+        <tr> <td>Adición Vaso para llevar 2 de 16 o 1 Tarrina: </td> <td><input id="btnAdicionAdiciónVasoparallevar2de16o1Tarrina" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('75')" tabindex="75" data-valoru="500" value="+1"></td> <td><label for="obsbtnAdiciónVasoparallevar2de16o1Tarrina">Observaciones: </label> <input type="text" id="obsbtnAdiciónVasoparallevar2de16o1Tarrina"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('75')" tabindex="75" data-valoru="500" value="-1"></td> <td><pre id="lblprnCantidad75"></pre></td><td><pre id="lblprnSubtotal75"></pre></td> </tr>
+        <tr> <td>Croissant de Queso: </td> <td><input id="btnAdicionCroissantdeQueso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('76')" tabindex="76" data-valoru="2500" value="+1"></td> <td><label for="obsbtnCroissantdeQueso">Observaciones: </label> <input type="text" id="obsbtnCroissantdeQueso"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('76')" tabindex="76" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad76"></pre></td><td><pre id="lblprnSubtotal76"></pre></td> </tr>
+        <tr> <td>Domicilio 1 Km a la redonda: </td> <td><input id="btnAdicionDomicilio1Kmalaredonda" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('85')" tabindex="85" data-valoru="1000" value="+1"></td> <td><label for="obsbtnDomicilio1Kmalaredonda">Observaciones: </label> <input type="text" id="obsbtnDomicilio1Kmalaredonda"></td> <td><input id="btnRetiroAdición" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('85')" tabindex="85" data-valoru="1000" value="-1"></td> <td><pre id="lblprnCantidad85"></pre></td><td><pre id="lblprnSubtotal85"></pre></td> </tr>
+        <tr> <td>Pan Bola: </td> <td><input id="btnAdicionPanBola" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('88')" tabindex="88" data-valoru="500" value="+1"></td> <td><label for="obsbtnPanBola">Observaciones: </label> <input type="text" id="obsbtnPanBola"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('88')" tabindex="88" data-valoru="500" value="-1"></td> <td><pre id="lblprnCantidad88"></pre></td><td><pre id="lblprnSubtotal88"></pre></td> </tr>
+        <tr> <td>Fresa en Agua Jarra: </td> <td><input id="btnAdicionFresaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('20')" tabindex="20" data-valoru="2500" value="+1"></td> <td><label for="obsbtnFresaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnFresaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('20')" tabindex="20" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad20"></pre></td><td><pre id="lblprnSubtotal20"></pre></td> </tr>
+        <tr> <td>Fresa en Agua Vaso: </td> <td><input id="btnAdicionFresaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('19')" tabindex="19" data-valoru="1500" value="+1"></td> <td><label for="obsbtnFresaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnFresaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('19')" tabindex="19" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad19"></pre></td><td><pre id="lblprnSubtotal19"></pre></td> </tr>
+        <tr> <td>Fresa en Leche Jarra: </td> <td><input id="btnAdicionFresaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('22')" tabindex="22" data-valoru="2500" value="+1"></td> <td><label for="obsbtnFresaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnFresaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('22')" tabindex="22" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad22"></pre></td><td><pre id="lblprnSubtotal22"></pre></td> </tr>
+        <tr> <td>Fresa en Leche Vaso: </td> <td><input id="btnAdicionFresaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('21')" tabindex="21" data-valoru="1500" value="+1"></td> <td><label for="obsbtnFresaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnFresaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('21')" tabindex="21" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad21"></pre></td><td><pre id="lblprnSubtotal21"></pre></td> </tr>
+        <tr> <td>Guanabana en Agua Jarra: </td> <td><input id="btnAdicionGuanabanaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('16')" tabindex="16" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuanabanaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('16')" tabindex="16" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad16"></pre></td><td><pre id="lblprnSubtotal16"></pre></td> </tr>
+        <tr> <td>Guanabana en Agua Vaso: </td> <td><input id="btnAdicionGuanabanaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('15')" tabindex="15" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuanabanaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('15')" tabindex="15" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad15"></pre></td><td><pre id="lblprnSubtotal15"></pre></td> </tr>
+        <tr> <td>Guanabana en Leche Jarra: </td> <td><input id="btnAdicionGuanabanaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('18')" tabindex="18" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuanabanaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('18')" tabindex="18" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad18"></pre></td><td><pre id="lblprnSubtotal18"></pre></td> </tr>
+        <tr> <td>Guanabana en Leche Vaso: </td> <td><input id="btnAdicionGuanabanaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('17')" tabindex="17" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuanabanaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnGuanabanaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('17')" tabindex="17" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad17"></pre></td><td><pre id="lblprnSubtotal17"></pre></td> </tr>
+        <tr> <td>Guayaba en Agua Jarra: </td> <td><input id="btnAdicionGuayabaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('30')" tabindex="30" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuayabaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnGuayabaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('30')" tabindex="30" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad30"></pre></td><td><pre id="lblprnSubtotal30"></pre></td> </tr>
+        <tr> <td>Guayaba en Agua Vaso: </td> <td><input id="btnAdicionGuayabaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('29')" tabindex="29" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuayabaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnGuayabaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('29')" tabindex="29" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad29"></pre></td><td><pre id="lblprnSubtotal29"></pre></td> </tr>
+        <tr> <td>Guayaba en Leche Jarra: </td> <td><input id="btnAdicionGuayabaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('32')" tabindex="32" data-valoru="2500" value="+1"></td> <td><label for="obsbtnGuayabaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnGuayabaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('32')" tabindex="32" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad32"></pre></td><td><pre id="lblprnSubtotal32"></pre></td> </tr>
+        <tr> <td>Guayaba en Leche Vaso: </td> <td><input id="btnAdicionGuayabaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('31')" tabindex="31" data-valoru="1500" value="+1"></td> <td><label for="obsbtnGuayabaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnGuayabaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('31')" tabindex="31" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad31"></pre></td><td><pre id="lblprnSubtotal31"></pre></td> </tr>
+        <tr> <td>Limonada Natural Jarra: </td> <td><input id="btnAdicionLimonadaNaturalJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('42')" tabindex="42" data-valoru="4000" value="+1"></td> <td><label for="obsbtnLimonadaNaturalJarra">Observaciones: </label> <input type="text" id="obsbtnLimonadaNaturalJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('42')" tabindex="42" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad42"></pre></td><td><pre id="lblprnSubtotal42"></pre></td> </tr>
+        <tr> <td>Limonada Natural Vaso: </td> <td><input id="btnAdicionLimonadaNaturalVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('41')" tabindex="41" data-valoru="1500" value="+1"></td> <td><label for="obsbtnLimonadaNaturalVaso">Observaciones: </label> <input type="text" id="obsbtnLimonadaNaturalVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('41')" tabindex="41" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad41"></pre></td><td><pre id="lblprnSubtotal41"></pre></td> </tr>
+        <tr> <td>Lulo en Agua Jarra: </td> <td><input id="btnAdicionLuloenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('38')" tabindex="38" data-valoru="2500" value="+1"></td> <td><label for="obsbtnLuloenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnLuloenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('38')" tabindex="38" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad38"></pre></td><td><pre id="lblprnSubtotal38"></pre></td> </tr>
+        <tr> <td>Lulo en Agua Vaso: </td> <td><input id="btnAdicionLuloenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('37')" tabindex="37" data-valoru="1500" value="+1"></td> <td><label for="obsbtnLuloenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnLuloenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('37')" tabindex="37" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad37"></pre></td><td><pre id="lblprnSubtotal37"></pre></td> </tr>
+        <tr> <td>Lulo en Leche Jarra: </td> <td><input id="btnAdicionLuloenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('40')" tabindex="40" data-valoru="2500" value="+1"></td> <td><label for="obsbtnLuloenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnLuloenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('40')" tabindex="40" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad40"></pre></td><td><pre id="lblprnSubtotal40"></pre></td> </tr>
+        <tr> <td>Lulo en Leche Vaso: </td> <td><input id="btnAdicionLuloenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('39')" tabindex="39" data-valoru="1500" value="+1"></td> <td><label for="obsbtnLuloenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnLuloenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('39')" tabindex="39" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad39"></pre></td><td><pre id="lblprnSubtotal39"></pre></td> </tr>
+        <tr> <td>Mandarina Jarra: </td> <td><input id="btnAdicionMandarinaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('13')" tabindex="13" data-valoru="4000" value="+1"></td> <td><label for="obsbtnMandarinaJarra">Observaciones: </label> <input type="text" id="obsbtnMandarinaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('13')" tabindex="13" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad13"></pre></td><td><pre id="lblprnSubtotal13"></pre></td> </tr>
+        <tr> <td>Mandarina Vaso: </td> <td><input id="btnAdicionMandarinaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('12')" tabindex="12" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMandarinaVaso">Observaciones: </label> <input type="text" id="obsbtnMandarinaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('12')" tabindex="12" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad12"></pre></td><td><pre id="lblprnSubtotal12"></pre></td> </tr>
+        <tr> <td>Mango en Agua Jarra: </td> <td><input id="btnAdicionMangoenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('2')" tabindex="2" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMangoenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnMangoenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('2')" tabindex="2" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad2"></pre></td><td><pre id="lblprnSubtotal2"></pre></td> </tr>
+        <tr> <td>Mango en Agua Vaso: </td> <td><input id="btnAdicionMangoenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('1')" tabindex="1" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMangoenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnMangoenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('1')" tabindex="1" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad1"></pre></td><td><pre id="lblprnSubtotal1"></pre></td> </tr>
+        <tr> <td>Mango en Leche Jarra: </td> <td><input id="btnAdicionMangoenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('4')" tabindex="4" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMangoenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnMangoenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('4')" tabindex="4" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad4"></pre></td><td><pre id="lblprnSubtotal4"></pre></td> </tr>
+        <tr> <td>Mango en Leche Vaso: </td> <td><input id="btnAdicionMangoenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('3')" tabindex="3" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMangoenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnMangoenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('3')" tabindex="3" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad3"></pre></td><td><pre id="lblprnSubtotal3"></pre></td> </tr>
+        <tr> <td>Maracuyá en Agua Jarra: </td> <td><input id="btnAdicionMaracuyáenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('7')" tabindex="7" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMaracuyáenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('7')" tabindex="7" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad7"></pre></td><td><pre id="lblprnSubtotal7"></pre></td> </tr>
+        <tr> <td>Maracuyá en Agua Vaso: </td> <td><input id="btnAdicionMaracuyáenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('6')" tabindex="6" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMaracuyáenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('6')" tabindex="6" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad6"></pre></td><td><pre id="lblprnSubtotal6"></pre></td> </tr>
+        <tr> <td>Maracuyá en Leche Jarra: </td> <td><input id="btnAdicionMaracuyáenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('9')" tabindex="9" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMaracuyáenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('9')" tabindex="9" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad9"></pre></td><td><pre id="lblprnSubtotal9"></pre></td> </tr>
+        <tr> <td>Maracuyá en Leche Vaso: </td> <td><input id="btnAdicionMaracuyáenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('8')" tabindex="8" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMaracuyáenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnMaracuyáenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('8')" tabindex="8" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad8"></pre></td><td><pre id="lblprnSubtotal8"></pre></td> </tr>
+        <tr> <td>Milo Frio Jarra: </td> <td><input id="btnAdicionMiloFrioJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('51')" tabindex="51" data-valoru="4000" value="+1"></td> <td><label for="obsbtnMiloFrioJarra">Observaciones: </label> <input type="text" id="obsbtnMiloFrioJarra"></td> <td><input id="btnRetiroBebida" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('51')" tabindex="51" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad51"></pre></td><td><pre id="lblprnSubtotal51"></pre></td> </tr>
+        <tr> <td>Milo Frio Vaso: </td> <td><input id="btnAdicionMiloFrioVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('50')" tabindex="50" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMiloFrioVaso">Observaciones: </label> <input type="text" id="obsbtnMiloFrioVaso"></td> <td><input id="btnRetiroBebida" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('50')" tabindex="50" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad50"></pre></td><td><pre id="lblprnSubtotal50"></pre></td> </tr>
+        <tr> <td>Mora en Agua Jarra: </td> <td><input id="btnAdicionMoraenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('24')" tabindex="24" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMoraenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnMoraenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('24')" tabindex="24" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad24"></pre></td><td><pre id="lblprnSubtotal24"></pre></td> </tr>
+        <tr> <td>Mora en Agua Vaso: </td> <td><input id="btnAdicionMoraenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('23')" tabindex="23" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMoraenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnMoraenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('23')" tabindex="23" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad23"></pre></td><td><pre id="lblprnSubtotal23"></pre></td> </tr>
+        <tr> <td>Mora en Leche Jarra: </td> <td><input id="btnAdicionMoraenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('26')" tabindex="26" data-valoru="2500" value="+1"></td> <td><label for="obsbtnMoraenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnMoraenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('26')" tabindex="26" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad26"></pre></td><td><pre id="lblprnSubtotal26"></pre></td> </tr>
+        <tr> <td>Mora en Leche Vaso: </td> <td><input id="btnAdicionMoraenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('25')" tabindex="25" data-valoru="1500" value="+1"></td> <td><label for="obsbtnMoraenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnMoraenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('25')" tabindex="25" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad25"></pre></td><td><pre id="lblprnSubtotal25"></pre></td> </tr>
+        <tr> <td>Naranja Jarra: </td> <td><input id="btnAdicionNaranjaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('47')" tabindex="47" data-valoru="4000" value="+1"></td> <td><label for="obsbtnNaranjaJarra">Observaciones: </label> <input type="text" id="obsbtnNaranjaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('47')" tabindex="47" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad47"></pre></td><td><pre id="lblprnSubtotal47"></pre></td> </tr>
+        <tr> <td>Naranja Vaso: </td> <td><input id="btnAdicionNaranjaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('46')" tabindex="46" data-valoru="2000" value="+1"></td> <td><label for="obsbtnNaranjaVaso">Observaciones: </label> <input type="text" id="obsbtnNaranjaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('46')" tabindex="46" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad46"></pre></td><td><pre id="lblprnSubtotal46"></pre></td> </tr>
+        <tr> <td>Pan Salchicha: </td> <td><input id="btnAdicionPanSalchicha" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('81')" tabindex="81" data-valoru="2000" value="+1"></td> <td><label for="obsbtnPanSalchicha">Observaciones: </label> <input type="text" id="obsbtnPanSalchicha"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('81')" tabindex="81" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad81"></pre></td><td><pre id="lblprnSubtotal81"></pre></td> </tr>
+        <tr> <td>Pandebono: </td> <td><input id="btnAdicionPandebono" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('77')" tabindex="77" data-valoru="2000" value="+1"></td> <td><label for="obsbtnPandebono">Observaciones: </label> <input type="text" id="obsbtnPandebono"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('77')" tabindex="77" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad77"></pre></td><td><pre id="lblprnSubtotal77"></pre></td> </tr>
+        <tr> <td>Pandequeso: </td> <td><input id="btnAdicionPandequeso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('78')" tabindex="78" data-valoru="2000" value="+1"></td> <td><label for="obsbtnPandequeso">Observaciones: </label> <input type="text" id="obsbtnPandequeso"></td> <td><input id="btnRetiroParva" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('78')" tabindex="78" data-valoru="2000" value="-1"></td> <td><pre id="lblprnCantidad78"></pre></td><td><pre id="lblprnSubtotal78"></pre></td> </tr>
+        <tr> <td>Piña en Agua Jarra: </td> <td><input id="btnAdicionPiñaenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('34')" tabindex="34" data-valoru="2500" value="+1"></td> <td><label for="obsbtnPiñaenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnPiñaenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('34')" tabindex="34" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad34"></pre></td><td><pre id="lblprnSubtotal34"></pre></td> </tr>
+        <tr> <td>Piña en Agua Vaso: </td> <td><input id="btnAdicionPiñaenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('33')" tabindex="33" data-valoru="1500" value="+1"></td> <td><label for="obsbtnPiñaenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnPiñaenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('33')" tabindex="33" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad33"></pre></td><td><pre id="lblprnSubtotal33"></pre></td> </tr>
+        <tr> <td>Tomate de Árbol en Agua Jarra: </td> <td><input id="btnAdicionTomatedeÁrbolenAguaJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('49')" tabindex="49" data-valoru="2500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenAguaJarra">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenAguaJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('49')" tabindex="49" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad49"></pre></td><td><pre id="lblprnSubtotal49"></pre></td> </tr>
+        <tr> <td>Tomate de Árbol en Agua Vaso: </td> <td><input id="btnAdicionTomatedeÁrbolenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('48')" tabindex="48" data-valoru="1500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenAguaVaso">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenAguaVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('48')" tabindex="48" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad48"></pre></td><td><pre id="lblprnSubtotal48"></pre></td> </tr>
+        <tr> <td>Tomate de Árbol en Leche Jarra: </td> <td><input id="btnAdicionTomatedeÁrbolenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('73')" tabindex="73" data-valoru="2500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('73')" tabindex="73" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad73"></pre></td><td><pre id="lblprnSubtotal73"></pre></td> </tr>
+        <tr> <td>Tomate de Árbol en Leche Vaso: </td> <td><input id="btnAdicionTomatedeÁrbolenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('72')" tabindex="72" data-valoru="1500" value="+1"></td> <td><label for="obsbtnTomatedeÁrbolenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnTomatedeÁrbolenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('72')" tabindex="72" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad72"></pre></td><td><pre id="lblprnSubtotal72"></pre></td> </tr>
+        <tr> <td>Piña en Leche Jarra: </td> <td><input id="btnAdicionPiñaenLecheJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('89')" tabindex="89" data-valoru="2500" value="+1"></td> <td><label for="obsbtnPiñaenLecheJarra">Observaciones: </label> <input type="text" id="obsbtnPiñaenLecheJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('89')" tabindex="89" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad89"></pre></td><td><pre id="lblprnSubtotal89"></pre></td> </tr>
+        <tr> <td>Piña en Leche Vaso: </td> <td><input id="btnAdicionPiñaenLecheVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('90')" tabindex="90" data-valoru="1500" value="+1"></td> <td><label for="obsbtnPiñaenLecheVaso">Observaciones: </label> <input type="text" id="obsbtnPiñaenLecheVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('90')" tabindex="90" data-valoru="1500" value="-1"></td> <td><pre id="lblprnCantidad90"></pre></td><td><pre id="lblprnSubtotal90"></pre></td> </tr>
+        <tr> <td>Empanadas de Carne y Papa: </td> <td><input id="btnAdicionEmpanadasdeCarneyPapa" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('91')" tabindex="91" data-valoru="2500" value="+1"></td> <td><label for="obsbtnEmpanadasdeCarneyPapa">Observaciones: </label> <input type="text" id="obsbtnEmpanadasdeCarneyPapa"></td> <td><input id="btnRetiroFritos" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('91')" tabindex="91" data-valoru="2500" value="-1"></td> <td><pre id="lblprnCantidad91"></pre></td><td><pre id="lblprnSubtotal91"></pre></td> </tr>
+        <tr> <td>Cerveza JuiceBar Vaso: </td> <td><input id="btnAdicionCervezaJuiceBarVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('92')" tabindex="92" data-valoru="3000" value="+1"></td> <td><label for="obsbtnCervezaJuiceBarVaso">Observaciones: </label> <input type="text" id="obsbtnCervezaJuiceBarVaso"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('92')" tabindex="92" data-valoru="3000" value="-1"></td> <td><pre id="lblprnCantidad92"></pre></td><td><pre id="lblprnSubtotal92"></pre></td> </tr>
+        <tr> <td>Cerveza JuiceBar Jarra: </td> <td><input id="btnAdicionCervezaJuiceBarJarra" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('93')" tabindex="93" data-valoru="4000" value="+1"></td> <td><label for="obsbtnCervezaJuiceBarJarra">Observaciones: </label> <input type="text" id="obsbtnCervezaJuiceBarJarra"></td> <td><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('93')" tabindex="93" data-valoru="4000" value="-1"></td> <td><pre id="lblprnCantidad93"></pre></td><td><pre id="lblprnSubtotal93"></pre></td> </tr>
+        <tr>
+            <th>VALOR TOTAL FACTURA: </th>
+            <th><pre id="lblprnTotalFacturaD"></pre></th>
+        </tr>
+
+
+        <!--FIN PEGAR AQUI EXCEL-->
 
 
     </table>
 
-    <input id="btnSolPedido" type="button" class="btn btn-sm btn-success" onclick="SolicitarPedido()" value="Solicitar Pedido" /> <!--data-url-solicitar-pedido="Url.Action("GuardarPedido","Billing")">-->
+    <input id="btnSolPedido" type="button" class="btn btn-sm btn-success" onclick="SolicitarPedido()" value="Solicitar Pedido" data-url-solicitar-pedido="@Url.Action(" GuardarPedido","Billing")">
     <form action="../AnularFactura.cshtml">
         <input type="submit" value="Anular Factura" />
     </form>
-    <label> VALOR TOTAL FACTURA: </label><pre id="lblprnTotalFactura"></pre>
-
-    <!--Campo para imprimir la factura-->
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><pre id="lblprnFactura"></pre></td>
-    </tr>
 
     <!--<input id="btnAdicionLD" type="button" class="btn btn-sm btn-success" onclick="AdicionarProducto('86')" tabindex="84" data-valoru="0" value="Adición Leche Deslactosada">
     <label for="obsbtnAdicionLD">Observaciones</label>
@@ -140,7 +135,7 @@
                     IdPedidoDia: 1,
                     NroResolucionDian: "X",
                     NroFacturaDian: "X",
-                    Fecha: null, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+                    Fecha: d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
                     TipoDespacho: 1,
                     Impuesto: document.activeElement.dataset.valoru * 0.08,
                     ValorTotal: parseInt(document.activeElement.dataset.valoru),
@@ -150,7 +145,8 @@
                     DetallePedido: []
                 };
                 vDatosFactura.DetallePedido.push(producto);
-                document.getElementById("lblprnTotalFactura").innerHTML = vDatosFactura.ValorTotal;
+                document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
+                document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
             }
             else {
                 vDatosFactura.DetallePedido.push(producto);
@@ -161,7 +157,8 @@
                     if (vDatosFactura.DetallePedido[iCont].IdProducto === document.activeElement.tabIndex) {
                         vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
                         vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
-                        document.getElementById("lblprnTotalFactura").innerHTML = vDatosFactura.ValorTotal;
+                        document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
+                        document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
                         break; //No importa si el elemento está varias veces en detallepedido, ya lo sumó una vez más al total de la factura
                     }
                 };
@@ -177,22 +174,24 @@
             //    };
             //}
 
-            console.log("Datos Pedido");
-            document.getElementById("lblprnFactura").innerHTML = JSON.stringify(vDatosFactura);
+            //console.log("Datos Pedido");
+            //document.getElementById("lblprnFactura").innerHTML = JSON.stringify(vDatosFactura);
         };
 
         function RetirarProducto(ControlId) {
 
             //Mostrarle cantidades del producto al usuario
-            if (document.getElementById("lblprnCantidad" + ControlId).value === 0) 
-                document.getElementById("lblprnCantidad" + ControlId).value = undefined;
-            else
+            if (document.getElementById("lblprnCantidad" + ControlId).value === 0 || document.getElementById("lblprnCantidad" + ControlId).value === undefined) {
+                document.getElementById("lblprnCantidad" + ControlId).value = 0;
+                document.getElementById("lblprnCantidad" + ControlId).innerHTML = 0;
+                document.getElementById("lblprnSubtotal" + ControlId).innerHTML = 0;
+            }
+            else {
                 document.getElementById("lblprnCantidad" + ControlId).value = document.getElementById("lblprnCantidad" + ControlId).value - 1;
-
-            document.getElementById("lblprnCantidad" + ControlId).innerHTML = document.getElementById("lblprnCantidad" + ControlId).value;
-
-            //Mostrar subtotales al usuario
-            document.getElementById("lblprnSubtotal" + ControlId).innerHTML = document.activeElement.dataset.valoru * document.getElementById("lblprnCantidad" + ControlId).value;
+                document.getElementById("lblprnCantidad" + ControlId).innerHTML = document.getElementById("lblprnCantidad" + ControlId).value;
+                //Mostrar subtotales al usuario
+                document.getElementById("lblprnSubtotal" + ControlId).innerHTML = document.activeElement.dataset.valoru * document.getElementById("lblprnCantidad" + ControlId).value;
+            }
 
 
             var iCont;
@@ -202,7 +201,8 @@
                     delete vDatosFactura.DetallePedido.splice(iCont, 1);
                     vDatosFactura.Impuesto = vDatosFactura.Impuesto - document.activeElement.dataset.valoru * 0.08;
                     vDatosFactura.ValorTotal = vDatosFactura.ValorTotal - document.activeElement.dataset.valoru;
-                    document.getElementById("lblprnTotalFactura").innerHTML = vDatosFactura.ValorTotal;
+                    document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
+                    document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
                     break;
                 }
             };
@@ -251,111 +251,113 @@
             //    //Recorrer el arreglo ver si hay algún producto igual para aumentarle la cantidad
             //    //vDatosFactura.forEach(RecorrerFacturaB);
             //};
-            console.log("Datos Pedido");
-            document.getElementById("lblprnFactura").innerHTML = JSON.stringify(vDatosFactura);
+            //console.log("Datos Pedido");
+            //document.getElementById("lblprnFactura").innerHTML = JSON.stringify(vDatosFactura);
         }
 
         function SolicitarPedido() {
 
-            //vDatosFactura = {
-            //    IdRegistro: 1,
-            //    IdPedidoDia: 1,
-            //    NroResolucionDian: "X",
-            //    NroFacturaDian: "X",
-            //    Fecha: frmPedidos.FechaHora1.value, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
-            //    TipoDespacho: frmPedidos.TipoDespacho1.value,
-            //    Impuesto: frmPedidos.Impoconsumo.value,
-            //    ValorTotal: frmPedidos.ValorTotal.value,
-            //    EstadoFactura: 'PENDIENTE',
-            //    IdPersona: 3,
-            //    IdLocal: 1,
-            //    DetallePedido: [{
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto1.value,
-            //        Cantidad: frmPedidos.Cantidad1.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario1.value,
-            //        Subtotal: frmPedidos.Subtotal1.value,
-            //        Observaciones: frmPedidos.observaciones1.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto2.value,
-            //        Cantidad: frmPedidos.Cantidad2.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario2.value,
-            //        Subtotal: frmPedidos.Subtotal2.value,
-            //        Observaciones: frmPedidos.observaciones2.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto3.value,
-            //        Cantidad: frmPedidos.Cantidad3.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario3.value,
-            //        Subtotal: frmPedidos.Subtotal3.value,
-            //        Observaciones: frmPedidos.observaciones3.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto4.value,
-            //        Cantidad: frmPedidos.Cantidad4.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario4.value,
-            //        Subtotal: frmPedidos.Subtotal4.value,
-            //        Observaciones: frmPedidos.observaciones4.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto5.value,
-            //        Cantidad: frmPedidos.Cantidad5.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario5.value,
-            //        Subtotal: frmPedidos.Subtotal5.value,
-            //        Observaciones: frmPedidos.observaciones5.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto6.value,
-            //        Cantidad: frmPedidos.Cantidad6.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario6.value,
-            //        Subtotal: frmPedidos.Subtotal6.value,
-            //        Observaciones: frmPedidos.observaciones6.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto7.value,
-            //        Cantidad: frmPedidos.Cantidad7.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario7.value,
-            //        Subtotal: frmPedidos.Subtotal7.value,
-            //        Observaciones: frmPedidos.observaciones7.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto8.value,
-            //        Cantidad: frmPedidos.Cantidad8.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario8.value,
-            //        Subtotal: frmPedidos.Subtotal8.value,
-            //        Observaciones: frmPedidos.observaciones8.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto9.value,
-            //        Cantidad: frmPedidos.Cantidad9.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario9.value,
-            //        Subtotal: frmPedidos.Subtotal9.value,
-            //        Observaciones: frmPedidos.observaciones9.value
-            //    }, {
-            //        IdRegistro: 1,
-            //        IdRegFactura: 1,
-            //        IdProducto: frmPedidos.Producto10.value,
-            //        Cantidad: frmPedidos.Cantidad10.value,
-            //        ValorUnitario: frmPedidos.ValorUnitario10.value,
-            //        Subtotal: frmPedidos.Subtotal10.value,
-            //        Observaciones: frmPedidos.observaciones10.value
-            //    },]
-            //};
+            vDatosFactura = {
+                IdRegistro: 1,
+                IdPedidoDia: 1,
+                NroResolucionDian: "X",
+                NroFacturaDian: "X",
+                Fecha: frmPedidos.FechaHora1.value, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+                TipoDespacho: frmPedidos.TipoDespacho1.value,
+                Impuesto: frmPedidos.Impoconsumo.value,
+                ValorTotal: frmPedidos.ValorTotal.value,
+                EstadoFactura: 'PENDIENTE',
+                IdPersona: 3,
+                IdLocal: 1,
+                DetallePedido: [{
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto1.value,
+                    Cantidad: frmPedidos.Cantidad1.value,
+                    ValorUnitario: frmPedidos.ValorUnitario1.value,
+                    Subtotal: frmPedidos.Subtotal1.value,
+                    Observaciones: frmPedidos.observaciones1.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto2.value,
+                    Cantidad: frmPedidos.Cantidad2.value,
+                    ValorUnitario: frmPedidos.ValorUnitario2.value,
+                    Subtotal: frmPedidos.Subtotal2.value,
+                    Observaciones: frmPedidos.observaciones2.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto3.value,
+                    Cantidad: frmPedidos.Cantidad3.value,
+                    ValorUnitario: frmPedidos.ValorUnitario3.value,
+                    Subtotal: frmPedidos.Subtotal3.value,
+                    Observaciones: frmPedidos.observaciones3.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto4.value,
+                    Cantidad: frmPedidos.Cantidad4.value,
+                    ValorUnitario: frmPedidos.ValorUnitario4.value,
+                    Subtotal: frmPedidos.Subtotal4.value,
+                    Observaciones: frmPedidos.observaciones4.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto5.value,
+                    Cantidad: frmPedidos.Cantidad5.value,
+                    ValorUnitario: frmPedidos.ValorUnitario5.value,
+                    Subtotal: frmPedidos.Subtotal5.value,
+                    Observaciones: frmPedidos.observaciones5.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto6.value,
+                    Cantidad: frmPedidos.Cantidad6.value,
+                    ValorUnitario: frmPedidos.ValorUnitario6.value,
+                    Subtotal: frmPedidos.Subtotal6.value,
+                    Observaciones: frmPedidos.observaciones6.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto7.value,
+                    Cantidad: frmPedidos.Cantidad7.value,
+                    ValorUnitario: frmPedidos.ValorUnitario7.value,
+                    Subtotal: frmPedidos.Subtotal7.value,
+                    Observaciones: frmPedidos.observaciones7.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto8.value,
+                    Cantidad: frmPedidos.Cantidad8.value,
+                    ValorUnitario: frmPedidos.ValorUnitario8.value,
+                    Subtotal: frmPedidos.Subtotal8.value,
+                    Observaciones: frmPedidos.observaciones8.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto9.value,
+                    Cantidad: frmPedidos.Cantidad9.value,
+                    ValorUnitario: frmPedidos.ValorUnitario9.value,
+                    Subtotal: frmPedidos.Subtotal9.value,
+                    Observaciones: frmPedidos.observaciones9.value
+                }, {
+                    IdRegistro: 1,
+                    IdRegFactura: 1,
+                    IdProducto: frmPedidos.Producto10.value,
+                    Cantidad: frmPedidos.Cantidad10.value,
+                    ValorUnitario: frmPedidos.ValorUnitario10.value,
+                    Subtotal: frmPedidos.Subtotal10.value,
+                    Observaciones: frmPedidos.observaciones10.value
+                },]
+            };
+
+            var urlGuardarPedido = $('#btnSolPedido').data('url-solicitar-pedido');
 
             //call a function with parameters
             $.ajax({
                 type: "POST",
-                url: '/Billing/GuardarPedido',//urlGuardarPedido,
+                url: urlGuardarPedido,
                 data: vDatosFactura,
 
                 success: function (rtaok) {
