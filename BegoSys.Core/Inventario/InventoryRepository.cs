@@ -52,6 +52,18 @@ namespace BegoSys.Core.Inventario
                 var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
+                    //Actualizando el encabezado del inventario
+                    var UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == idingr && Inv.IdLocal == idloc select Inv).FirstOrDefault();
+
+                    if (UpdEncabezado != null) {
+                        UpdEncabezado.CantidadActual = (long)(UpdEncabezado.CantidadActual + cantidad);
+                        UpdEncabezado.CantidadMinima = (long)(UpdEncabezado.CantidadActual * 0.2); //La cantidad mínima es el 30% de la cantidad actual
+                        UpdEncabezado.CostoPromDiaActual = UpdEncabezado.CantidadActual / valor;
+                        UpdEncabezado.CostoPromDiaUnidad = UpdEncabezado.CantidadActual / (nrounidades ?? 1);
+                        UpdEncabezado.UnidadesActuales = (long)(UpdEncabezado.UnidadesActuales + (nrounidades ?? 1));
+                        UpdEncabezado.UnidadesMinimas = (long)(UpdEncabezado.UnidadesActuales * 0.2);
+                    }
+
                     DetalleInventario DatosNuevoInventario = new DetalleInventario();
 
                     //Selecciona el máximo registro para aumentar en uno el valor
@@ -167,7 +179,7 @@ namespace BegoSys.Core.Inventario
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
@@ -185,6 +197,18 @@ namespace BegoSys.Core.Inventario
             {
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
+                    //Actualizando el encabezado del inventario
+                    var UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == idingr && Inv.IdLocal == idloc select Inv).FirstOrDefault();
+
+                    if (UpdEncabezado != null) {
+                        UpdEncabezado.CantidadActual = (long)(UpdEncabezado.CantidadActual - cantidad);
+                        UpdEncabezado.CantidadMinima = (long)(UpdEncabezado.CantidadActual * 0.3); //La cantidad mínima es el 30% de la cantidad actual
+                        UpdEncabezado.CostoPromDiaActual = (UpdEncabezado.CantidadActual / valor);
+                        UpdEncabezado.CostoPromDiaUnidad = (UpdEncabezado.CantidadActual / nrounidades);
+                        UpdEncabezado.UnidadesActuales = (long)(UpdEncabezado.UnidadesActuales - nrounidades);
+                        UpdEncabezado.UnidadesMinimas = (long)(UpdEncabezado.UnidadesActuales * 0.3);
+                    }
+
                     DetalleInventario DatosRetiroInventario = new DetalleInventario();
 
                     //Se elimina un ingrediente del inventario porque fue procesado o fue vendido
@@ -557,7 +581,7 @@ namespace BegoSys.Core.Inventario
                                                                                     && dii.ConExistencias == di.ConExistencias).Min(diifh => diifh.FechaHora)))
                                      select new InventarioTO
                                      {
-                                         IdIngrediente = inv.IdIngrediente,
+                                         IdIngrediente = inv.IdIngrediente ?? 0,
                                          NombreMedida = null,
                                          Cantidad = di.Cantidad,
                                          CostoTotal = di.CostoTotal

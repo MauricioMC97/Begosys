@@ -17,13 +17,13 @@ namespace BegoSys.Domain.Entidades
         public long IdRegistro { get; set; }
 
         [Column("IDINGREDIENTE")]
-        public long IdIngrediente { get; set; }
+        public long? IdIngrediente { get; set; }
 
         [Column("IDENVASE")]
-        public long IdEnvase { get; set; }
+        public long? IdEnvase { get; set; }
 
         [Column("IDINSUMO")]
-        public long IdInsumo { get; set; }
+        public long? IdInsumo { get; set; }
 
         [Column("CANTIDADACTUAL")]
         public long CantidadActual { get; set; }
@@ -32,10 +32,10 @@ namespace BegoSys.Domain.Entidades
         public long CantidadMinima { get; set; }
 
         [Column("UNIDADESACTUALES")]
-        public long UnidadesActuales { get; set; }
+        public long? UnidadesActuales { get; set; }
         
         [Column("UNIDADESMINIMAS")]
-        public long UnidadesMinimas { get; set; }
+        public long? UnidadesMinimas { get; set; }
         
         [Column("COSTOPROMDIAACTUAL")]
         public double CostoPromDiaActual { get; set; }
