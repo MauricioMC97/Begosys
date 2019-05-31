@@ -416,6 +416,18 @@ namespace BegoSys.Core.Inventario
                                                                                     && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
                                       select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
 
+                        //Actualizando el encabezado del inventario
+                        var UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal select Inv).FirstOrDefault();
+
+                        if (UpdEncabezado != null)
+                        {
+                            UpdEncabezado.CantidadActual = (long)(UpdEncabezado.CantidadActual - Elem.Cantidad);
+                            UpdEncabezado.CostoPromDiaActual = (UpdEncabezado.CantidadActual / ((iCostoIngr.CostoU ?? 1) * Elem.Cantidad));
+                            UpdEncabezado.UnidadesActuales = (long)(UpdEncabezado.UnidadesActuales - Elem.Cantidad);
+                            UpdEncabezado.CostoPromDiaUnidad = (long)(iCostoIngr.CostoU ?? 1);
+                        }
+
+
                         DetalleInventario ProductoaRetirar = new DetalleInventario();
                         if (iCostoIngr != null)
                         {
