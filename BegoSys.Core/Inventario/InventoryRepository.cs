@@ -179,7 +179,7 @@ namespace BegoSys.Core.Inventario
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -374,6 +374,106 @@ namespace BegoSys.Core.Inventario
                 lidIngr = (from ing in db.Ingredientes where ing.IdIngrediente == idPulpa select ing.IngredienteOrigen).FirstOrDefault();
             }
             return lidIngr;
+        }
+
+        public long ConvertirBolsasaGramos(long idIngrediente, long iCantBolsas, long? idProducto)
+        {
+            //Convierte la cantidad de bolsas en gramos
+            MedidasReceta dMedidas = new MedidasReceta();
+            using (var db = EntidadesJuicebar.GetDbContext())
+            {
+                if (idProducto != null)
+                {
+                     dMedidas = (from medr in db.MedidasRecetas where medr.IdIngrediente == idIngrediente && medr.IdProducto == idProducto select medr).OrderBy(x => x.Cantidad).FirstOrDefault();
+                }
+                else
+                {
+                    //Trae la menor cantidad porque de ese tamaño se deben empacar las bolsas
+                    dMedidas = (from medr in db.MedidasRecetas where medr.IdIngrediente == idIngrediente select medr).OrderBy(x => x.Cantidad).FirstOrDefault();
+                }
+                return dMedidas.Cantidad;
+            }
+        }
+
+
+        //Trasladar ingrediente de un local a otro
+        public bool TrasladarIngrediente(TrasladoIngrTO dDatos) // long idProducto, long iCantidad, DatosLocalTO dLocalOrigen, long idLocalDestino, DateTime dFecha)
+        {
+            BegoSys.Core.Contabilidad.AccountingRepository CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
+            try
+            {
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+                    //Se verifica si el ingrediente existe en el local origen
+                    var UpdEncOrigen = (from Inv in db.Inventarios where Inv.IdIngrediente == dDatos.idIngrediente && Inv.IdLocal == dDatos.dDatosLocalOrigen.IdLocal select Inv).FirstOrDefault();
+
+                    var UpdEncDestino = (from Inv in db.Inventarios where Inv.IdIngrediente == dDatos.idIngrediente && Inv.IdLocal == dDatos.idLocalDestino select Inv).FirstOrDefault();
+
+                    if (UpdEncOrigen != null)
+                    {
+                        //Retira Encabezado local origen
+                        UpdEncOrigen.CantidadActual = (long)(UpdEncOrigen.CantidadActual - dDatos.iCantidadGramos);
+                        UpdEncOrigen.UnidadesActuales = (long)(UpdEncOrigen.UnidadesActuales - dDatos.iCantidadGramos);
+
+                        //Consulta los datos del ingrediente en el local origen
+                        DetalleInventario DatosIngrLO = (from dp in db.DetalleInventarios where dp.IdIngrediente == dDatos.idIngrediente && dp.IdLocal == dDatos.dDatosLocalOrigen.IdLocal select dp).FirstOrDefault();
+
+                        //Registra salida del local origen en el detalle
+                        DetalleInventario RetirarOrigen = new DetalleInventario();
+                        RetirarOrigen.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                        RetirarOrigen.FechaHora = dDatos.dFEcha;
+                        RetirarOrigen.Transaccion = "SALE";
+                        RetirarOrigen.Cantidad = dDatos.iCantidadGramos ?? 0;
+                        RetirarOrigen.CostoTotal = DatosIngrLO.CostoTotal;
+                        RetirarOrigen.Unidades = dDatos.iCantidadGramos;
+                        RetirarOrigen.CostoUnidad = DatosIngrLO.CostoUnidad;
+                        RetirarOrigen.IdMedida = DatosIngrLO.IdMedida;
+                        RetirarOrigen.IdIngrediente = dDatos.idIngrediente;
+                        RetirarOrigen.IdEnvase = null;
+                        RetirarOrigen.IdInsumo = null;
+                        RetirarOrigen.IdLocal = dDatos.dDatosLocalOrigen.IdLocal;
+                        RetirarOrigen.IdProveedor = null;
+                        RetirarOrigen.IdPersona = DatosIngrLO.IdPersona;
+                        RetirarOrigen.TiempoProduccion = DatosIngrLO.TiempoProduccion;
+                        RetirarOrigen.ConExistencias = 0;
+
+                        //Adiciona Encabezado local destino
+                        if (UpdEncDestino != null)
+                        {
+                            UpdEncDestino.CantidadActual = (long)(UpdEncDestino.CantidadActual + dDatos.iCantidadGramos);
+                            UpdEncDestino.UnidadesActuales = (long)(UpdEncDestino.UnidadesActuales + dDatos.iCantidadGramos);
+                        }
+
+                        //Registra entrada al local destino en el detalle
+                        DetalleInventario AdicionarDestino = new DetalleInventario();
+                        //Selecciona el máximo registro para aumentar en uno el valor
+                        AdicionarDestino.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                        AdicionarDestino.IdIngrediente = dDatos.idIngrediente;
+                        AdicionarDestino.IdEnvase = null;
+                        AdicionarDestino.IdInsumo = null;
+                        AdicionarDestino.Cantidad = dDatos.iCantidadGramos ?? 0;
+                        AdicionarDestino.CostoTotal = DatosIngrLO.CostoTotal;
+                        AdicionarDestino.Unidades = dDatos.iCantidadGramos;
+                        AdicionarDestino.CostoUnidad = DatosIngrLO.CostoUnidad;
+                        AdicionarDestino.IdMedida = DatosIngrLO.IdMedida;
+                        AdicionarDestino.FechaHora = dDatos.dFEcha;
+                        AdicionarDestino.IdLocal = dDatos.idLocalDestino;
+                        AdicionarDestino.IdProveedor = DatosIngrLO.IdProveedor;
+                        AdicionarDestino.Transaccion = "ENTRA";
+                        AdicionarDestino.IdPersona = DatosIngrLO.IdPersona;
+                        AdicionarDestino.ConExistencias = 1; //Cuando llega nuevo hay existencias del producto
+
+                        db.DetalleInventarios.Add(AdicionarDestino);
+
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch 
+            {
+                return false;
+            }
+            return true;
         }
 
         //Retirar el producto del inventario

@@ -157,7 +157,7 @@ namespace BegoSys.Core.Facturacion
 
                     }
                     //Imprime el pedido
-                    //PrintReceiptForTransaction(DFac);
+                    PrintReceiptForTransaction(DFac);
                     //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
             }
@@ -189,18 +189,18 @@ namespace BegoSys.Core.Facturacion
             recordDoc.PrintController = new StandardPrintController(); // hides status dialog popup
 
             // Comment if debugging 
-            //PrinterSettings ps = new PrinterSettings();
-            //ps.PrinterName = "Bixolon";
-            //recordDoc.PrinterSettings = ps;
-            //recordDoc.Print();
+            PrinterSettings ps = new PrinterSettings();
+            ps.PrinterName = "Bixolon SRP-350Plus";
+            recordDoc.PrinterSettings = ps;
+            recordDoc.Print();
             // --------------------------------------
 
             // Uncomment if debugging - shows dialog instead
-            PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
-            printPrvDlg.Document = recordDoc;
-            printPrvDlg.Width = 1200;
-            printPrvDlg.Height = 800;
-            printPrvDlg.ShowDialog();
+            //PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
+            //printPrvDlg.Document = recordDoc;
+            //printPrvDlg.Width = 1200;
+            //printPrvDlg.Height = 800;
+            //printPrvDlg.ShowDialog();
             // --------------------------------------
 
             recordDoc.Dispose();
@@ -248,7 +248,7 @@ namespace BegoSys.Core.Facturacion
 
             text = "Resolución DIAN # " + DatosF.NroResolucionDian + " del 2018/12/01 desde el 7499963 hasta el 9000000 Regimen Común";
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
-            y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+            y += (e.Graphics.MeasureString(text, drawFontArial10Regular).Height * 3);
 
             text = "Medellín, Colombia";
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
@@ -280,6 +280,15 @@ namespace BegoSys.Core.Facturacion
                 y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
             }
+
+            text = "Impoconsumo (8%): " + DatosF.Impuesto;
+            e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+            y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
+            text = "Valor Total: " + DatosF.ValorTotal;
+            e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
+            y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
+
         }
 
 

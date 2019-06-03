@@ -77,7 +77,6 @@
     <Compile Include="Facturacion\BillingRepository.cs" />
     <Compile Include="Contabilidad\IAccountingRepository.cs" />
     <Compile Include="Facturacion\IBillingRepository.cs" />
-    <Compile Include="Facturacion\ImprimirFactura.cs" />
     <Compile Include="Inventario\IInventoryRepository.cs" />
     <Compile Include="Inventario\InventoryRepository.cs" />
     <Compile Include="MonitorOperaciones\IOperationRepository.cs" />

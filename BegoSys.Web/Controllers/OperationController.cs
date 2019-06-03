@@ -1,11 +1,14 @@
-﻿using System;
+﻿using BegoSys.Common.Auxiliares;
+using BegoSys.Common.Constantes;
+using BegoSys.Common.ProveedoresDependencias;
+using BegoSys.TO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Spring.Rest.Client;
-using BegoSys.Common.Auxiliares;
-using BegoSys.Common.ProveedoresDependencias;
+using System.Threading.Tasks;
 
 namespace BegoSys.Web.Controllers
 {
@@ -38,6 +41,15 @@ namespace BegoSys.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult TrasladarIngrediente(TrasladoIngrTO dTraslado)
+        {
+            BegoSys.Core.Inventario.InventoryRepository CoreInventario = new BegoSys.Core.Inventario.InventoryRepository();
+            dTraslado.iCantidadGramos = CoreInventario.ConvertirBolsasaGramos(dTraslado.idIngrediente, dTraslado.iCantidadBolsas ?? 0, null);
+            _proxy.PostForMessage(ConstantesApi.TrasladarIngredienteURI, dTraslado);
+            return Ok();
         }
     }
 }

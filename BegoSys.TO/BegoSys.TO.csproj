@@ -54,6 +54,7 @@
     <Compile Include="PedidoTO.cs" />
     <Compile Include="PersonasLocalTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrasladoIngrTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

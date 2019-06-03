@@ -73,13 +73,14 @@ namespace BegoSys.Service.Tests.Controllers
 
 
             //token         
-            var clientToken = new RestClient("http://192.168.1.243/JBCService");
+            //var clientToken = new RestClient("http://192.168.1.243/JBCService");
+            var clientToken = new RestClient("http://localhost:3445/JBCService");
 
 
             var requestToken = new RestRequest("token", Method.POST);
             requestToken.AddParameter("grant_type", "password");
-            requestToken.AddParameter("username", "apiuser_sgdhm");
-            requestToken.AddParameter("password", "mvm2017*");
+            requestToken.AddParameter("username", "apiuser_bego");
+            requestToken.AddParameter("password", "bego2019*");
 
             // execute the request
             IRestResponse responseToken = clientToken.Execute(requestToken);
