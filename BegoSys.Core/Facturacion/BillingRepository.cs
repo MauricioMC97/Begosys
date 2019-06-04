@@ -157,7 +157,7 @@ namespace BegoSys.Core.Facturacion
 
                     }
                     //Imprime el pedido
-                    PrintReceiptForTransaction(DFac);
+                    //PrintReceiptForTransaction(DFac);
                     //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
             }
