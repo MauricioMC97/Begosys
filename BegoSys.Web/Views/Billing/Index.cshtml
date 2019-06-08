@@ -128,7 +128,7 @@
                 Observaciones: ''
             };
 
-            //El arreglo está vacio es el primer producto
+            //El arreglo está vacio y length es cero es el primer producto
             if (vDatosFactura.length === 0) {
                 vDatosFactura = {
                     IdRegistro: 1,
@@ -151,104 +151,55 @@
             else {
                 //Recorrer el arreglo ver si hay algún producto igual para aumentarle la cantidad
                 var iCont;
-                for (iCont = 0; iCont < vDatosFactura.DetallePedido.length; iCont++) {
-                    if (vDatosFactura.DetallePedido[iCont].IdProducto === document.activeElement.tabIndex) {
-                        vDatosFactura.DetallePedido[iCont].Cantidad = vDatosFactura.DetallePedido[iCont].Cantidad + 1;
-                        vDatosFactura.DetallePedido[iCont].Subtotal = document.activeElement.dataset.valoru * vDatosFactura.DetallePedido[iCont].Cantidad;
-                        vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
-                        vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
-                        document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
-                        document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
-                        break; //Se suma una vez más al total de la factura
-                    }
-                    else if (iCont === vDatosFactura.DetallePedido.length - 1) { //Si es el último elemento no lo encontró
-                        vDatosFactura.DetallePedido.push(producto); // Lo adiciona
-                        vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
-                        vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
-                        document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
-                        document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
-                        break;
-                    }
-                    else {
-                        continue; //Continua con el siguiente elemento buscando
-                    }
-                };
 
+                //La factura tiene productos adicionados
+                if (vDatosFactura.DetallePedido.length > 0) {
+                    for (iCont = 0; iCont < vDatosFactura.DetallePedido.length; iCont++) {
+                        if (vDatosFactura.DetallePedido[iCont].IdProducto === document.activeElement.tabIndex) {
+                            vDatosFactura.DetallePedido[iCont].Cantidad = vDatosFactura.DetallePedido[iCont].Cantidad + 1;
+                            vDatosFactura.DetallePedido[iCont].Subtotal = document.activeElement.dataset.valoru * vDatosFactura.DetallePedido[iCont].Cantidad;
+                            vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
+                            vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
+                            document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
+                            document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
+                            break; //Se suma una vez más al total de la factura
+                        }
+                        else if (iCont === vDatosFactura.DetallePedido.length - 1) { //Si es el último elemento no lo encontró
+                            vDatosFactura.DetallePedido.push(producto); // Lo adiciona
+                            vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
+                            vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
+                            document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
+                            document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
+                            break;
+                        }
+                        else {
+                            continue; //Continua con el siguiente elemento buscando
+                        }
+                    };
+                }
+                else { //La factura no tiene ningún producto porque se los eliminaron, se agrega el nuevo primer producto
+                    vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
+                    vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
+                    vDatosFactura.DetallePedido.push(producto);
+                    document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
+                    document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
+                }
+
+                //vDatosFactura.forEach(RecorrerFacturaA);
             };
+
+            //function RecorrerFacturaA(value, index, array) {
+            //    //Si el elemento ya existe en el array se incrementa el valor total de la factura y el impuesto
+            //    if (array.DetallePedido.IdProducto.value === document.activeElement.tabIndex) {
+            //        array.Impuesto = array.Impuesto + document.activeElement.dataset.valoru * 0.08;
+            //        array.ValorTotal = array.ValorTotal + document.activeElement.dataset.valoru;
+            //    };
+            //}
+
+            //console.log("Datos Pedido");
+            //document.getElementById("lblprnFactura").innerHTML = JSON.stringify(vDatosFactura);
         };
 
-        //function AdicionarProducto(ControlId) {
-
-        //    //Mostrarle cantidades del producto al usuario
-        //    if (document.getElementById("lblprnCantidad" + ControlId).value === undefined)
-        //        document.getElementById("lblprnCantidad" + ControlId).value = 1;
-        //    else
-        //        document.getElementById("lblprnCantidad" + ControlId).value = document.getElementById("lblprnCantidad" + ControlId).value + 1;
-
-        //    document.getElementById("lblprnCantidad" + ControlId).innerHTML = document.getElementById("lblprnCantidad" + ControlId).value;
-
-        //    //Mostrar subtotales al usuario
-        //    document.getElementById("lblprnSubtotal" + ControlId).innerHTML = document.activeElement.dataset.valoru * document.getElementById("lblprnCantidad" + ControlId).value;
-
-        //    var producto = {
-        //        IdRegistro: 1,
-        //        IdRegFactura: 1,
-        //        IdProducto: document.activeElement.tabIndex,
-        //        Cantidad: 1,
-        //        ValorUnitario: document.activeElement.dataset.valoru,
-        //        Subtotal: document.activeElement.dataset.valoru,
-        //        Observaciones: ''
-        //    };
-
-        //    //El arreglo está vacio es el primer producto
-        //    if (vDatosFactura.length === 0) {
-        //        vDatosFactura = {
-        //            IdRegistro: 1,
-        //            IdPedidoDia: 1,
-        //            NroResolucionDian: "X",
-        //            NroFacturaDian: "X",
-        //            Fecha: null, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
-        //            TipoDespacho: 1,
-        //            Impuesto: document.activeElement.dataset.valoru * 0.08,
-        //            ValorTotal: parseInt(document.activeElement.dataset.valoru),
-        //            EstadoFactura: 'PENDIENTE',
-        //            IdPersona: 3,
-        //            IdLocal: 1,
-        //            DetallePedido: []
-        //        };
-        //        vDatosFactura.DetallePedido.push(producto);
-        //        document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
-        //        document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
-        //    }
-        //    else {
-        //        vDatosFactura.DetallePedido.push(producto);
-
-        //        //Recorrer el arreglo ver si hay algún producto igual para aumentarle la cantidad
-        //        var iCont;
-        //        for (iCont = 0; iCont < vDatosFactura.DetallePedido.length; iCont++) {
-        //            if (vDatosFactura.DetallePedido[iCont].IdProducto === document.activeElement.tabIndex) {
-        //                vDatosFactura.Impuesto = vDatosFactura.Impuesto + document.activeElement.dataset.valoru * 0.08;
-        //                vDatosFactura.ValorTotal = vDatosFactura.ValorTotal + parseInt(document.activeElement.dataset.valoru);
-        //                document.getElementById("lblprnTotalFacturaU").innerHTML = vDatosFactura.ValorTotal;
-        //                document.getElementById("lblprnTotalFacturaD").innerHTML = vDatosFactura.ValorTotal;
-        //                break; //No importa si el elemento está varias veces en detallepedido, ya lo sumó una vez más al total de la factura
-        //            }
-        //        };
-
-        //        //vDatosFactura.forEach(RecorrerFacturaA);
-        //    };
-
-        //    //function RecorrerFacturaA(value, index, array) {
-        //    //    //Si el elemento ya existe en el array se incrementa el valor total de la factura y el impuesto
-        //    //    if (array.DetallePedido.IdProducto.value === document.activeElement.tabIndex) {
-        //    //        array.Impuesto = array.Impuesto + document.activeElement.dataset.valoru * 0.08;
-        //    //        array.ValorTotal = array.ValorTotal + document.activeElement.dataset.valoru;
-        //    //    };
-        //    //}
-
-        //    //console.log("Datos Pedido");
-        //    //document.getElementById("lblprnFactura").innerHTML = JSON.stringify(vDatosFactura);
-        //};
 
         function RetirarProducto(ControlId) {
 
