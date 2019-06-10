@@ -59,12 +59,12 @@ namespace BegoSys.Core.Facturacion
             //Guarda los datos de los pedidos 
             try
             {
-               //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
+                //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Inicio SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
 
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
                     Factura DatosPedidos = new Factura();
-                    
+
 
                     //Actualiza el número de facturación
                     ResolucionDian DatosResol = (db.ResolucionDians.Where(rds => rds.Activa == 1).Select(rd => rd)).FirstOrDefault();
@@ -90,13 +90,15 @@ namespace BegoSys.Core.Facturacion
                         dFFin = DateTime.Now.AddDays(1);
                         DFac.Fecha = DateTime.Now;
                     }
-                    
+
                     DatosPedidos.IdPedidoDia = ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= dFInicio.Date).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && (fcp.Fecha >= dFInicio.Date && fcp.Fecha <= dFFin)).DefaultIfEmpty().Max(f => f == null ? 0 : f.IdPedidoDia) + 1 : 1); //((dFInicio != null) ? ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= dFInicio.Date).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && (fcp.Fecha >= dFInicio.Date && fcp.Fecha <= dFFin)).Max(f => f.IdPedidoDia) + 1 : 1) : ((db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Count() > 0) ? db.Facturas.Where(fcp => fcp.IdLocal == DFac.IdLocal && fcp.Fecha >= DateTime.Today).Max(f => f.IdPedidoDia) + 1 : 1));
 
                     //Busca en la tabla jbResolucionesDian para saber cual el número que continua
                     DatosPedidos.NroResolucionDian = (db.ResolucionDians.Where(rds => rds.Activa == 1).Select(rd => rd.NroResolucionDian)).FirstOrDefault();
+                    DFac.NroResolucionDian = DatosPedidos.NroResolucionDian; //Asigna este valor para imprimirlo
 
                     DatosPedidos.NroFacturaDian = DatosResol.Actual;
+                    DFac.NroFacturaDian = DatosPedidos.NroFacturaDian; //Asigna este valor para imprimirlo
 
                     DatosPedidos.Fecha = ((dFInicio != null) ? dFInicio : DateTime.Now); // Convert.ToDateTime("09/01/2019 09:50"); // ;
 
@@ -129,7 +131,7 @@ namespace BegoSys.Core.Facturacion
                     //Guarda el detalle de las facturas                     
                     foreach (DetalleFacturaTO ProductoPedido in DFac.DetallePedido)
                     {
-                        
+
                         //Se eliminan los registros que no tienen un producto
                         if (ProductoPedido.IdProducto == 0 && ProductoPedido.Cantidad == 0)
                         {
@@ -150,14 +152,19 @@ namespace BegoSys.Core.Facturacion
                         await db.SaveChangesAsync();
 
                         //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
-                        
+
                         //Descuenta del inventario los ingredientes vendidos
                         CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona, dFInicio);
 
 
                     }
+
                     //Imprime el pedido
-                    //PrintReceiptForTransaction(DFac);
+                    //DialogResult dialogResult = MessageBox.Show("Desea imprimir el recibo?", "Imprimir", MessageBoxButtons.YesNo);
+                    //if (dialogResult == DialogResult.Yes)
+                    //{
+                        PrintReceiptForTransaction(DFac);
+                    //}
                     //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
             }
