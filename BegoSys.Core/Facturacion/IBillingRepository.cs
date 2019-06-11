@@ -10,6 +10,6 @@ namespace BegoSys.Core.Facturacion
 
         List<PedidoTO> ConsultarListaPedidos(string sDoc, DatosLocalTO dLoc);
 
-        Task AnulaPedido(long ipd);
+        Task AnulaPedido(long ipd, long idLocal, long idPersona);
     }
 }

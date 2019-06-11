@@ -476,6 +476,184 @@ namespace BegoSys.Core.Inventario
             return true;
         }
 
+        //Adicionar producto al inventario
+        public bool AdicionarProducto(long idProducto, long idLocal, long idPersona, DateTime dFecha)
+        {
+            List<MedidasReceta> DatIngrR = new List<MedidasReceta>();
+            var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
+            try
+            {
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+
+                    AccountingRepository CoreContabilidad = new AccountingRepository();
+
+                    //Consulta las medidas de los ingredientes del producto, que se utilizarán luego para retirar del inventario
+                    DatIngrR = (from mr in db.MedidasRecetas
+                                join pr in db.Productos on mr.IdProducto equals pr.IdProducto
+                                where mr.IdProducto == idProducto
+                                select mr).ToList();
+
+                    foreach (MedidasReceta Elem in DatIngrR)
+                    {
+                        //Se busca el costo de la materia prima para calcular el costo en el momento de la venta
+                        /*select * from jbdetalleinventarios jbdia 
+                          where jbdia.idingrediente = Vidingr 
+                            and jbdia.conexistencias = Vexist 
+                            and jbdia.transaccion = 'ENTRA'
+                            and jbdia.fechahora = (select min(jbdib.fechahora) 
+                                                     from jbdetalleinventarios jbdib 
+                                                    where jbdib.idingrediente = jbdia.idingrediente 
+                                                      and jbdib.transaccion = jbdia.transaccion 
+                                                      and jbdib.fechahora <= SYSDATE)*/
+                        var iCostoIngr = (from cing in db.DetalleInventarios
+                                          where (cing.IdIngrediente == Elem.IdIngrediente
+                                             && cing.ConExistencias == 1
+                                             && cing.Transaccion == "ENTRA"
+                                             && cing.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now
+                                                                                        && dii.IdIngrediente == cing.IdIngrediente
+                                                                                        && dii.IdLocal == cing.IdLocal
+                                                                                        && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
+                                          select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
+
+                        //Actualizando el encabezado del inventario
+                        var UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal select Inv).FirstOrDefault();
+
+                        if (UpdEncabezado != null)
+                        {
+                            UpdEncabezado.CantidadActual = (long)(UpdEncabezado.CantidadActual - Elem.Cantidad);
+                            UpdEncabezado.CostoPromDiaActual = (UpdEncabezado.CantidadActual / ((iCostoIngr.CostoU ?? 1) * Elem.Cantidad));
+                            UpdEncabezado.UnidadesActuales = (long)(UpdEncabezado.UnidadesActuales - Elem.Cantidad);
+                            UpdEncabezado.CostoPromDiaUnidad = (long)(iCostoIngr.CostoU ?? 1);
+                        }
+
+
+                        DetalleInventario ProductoaAdicionar = new DetalleInventario();
+                        if (iCostoIngr != null)
+                        {
+                            ProductoaAdicionar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            ProductoaAdicionar.FechaHora = dFecha;
+                            ProductoaAdicionar.Transaccion = "ENTRA";
+                            ProductoaAdicionar.Cantidad = Elem.Cantidad;
+                            ProductoaAdicionar.CostoTotal = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad; //Se calcula en el proceso en las noches Tiempo en segundos de elaboracion por salario en segundos
+                            ProductoaAdicionar.Unidades = Elem.Cantidad;
+                            ProductoaAdicionar.CostoUnidad = iCostoIngr.CostoU;
+                            ProductoaAdicionar.IdMedida = Elem.IdMedida;
+                            ProductoaAdicionar.IdIngrediente = Elem.IdIngrediente;
+                            ProductoaAdicionar.IdEnvase = Elem.IdEnvase;
+                            ProductoaAdicionar.IdInsumo = null;
+                            ProductoaAdicionar.IdLocal = idLocal;
+                            ProductoaAdicionar.IdProveedor = null;
+                            ProductoaAdicionar.IdPersona = idPersona;
+                            ProductoaAdicionar.TiempoProduccion = null;
+                            ProductoaAdicionar.ConExistencias = 0;
+                        }
+                        else
+                        {
+                            ProductoaAdicionar.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                            ProductoaAdicionar.FechaHora = dFecha;
+                            ProductoaAdicionar.Transaccion = "ENTRA";
+                            ProductoaAdicionar.Cantidad = Elem.Cantidad;
+                            ProductoaAdicionar.CostoTotal = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            ProductoaAdicionar.Unidades = Elem.Cantidad;
+                            ProductoaAdicionar.CostoUnidad = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            ProductoaAdicionar.IdMedida = Elem.IdMedida;
+                            ProductoaAdicionar.IdIngrediente = Elem.IdIngrediente;
+                            ProductoaAdicionar.IdEnvase = Elem.IdEnvase;
+                            ProductoaAdicionar.IdInsumo = null;
+                            ProductoaAdicionar.IdLocal = idLocal;
+                            ProductoaAdicionar.IdProveedor = null;
+                            ProductoaAdicionar.IdPersona = idPersona;
+                            ProductoaAdicionar.TiempoProduccion = null;
+                            ProductoaAdicionar.ConExistencias = 0;
+                        }
+
+                        db.DetalleInventarios.Add(ProductoaAdicionar);
+
+                        db.SaveChanges();
+
+                        //Calcular Costos
+
+                        //Contabiliza la venta y los costos de la venta
+
+                        DatosLMTO RegistroContab = new DatosLMTO();
+
+                        //Crédito a la cuenta 143020 que pasa de subproducto terminado a producto vendido
+                        if (iCostoIngr != null)
+                        {
+                            RegistroContab.IdRegistro = 0;
+                            RegistroContab.IdClase = "1";
+                            RegistroContab.IdGrupo = "14";
+                            RegistroContab.IdCuenta = "1430";
+                            RegistroContab.IdSubCuenta = "143020";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "";
+                            RegistroContab.ValorDebito = 0;
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
+                            RegistroContab.Observaciones = "Pulpa adicionada";
+                        }
+                        else
+                        {
+                            RegistroContab.IdRegistro = 0;
+                            RegistroContab.IdClase = "1";
+                            RegistroContab.IdGrupo = "14";
+                            RegistroContab.IdCuenta = "1430";
+                            RegistroContab.IdSubCuenta = "143020";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "";
+                            RegistroContab.ValorDebito = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = 0; //El costo de los ingredientes no inventariados se calcula diferente
+                            RegistroContab.Observaciones = "Pulpa adicionada";
+                        }
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                        //Debito de la venta
+                        //Subproducto que se va para la venta
+                        if (iCostoIngr != null)
+                        {
+                            RegistroContab.IdRegistro = 0; //Se pone cero porque RegistrarLibroMayor asigna el valor siguiente
+                            RegistroContab.IdClase = "4";
+                            RegistroContab.IdGrupo = "41";
+                            RegistroContab.IdCuenta = "4140";
+                            RegistroContab.IdSubCuenta = "414015";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "901226468";
+                            RegistroContab.ValorDebito = (iCostoIngr.CostoU ?? 1) * Elem.Cantidad;
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = 0;
+                            RegistroContab.Observaciones = "Ingreso de subproductos";
+                        }
+                        else
+                        {
+                            RegistroContab.IdRegistro = 0; //Se pone cero porque RegistrarLibroMayor asigna el valor siguiente
+                            RegistroContab.IdClase = "4";
+                            RegistroContab.IdGrupo = "41";
+                            RegistroContab.IdCuenta = "4140";
+                            RegistroContab.IdSubCuenta = "414015";
+                            RegistroContab.FechaHora = dFecha;
+                            RegistroContab.NroDocPersonaDB = "901226468";
+                            RegistroContab.ValorDebito = 0;
+                            RegistroContab.NroDocPersonaCR = "";
+                            RegistroContab.ValorCredito = 0;
+                            RegistroContab.Observaciones = "Ingreso de subproductos";
+                        }
+
+                        CoreContable.RegistrarLibroMayor(RegistroContab);
+
+                    }
+
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         //Retirar el producto del inventario
         public bool RetirarProducto(long idProducto, long idLocal, long idPersona, DateTime dFecha)
         {

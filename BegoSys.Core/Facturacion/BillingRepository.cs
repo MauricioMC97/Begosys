@@ -163,7 +163,7 @@ namespace BegoSys.Core.Facturacion
                     //DialogResult dialogResult = MessageBox.Show("Desea imprimir el recibo?", "Imprimir", MessageBoxButtons.YesNo);
                     //if (dialogResult == DialogResult.Yes)
                     //{
-                        PrintReceiptForTransaction(DFac);
+                    //    PrintReceiptForTransaction(DFac);
                     //}
                     //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
@@ -373,10 +373,13 @@ namespace BegoSys.Core.Facturacion
 
         //}
 
-        public async Task AnulaPedido(long ipd)
+        public async Task AnulaPedido(long ipd, long idLocal, long idPersona)
         {
             try
             {
+                TrasladoIngrTO dDatos;
+                List<MedidasReceta> lstMedidas;
+
                 //Se anulan las facturas del día de hoy que estén en estado PENDIENTE solamente
                 using (var db = EntidadesJuicebar.GetDbContext())
                 {
@@ -384,15 +387,60 @@ namespace BegoSys.Core.Facturacion
 
                     FactAnular = db.Facturas.Where(fa => fa.IdPedidoDia == ipd && fa.Fecha == DateTime.Today && fa.EstadoFactura == "PENDIENTE").Select(reg => reg).FirstOrDefault();
 
-                    if (FactAnular != null)
-                    {
-                        FactAnular.EstadoFactura = "ANULADO";
-                        await db.SaveChangesAsync();
+                    List<DetalleFactura> lstDetallesF = db.DetalleFacturas.Where(dfp => dfp.IdRegFactura == FactAnular.IdRegistro).ToList();
+
+                    //Recorrer los ingredientes para ir retornando al inventario los productos anulados
+                    foreach (DetalleFactura ElemDF in lstDetallesF) { 
+                        lstMedidas = db.MedidasRecetas.Where(mr => mr.IdProducto == ElemDF.IdProducto).ToList();
+
+                        if (lstMedidas != null)
+                        {
+                            foreach (MedidasReceta ElemIngr in lstMedidas)
+                            {
+
+                                //Se verifica si el ingrediente existe en el local origen
+                                var UpdEncOrigen = (from Inv in db.Inventarios where Inv.IdIngrediente == ElemIngr.IdIngrediente && Inv.IdLocal == idLocal select Inv).FirstOrDefault();
+
+                                if (UpdEncOrigen != null)
+                                {
+                                    //Vuelve y adiciona el ingrediente en el inventario del local
+                                    UpdEncOrigen.CantidadActual = (long)(UpdEncOrigen.CantidadActual + ElemIngr.Cantidad);
+                                    UpdEncOrigen.UnidadesActuales = (long)(UpdEncOrigen.UnidadesActuales + ElemIngr.Cantidad);
+
+                                     //Registra entrada al local nuevamente en el detalle
+                                    DetalleInventario AdicionarDestino = new DetalleInventario();
+                                    //Selecciona el máximo registro para aumentar en uno el valor
+                                    AdicionarDestino.IdRegistroDetInv = ((db.DetalleInventarios.Count() == 0) ? 1 : db.DetalleInventarios.Max(x => x.IdRegistroDetInv) + 1);
+                                    AdicionarDestino.IdIngrediente = ElemIngr.IdIngrediente;
+                                    AdicionarDestino.IdEnvase = null;
+                                    AdicionarDestino.IdInsumo = null;
+                                    AdicionarDestino.Cantidad = ElemIngr.Cantidad;
+                                    AdicionarDestino.CostoTotal = 0;
+                                    AdicionarDestino.Unidades = ElemIngr.Cantidad;
+                                    AdicionarDestino.CostoUnidad = 0;
+                                    AdicionarDestino.IdMedida = ElemIngr.IdMedida;
+                                    AdicionarDestino.FechaHora = DateTime.Now;
+                                    AdicionarDestino.IdLocal = idLocal;
+                                    AdicionarDestino.IdProveedor = null;
+                                    AdicionarDestino.Transaccion = "ENTRA";
+                                    AdicionarDestino.IdPersona = idPersona;
+                                    AdicionarDestino.ConExistencias = 1; //Cuando llega nuevo hay existencias del producto
+
+                                    db.DetalleInventarios.Add(AdicionarDestino);
+
+                                    db.SaveChanges();
+                                }
+
+                                FactAnular.EstadoFactura = "ANULADO";
+                                await db.SaveChangesAsync();
+                            }
+                        }
+                        else
+                        {
+                            throw new BegoSysException("Billing_FactEntregada");
+                        }
                     }
-                    else
-                    {
-                        throw new BegoSysException("Billing_FactEntregada");
-                    }
+
                 }
             }
             catch (Exception Error)

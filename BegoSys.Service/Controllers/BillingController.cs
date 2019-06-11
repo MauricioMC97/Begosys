@@ -52,11 +52,11 @@ namespace BegoSys.Service.Controllers
 
         [HttpPost]
         [Route(ConstantesApi.AnularPedidoUri)]
-        public async Task<IHttpActionResult> AnularPedido(long ipd)
+        public async Task<IHttpActionResult> AnularPedido(long ipd, long idl, long idp)
         {
             //if (ModelState.IsValid)
             //{
-            await _repositorioFacturacion.AnulaPedido(ipd);
+            await _repositorioFacturacion.AnulaPedido(ipd, idl, idp);
             return Ok();
             /*}
             else
