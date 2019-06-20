@@ -49,6 +49,7 @@
     <Compile Include="DatosLocalTO.cs" />
     <Compile Include="DetalleFacturaTO.cs" />
     <Compile Include="FacturaTO.cs" />
+    <Compile Include="InventarioInsumosTo.cs" />
     <Compile Include="InventarioTO.cs" />
     <Compile Include="MedidaRecetaTO.cs" />
     <Compile Include="PedidoTO.cs" />

@@ -886,5 +886,40 @@ namespace BegoSys.Core.Inventario
             //Consulta los insumos de la tabla jbInsumos
         }
 
+        public List<InventarioInsumosTo> ConsultarInventarioInsumos(long lInsu, DatosLocalTO datosLocal)
+        {
+            List<InventarioInsumosTo> ListaDatosI = null;
+            //Consulta el inventario del ingrediente ordenado por la existenia más vieja
+            try
+            {
+                using (var db = EntidadesJuicebar.GetDbContext())
+                {
+                    //Consulta el inventario del insumo enviado que tengan inventario en el local actual
+                    //Consulta la entrada mas antigua que todavía tiene existencia
+                    ListaDatosI = (from di in db.DetalleInventarios
+                                   join inv in db.Inventarios on di.IdInsumo equals inv.IdInsumo
+                                   where (inv.IdInsumo == lInsu
+                                       && inv.IdLocal == datosLocal.IdLocal
+                                       && di.ConExistencias == 1
+                                       && di.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now
+                                                                                    && dii.IdInsumo == di.IdInsumo
+                                                                                    && dii.IdLocal == di.IdLocal
+                                                                                    && dii.ConExistencias == di.ConExistencias).Min(diifh => diifh.FechaHora)))
+                                   select new InventarioInsumosTo
+                                   {
+                                       idInsumo = inv.IdInsumo ?? 0,
+                                       nombreInsumo = null,
+                                       Cantidad = di.Cantidad,
+                                       CostoTotal = di.CostoTotal
+                                   }).ToList();
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine("Se presentó el siguiente error: " + Error.Message + Error.InnerException.Message);
+            }
+            return ListaDatosI;
+        }
+
     }
 }
