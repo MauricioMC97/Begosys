@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using BegoSys.Common.Auxiliares;
 using BegoSys.Common.Constantes;
 using BegoSys.Common.Excepciones;
+using BegoSys.TO;
 
 namespace BegoSys.Core.Facturacion
 {
@@ -176,7 +177,7 @@ namespace BegoSys.Core.Facturacion
             }
         }
 
-        public static void PrintReceiptForTransaction(FacturaTO DFac)
+        public void PrintReceiptForTransaction(FacturaTO DFac)
         {
             /*Debe contener el nombre o razón social de la empresa.
             NIT de la persona o empresa que vende un producto o servicio.
@@ -447,6 +448,50 @@ namespace BegoSys.Core.Facturacion
             {
                 throw new BegoSysException("Se presentó el siguiente error" + Error.Message + Error.InnerException.Message);
             }
+        }
+
+        public FacturaTO ConsultarFactura(long NroFactura)
+        {
+            FacturaTO DatosF;
+
+            using (var db = EntidadesJuicebar.GetDbContext())
+            {
+                DatosF = (from fc in db.Facturas 
+                          where fc.IdRegistro == NroFactura
+                          select new FacturaTO {
+                              IdRegistro = fc.IdRegistro,
+                              IdPedidoDia = fc.IdPedidoDia,
+                              Fecha = fc.Fecha,
+                              NroFacturaDian = fc.NroFacturaDian,
+                              NroResolucionDian = fc.NroResolucionDian,
+                              EstadoFactura = fc.EstadoFactura,
+                              TipoDespacho = fc.IdTipoDespacho,
+                              Cliente = fc.Cliente,
+                              Direccion = fc.Direccion,
+                              DocCliente = fc.DocCliente,
+                              IdLocal = fc.IdLocal,
+                              IdPersona = fc.IdPersona,
+                              Impuesto = fc.Impuesto,
+                              Telefono = fc.Telefono,
+                              ValorTotal = fc.ValorTotal,
+                              DetallePedido = null
+                          }).FirstOrDefault();
+
+
+                DatosF.DetallePedido = (from dfc in db.DetalleFacturas
+                                        where dfc.IdRegFactura == NroFactura
+                                        select new DetalleFacturaTO {
+                                            IdRegistro = dfc.IdRegistro,
+                                            IdRegFactura = dfc.IdRegFactura,
+                                            IdProducto = dfc.IdProducto,
+                                            Cantidad = dfc.Cantidad,
+                                            Observaciones = dfc.Observaciones,
+                                            Subtotal = dfc.Subtotal,
+                                            ValorUnitario = dfc.ValorUnitario
+                                        }).ToList();
+            }
+
+            return DatosF;
         }
     }
 }

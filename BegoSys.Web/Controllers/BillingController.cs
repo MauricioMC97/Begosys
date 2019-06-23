@@ -98,6 +98,9 @@ namespace BegoSys.Web.Controllers
         [HttpPost]
         public JsonResult ImprimirPedido(FacturaTO DatosFactura)
         {
+            BegoSys.Core.Facturacion.BillingRepository CoreFacturacion = new BegoSys.Core.Facturacion.BillingRepository();
+            CoreFacturacion.PrintReceiptForTransaction(DatosFactura);
+
             return Json(new { status = "ok" });
         }
     }

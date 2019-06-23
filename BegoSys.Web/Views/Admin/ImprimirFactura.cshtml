@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "ImprimirFactura";
+}
+
+<h2>ImprimirFactura</h2>
+<form>
+    Número de Factura<br>
+    <input type="text" name="ImpFactura">
+</form>
+
+<script type="text/javascript">
+            //call a function with parameters
+            $.ajax({
+                type: "POST",
+                url: '/Billing/PrintReceiptForTransaction',
+                data: ImpFactura.value,
+
+                success: function (rtaok) {
+                    if (rtaok.status === "error") {
+                        alert("Error: " + rtaok.message);
+                    }
+                    else {
+                        alert("Se imprimió exitosamente");
+                    }
+                },
+                error: function (rtaerror) {
+                    alert("Error: " + rtaerror.responseText);
+                }
+    });
+</script>
