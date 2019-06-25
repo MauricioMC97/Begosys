@@ -19,6 +19,7 @@ namespace BegoSys.Common.Constantes
         #region Billing
         public const string GuardarPedidoUri = "api/Billing/GuardarPedido";
         public const string AnularPedidoUri = "api/Billing/AnularPedido";
+        public const string ImprimirPedidoUri = "api/Admin/ImprimirPedido";
         #endregion
 
         #region Inventory

@@ -3,18 +3,21 @@
     ViewBag.Title = "ImprimirFactura";
 }
 
-<h2>ImprimirFactura</h2>
-<form>
-    Número de Factura<br>
-    <input type="text" name="ImpFactura">
-</form>
+<html>
+<title>
+    <h2>ImprimirFactura</h2>
+</title>
+<body>
+    <form id="frmImprimirFactura" action="/ImprimirPedido" method="post">
+        Número de Factura<br>
+        <input type="text" name="ImpFactura" id="ImpFactura">
 
-<script type="text/javascript">
+        <script type="text/javascript">
             //call a function with parameters
             $.ajax({
                 type: "POST",
-                url: '/Billing/PrintReceiptForTransaction',
-                data: ImpFactura.value,
+                url: 'Billing/ImprimirPedido',
+                data: frmImprimirFactura.ImpFactura.value,
 
                 success: function (rtaok) {
                     if (rtaok.status === "error") {
@@ -27,5 +30,8 @@
                 error: function (rtaerror) {
                     alert("Error: " + rtaerror.responseText);
                 }
-    });
-</script>
+            });
+        </script>
+    </form>
+</body>
+</html>

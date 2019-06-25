@@ -450,6 +450,12 @@ namespace BegoSys.Core.Facturacion
             }
         }
 
+        public void ImprimirFactura (long NroFactura)
+        {
+            //Imprime el recibo a solicitod del cliente
+            PrintReceiptForTransaction(ConsultarFactura(NroFactura));
+        }
+
         public FacturaTO ConsultarFactura(long NroFactura)
         {
             FacturaTO DatosF;

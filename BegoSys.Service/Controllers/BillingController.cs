@@ -65,5 +65,13 @@ namespace BegoSys.Service.Controllers
             }*/
         }
 
+        [HttpPost]
+        [Route(ConstantesApi.ImprimirPedidoUri)]
+        public void ImprimirPedido(long NroF)
+        {
+            BegoSys.Core.Facturacion.BillingRepository CoreFacturacion = new BegoSys.Core.Facturacion.BillingRepository();
+            CoreFacturacion.PrintReceiptForTransaction(CoreFacturacion.ConsultarFactura(NroF));
+        }
+
     }
 }

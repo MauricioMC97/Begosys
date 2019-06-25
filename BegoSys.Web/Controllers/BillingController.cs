@@ -94,13 +94,15 @@ namespace BegoSys.Web.Controllers
             //}
         }
 
+        public ActionResult Print()
+        {
+            return View("ImprimirFactura");
+        }
 
         [HttpPost]
-        public JsonResult ImprimirPedido(FacturaTO DatosFactura)
+        public JsonResult ImprimirPedido(long NroFactura)
         {
-            BegoSys.Core.Facturacion.BillingRepository CoreFacturacion = new BegoSys.Core.Facturacion.BillingRepository();
-            CoreFacturacion.PrintReceiptForTransaction(DatosFactura);
-
+            _proxy.PostForMessage(ConstantesApi.ImprimirPedidoUri, NroFactura);
             return Json(new { status = "ok" });
         }
     }
