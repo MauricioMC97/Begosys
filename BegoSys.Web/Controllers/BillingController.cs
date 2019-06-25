@@ -103,7 +103,7 @@ namespace BegoSys.Web.Controllers
         public JsonResult ImprimirPedido(long NroFactura)
         {
             _proxy.PostForMessage(ConstantesApi.ImprimirPedidoUri, NroFactura);
-            return Json(new { status = "ok" });
+            return Ok();
         }
     }
 }

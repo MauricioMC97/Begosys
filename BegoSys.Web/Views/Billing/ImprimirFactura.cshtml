@@ -8,30 +8,35 @@
     <h2>ImprimirFactura</h2>
 </title>
 <body>
-    <form id="frmImprimirFactura" action="/ImprimirPedido" method="post">
+    @*<form id="frmImprimirFactura" action="/Billing/ImprimirPedido" method="post">*@
         Número de Factura<br>
         <input type="text" name="ImpFactura" id="ImpFactura">
+        <input id="btnPrint" type="button" class="btn btn-sm btn-success" onclick="PrintFactura()" value="Imprimir" data-url-imprimir-factura="@Url.Action("ImprimirPedido","Billing")"/>
 
         <script type="text/javascript">
-            //call a function with parameters
-            $.ajax({
-                type: "POST",
-                url: 'Billing/ImprimirPedido',
-                data: frmImprimirFactura.ImpFactura.value,
+            function PrintFactura() {
+                var urlPFactura = $('#btnPrint').data('url-imprimir-factura');
 
-                success: function (rtaok) {
-                    if (rtaok.status === "error") {
-                        alert("Error: " + rtaok.message);
+                //call a function with parameters
+                $.ajax({
+                    type: "POST",
+                    url: urlPFactura,
+                    data: parseInt(ImpFactura.value),
+
+                    success: function (rtaok) {
+                        if (rtaok.status === "error") {
+                            alert("Error: " + rtaok.message);
+                        }
+                        else {
+                            alert("Se imprimió exitosamente");
+                        }
+                    },
+                    error: function (rtaerror) {
+                        alert("Error: " + rtaerror.responseText);
                     }
-                    else {
-                        alert("Se imprimió exitosamente");
-                    }
-                },
-                error: function (rtaerror) {
-                    alert("Error: " + rtaerror.responseText);
-                }
-            });
+                });
+            };
         </script>
-    </form>
+    @*</form>*@
 </body>
 </html>
