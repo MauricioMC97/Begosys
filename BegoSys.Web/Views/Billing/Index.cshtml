@@ -378,22 +378,28 @@
             //var urlGuardarPedido = $('#btnSolPedido').data('url-solicitar-pedido');
 
             //call a function with parameters
+            $('#btnSolPedido').prop('disabled', true);
+
             $.ajax({
                 type: "POST",
                 url: '/Billing/GuardarPedido',
                 data: vDatosFactura,
 
+                //$("btnSolPedido").disabled = true;
                 success: function (rtaok) {
                     if (rtaok.status === "error") {
                         alert("Error al guardar: " + rtaok.message);
                     }
                     else {
                         alert("Se guardó exitosamente");
+                        $('#btnSolPedido').prop('disabled', false);
+                        location.reload(true);
                     }
                 },
                 error: function (rtaerror) {
                     alert("Error al guardar: " + rtaerror.responseText);
                 }
+                //document.getElementById("btnSolPedido").disabled = false;
             });
         };
 

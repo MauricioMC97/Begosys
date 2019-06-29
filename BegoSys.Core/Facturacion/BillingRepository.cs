@@ -164,9 +164,9 @@ namespace BegoSys.Core.Facturacion
                     //DialogResult dialogResult = MessageBox.Show("Desea imprimir el recibo?", "Imprimir", MessageBoxButtons.YesNo);
                     //if (dialogResult == DialogResult.Yes)
                     //{
-                    //    PrintReceiptForTransaction(DFac);
+                        PrintReceiptForTransaction(DFac);
                     //}
-                    //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
+                    AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
             }
             catch (Exception Error)
@@ -254,7 +254,7 @@ namespace BegoSys.Core.Facturacion
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += e.Graphics.MeasureString(text, drawFontArial10Regular).Height;
 
-            text = "Resolución DIAN # " + DatosF.NroResolucionDian + " del 2018/12/01 desde el 7499963 hasta el 9000000 Regimen Común";
+            text = "Resolución DIAN # " + DatosF.NroResolucionDian + " del 28/12/2018 desde el 7499963 hasta el 9000000 Regimen Común";
             e.Graphics.DrawString(text, drawFontArial10Regular, drawBrush, new RectangleF(x, y, width, height), drawFormatCenter);
             y += (e.Graphics.MeasureString(text, drawFontArial10Regular).Height * 3);
 
