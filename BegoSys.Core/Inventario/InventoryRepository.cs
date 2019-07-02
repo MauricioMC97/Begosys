@@ -665,6 +665,7 @@ namespace BegoSys.Core.Inventario
                 {
                     
                     AccountingRepository CoreContabilidad = new AccountingRepository();
+                    Domain.Entidades.Inventario UpdEncabezado;
 
                     //Consulta las medidas de los ingredientes del producto, que se utilizarán luego para retirar del inventario
                     DatIngrR = (from mr in db.MedidasRecetas
@@ -691,11 +692,32 @@ namespace BegoSys.Core.Inventario
                                          && cing.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now
                                                                                     && dii.IdIngrediente == cing.IdIngrediente
                                                                                     && dii.IdLocal == cing.IdLocal
+                                                                                    && dii.Transaccion == cing.Transaccion
                                                                                     && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
                                       select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
 
                         //Actualizando el encabezado del inventario
-                        var UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal select Inv).FirstOrDefault();
+                        if (Elem.IdEnvase != null)
+                        {
+                            iCostoIngr = (from cing in db.DetalleInventarios
+                                              where (cing.IdIngrediente == Elem.IdIngrediente
+                                                 && cing.ConExistencias == 1
+                                                 && cing.Transaccion == "ENTRA"
+                                                 && cing.IdEnvase == Elem.IdEnvase
+                                                 && cing.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now
+                                                                                            && dii.IdIngrediente == cing.IdIngrediente
+                                                                                            && dii.IdLocal == cing.IdLocal
+                                                                                            && dii.Transaccion == cing.Transaccion
+                                                                                            && dii.IdEnvase == cing.IdEnvase
+                                                                                            && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
+                                              select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
+
+                            UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal && Inv.IdEnvase == Elem.IdEnvase select Inv).FirstOrDefault();
+                        }
+                        else
+                        {
+                            UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal select Inv).FirstOrDefault();
+                        }
 
                         if (UpdEncabezado != null)
                         {

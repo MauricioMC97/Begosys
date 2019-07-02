@@ -22,7 +22,7 @@ namespace BegoSys.Domain.Entidades
         public long IdIngrediente { get; set; }
 
         [Column("IDENVASE")]
-        public long IdEnvase { get; set; }
+        public long? IdEnvase { get; set; }
 
         [Column("CANTIDAD")]
         public long Cantidad { get; set; }
