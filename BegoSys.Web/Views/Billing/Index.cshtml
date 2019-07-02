@@ -385,10 +385,10 @@
                 url: '/Billing/GuardarPedido',
                 data: vDatosFactura,
 
-                //$("btnSolPedido").disabled = true;
                 success: function (rtaok) {
                     if (rtaok.status === "error") {
                         alert("Error al guardar: " + rtaok.message);
+                        $('#btnSolPedido').prop('disabled', false);
                     }
                     else {
                         alert("Se guardó exitosamente");
@@ -398,8 +398,8 @@
                 },
                 error: function (rtaerror) {
                     alert("Error al guardar: " + rtaerror.responseText);
+                    $('#btnSolPedido').prop('disabled', false);
                 }
-                //document.getElementById("btnSolPedido").disabled = false;
             });
         };
 
