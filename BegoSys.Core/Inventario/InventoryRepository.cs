@@ -699,19 +699,6 @@ namespace BegoSys.Core.Inventario
                         //Actualizando el encabezado del inventario
                         if (Elem.IdEnvase != null)
                         {
-                            iCostoIngr = (from cing in db.DetalleInventarios
-                                              where (cing.IdIngrediente == Elem.IdIngrediente
-                                                 && cing.ConExistencias == 1
-                                                 && cing.Transaccion == "ENTRA"
-                                                 && cing.IdEnvase == Elem.IdEnvase
-                                                 && cing.FechaHora == (db.DetalleInventarios.Where(dii => dii.FechaHora <= DateTime.Now
-                                                                                            && dii.IdIngrediente == cing.IdIngrediente
-                                                                                            && dii.IdLocal == cing.IdLocal
-                                                                                            && dii.Transaccion == cing.Transaccion
-                                                                                            && dii.IdEnvase == cing.IdEnvase
-                                                                                            && dii.ConExistencias == cing.ConExistencias).Min(diifh => diifh.FechaHora)))
-                                              select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
-
                             UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal && Inv.IdEnvase == Elem.IdEnvase select Inv).FirstOrDefault();
                         }
                         else
