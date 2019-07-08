@@ -48,9 +48,7 @@ namespace BegoSys.Web.Controllers
         /// </summary>
         /// <param name="DatosFactura">Datos de la factura y del detalle de la factura</param>
         /// <returns>Retorna OK si la operación es exitosa</returns>
-        [HttpPost]
-
-        public JsonResult GuardarPedido(FacturaTO DatosFactura)
+        public async Task<ActionResult> GuardarPedido(FacturaTO DatosFactura)
         {
             var errors = ModelState
             .Where(x => x.Value.Errors.Count > 0)
@@ -60,7 +58,7 @@ namespace BegoSys.Web.Controllers
             //if (ModelState.IsValid)
             //{
             //El registro acá llega inconsistente pero se van a agregar las claves correspondientes
-            _proxy.PostForMessage(ConstantesApi.GuardarPedidoUri, DatosFactura);
+            await _proxy.PostForMessageAsync(ConstantesApi.GuardarPedidoUri, DatosFactura);
             return Ok();
             //}
             //else

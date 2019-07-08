@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BegoSys.Common.Excepciones;
 using BegoSys.Core.Contabilidad;
 using BegoSys.Domain;
 using BegoSys.Domain.Entidades;
@@ -655,7 +656,7 @@ namespace BegoSys.Core.Inventario
         }
 
         //Retirar el producto del inventario
-        public bool RetirarProducto(long idProducto, long idLocal, long idPersona, DateTime dFecha)
+        public async Task RetirarProducto(long idProducto, long idLocal, long idPersona, DateTime dFecha)
         {
             List<MedidasReceta> DatIngrR = new List<MedidasReceta>();
             var CoreContable = new BegoSys.Core.Contabilidad.AccountingRepository();
@@ -697,7 +698,7 @@ namespace BegoSys.Core.Inventario
                                       select new { CostoU = cing.CostoUnidad }).FirstOrDefault();
 
                         //Actualizando el encabezado del inventario
-                        if (Elem.IdEnvase != null)
+                        if ((Elem.IdEnvase.ToString() != null) && ((Elem.IdProducto == 50) || (Elem.IdProducto == 51)))
                         {
                             UpdEncabezado = (from Inv in db.Inventarios where Inv.IdIngrediente == Elem.IdIngrediente && Inv.IdLocal == idLocal && Inv.IdEnvase == Elem.IdEnvase select Inv).FirstOrDefault();
                         }
@@ -714,6 +715,7 @@ namespace BegoSys.Core.Inventario
                             UpdEncabezado.CostoPromDiaUnidad = (long)(iCostoIngr.CostoU ?? 1);
                         }
 
+                        await db.SaveChangesAsync();
 
                         DetalleInventario ProductoaRetirar = new DetalleInventario();
                         if (iCostoIngr != null)
@@ -757,7 +759,7 @@ namespace BegoSys.Core.Inventario
 
                         db.DetalleInventarios.Add(ProductoaRetirar);
 
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
 
                         //Calcular Costos
 
@@ -850,12 +852,11 @@ namespace BegoSys.Core.Inventario
 
                 }
             }
-            catch
+            catch (Exception Error)
             {
-                return false;
+                Console.WriteLine("Se presentó el siguiente error: " + Error.Message + Error.InnerException.Message);
+                throw new BegoSysException("RetirarProducto: Se presentó el siguiente error al retirar el producto: " + Error.Message + Error.InnerException.Message);
             }
-            return true;
-
         }
 
         //Consulta el inventario del ingrediente enviado
