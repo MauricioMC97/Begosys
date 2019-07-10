@@ -59,8 +59,8 @@ namespace BegoSys.Core.Inventario
                     if (UpdEncabezado != null) {
                         UpdEncabezado.CantidadActual = (long)(UpdEncabezado.CantidadActual + cantidad);
                         UpdEncabezado.CantidadMinima = (long)(UpdEncabezado.CantidadActual * 0.2); //La cantidad mínima es el 30% de la cantidad actual
-                        UpdEncabezado.CostoPromDiaActual = UpdEncabezado.CantidadActual / valor;
-                        UpdEncabezado.CostoPromDiaUnidad = UpdEncabezado.CantidadActual / (nrounidades ?? 1);
+                        UpdEncabezado.CostoPromDiaActual = valor / (nrounidades ?? 1);
+                        UpdEncabezado.CostoPromDiaUnidad = (UpdEncabezado.CostoPromDiaActual + (valor / (nrounidades ?? 1))) / 2;
                         UpdEncabezado.UnidadesActuales = (long)(UpdEncabezado.UnidadesActuales + (nrounidades ?? 1));
                         UpdEncabezado.UnidadesMinimas = (long)(UpdEncabezado.UnidadesActuales * 0.2);
                     }
