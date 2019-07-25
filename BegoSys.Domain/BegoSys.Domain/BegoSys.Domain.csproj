@@ -57,8 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\ConstanteProcedimientoAlmacenado.cs" />
     <Compile Include="Clases\FunctionParameter.cs" />
     <Compile Include="EntidadesJuicebar.cs" />
+    <Compile Include="EntidadesJuicebar.procedimientoalmacenado.cs" />
     <Compile Include="Entidades\CostoManoObra.cs" />
     <Compile Include="Entidades\Departamento.cs" />
     <Compile Include="Entidades\DetalleFactura.cs" />
@@ -95,6 +97,10 @@
     <ProjectReference Include="..\..\BegoSys.Common\BegoSys.Common.csproj">
       <Project>{6a48768e-2b84-4c23-87f9-ab5f4a6ff95f}</Project>
       <Name>BegoSys.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BegoSys.TO\BegoSys.TO.csproj">
+      <Project>{07E4F6BF-541A-426D-88A6-1649E788664C}</Project>
+      <Name>BegoSys.TO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

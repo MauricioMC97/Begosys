@@ -20,7 +20,7 @@ namespace BegoSys.Web.Controllers
 
         #region Constructores
         /// <summary>
-        /// Crea una nueva instancia del tipo <see cref="CapturasController"/>
+        /// Crea una nueva instancia del tipo <see cref="BillingController"/>
         /// </summary>
         public BillingController()
         {
@@ -28,7 +28,7 @@ namespace BegoSys.Web.Controllers
         }
 
         /// <summary>
-        /// Crea una nueva instancia del tipo <see cref="CapturasController"/>
+        /// Crea una nueva instancia del tipo <see cref="BillingController"/>
         /// </summary>
         /// <param name="proxy">proxy rest inyectado a través del contenedor de instancias de spring</param>
         public BillingController(RestTemplate proxy)
@@ -48,6 +48,7 @@ namespace BegoSys.Web.Controllers
         /// </summary>
         /// <param name="DatosFactura">Datos de la factura y del detalle de la factura</param>
         /// <returns>Retorna OK si la operación es exitosa</returns>
+        [HttpPost]
         public async Task<ActionResult> GuardarPedido(FacturaTO DatosFactura)
         {
             var errors = ModelState

@@ -56,6 +56,7 @@ namespace BegoSys.Core.Facturacion
             BegoSys.Core.Inventario.InventoryRepository CoreInventario = new BegoSys.Core.Inventario.InventoryRepository();
             DateTime dFInicio = DateTime.Today;
             DateTime dFFin = DateTime.Today.AddDays(1);
+            long lContProductos = 0;
 
             //Guarda los datos de los pedidos 
             try
@@ -155,9 +156,9 @@ namespace BegoSys.Core.Facturacion
                         //AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Voy a RetirarProducto fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
 
                         //Descuenta del inventario los ingredientes vendidos
-                        await CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona, dFInicio);
-
-
+                        for (lContProductos = 0; lContProductos < ProductoPedido.Cantidad; lContProductos++) {
+                            await CoreInventario.RetirarProducto(ProductoPedido.IdProducto, DFac.IdLocal, DFac.IdPersona, dFInicio);
+                        }
                     }
 
                     //Imprime el pedido
