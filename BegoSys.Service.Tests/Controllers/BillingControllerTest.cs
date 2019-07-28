@@ -74,7 +74,8 @@ namespace BegoSys.Service.Tests.Controllers
 
             //token         
             //var clientToken = new RestClient("http://192.168.1.243/JBCService");
-            var clientToken = new RestClient("http://localhost:3445/JBCService");
+            var clientToken = new RestClient("http://localhost:3445");
+            //var clientToken = new RestClient("http://localhost/JBCService");
 
 
             var requestToken = new RestRequest("token", Method.POST);

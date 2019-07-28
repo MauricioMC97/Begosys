@@ -59,7 +59,7 @@ namespace BegoSys.Service
             //    Provider = new ProveedorAutorizacionDirectorioActivoServidorSgdhm()
             //};
 
-            //app.UseOAuthAuthorizationServer(oauthServerOptions);
+            app.UseOAuthAuthorizationServer(oauthServerOptions);
             //app.UseOAuthAuthorizationServer(windowsOauthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
