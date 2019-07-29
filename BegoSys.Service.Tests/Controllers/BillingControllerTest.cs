@@ -36,14 +36,14 @@ namespace BegoSys.Service.Tests.Controllers
 
             var factura = new FacturaTO
             {
-                IdRegistro = 1,
+                IdRegistro = 9426,
                 IdPedidoDia = 1,
-                NroResolucionDian = "X",
-                NroFacturaDian = "X",
+                NroResolucionDian = "18762012046532",
+                NroFacturaDian = "7508362",
                 Fecha = DateTime.Now,
                 TipoDespacho = 1,
-                Impuesto = 0,
-                ValorTotal = 0,
+                Impuesto = 360,
+                ValorTotal = 4500,
                 EstadoFactura = "PENDIENTE",
                 IdPersona = 3,
                 IdLocal = 1
@@ -69,12 +69,12 @@ namespace BegoSys.Service.Tests.Controllers
                     Observaciones: frmPedidos.observaciones1.value
                 }*/
         };
-            datos.Add(factura); 
+            datos.Add(factura);
 
 
             //token         
-            //var clientToken = new RestClient("http://192.168.1.243/JBCService");
-            var clientToken = new RestClient("http://localhost:3445");
+            var clientToken = new RestClient("http://192.168.1.243/JBCService");
+            //var clientToken = new RestClient("http://localhost:3445");
             //var clientToken = new RestClient("http://localhost/JBCService");
 
 
