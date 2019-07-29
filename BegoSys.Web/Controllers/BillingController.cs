@@ -48,7 +48,6 @@ namespace BegoSys.Web.Controllers
         /// </summary>
         /// <param name="DatosFactura">Datos de la factura y del detalle de la factura</param>
         /// <returns>Retorna OK si la operación es exitosa</returns>
-        [HttpPost]
         public async Task<ActionResult> GuardarPedido(FacturaTO DatosFactura)
         {
             var errors = ModelState

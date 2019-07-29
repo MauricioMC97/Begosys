@@ -364,7 +364,7 @@
 
     </table>
 
-    <input id="btnSolPedido" type="button" class="btn btn-sm btn-success" onclick="SolicitarPedido()" value="Solicitar Pedido" /> <!--data-url-solicitar-pedido="Url.Action("GuardarPedido","Billing")">-->
+    <input id="btnSolPedido" type="button" class="btn btn-sm btn-success" onclick="SolicitarPedido()" value="Solicitar Pedido"/>
     @*<form action="../AnularFactura.cshtml">
         <input type="submit" value="Anular Factura" />
     </form>*@
@@ -657,7 +657,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '/Billing/GuardarPedido',
+                url: '@Url.Action("GuardarPedido","Billing")', //urlGuardarPedido, //'/Billing/GuardarPedido',
                 data: vDatosFactura,
 
                 success: function (rtaok) {
