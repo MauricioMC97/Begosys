@@ -73,7 +73,7 @@ namespace BegoSys.Service.Tests.Controllers
 
 
             //token         
-            var clientToken = new RestClient("http://192.168.1.243/JBCService");
+            var clientToken = new RestClient("http://192.168.1.243/BegoSys.Service");
             //var clientToken = new RestClient("http://localhost:3445");
             //var clientToken = new RestClient("http://localhost/JBCService");
 
@@ -88,7 +88,7 @@ namespace BegoSys.Service.Tests.Controllers
 
             Token obj = JsonConvert.DeserializeObject<Token>(responseToken.Content);
 
-            var client = new RestClient("http://192.168.1.243/JBCService/api/Billing");
+            var client = new RestClient("http://192.168.1.243/BegoSys.Service/api/Billing");
 
             var request = new RestRequest("GuardarPedido", Method.POST);
 
