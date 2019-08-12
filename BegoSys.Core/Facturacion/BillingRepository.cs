@@ -165,7 +165,7 @@ namespace BegoSys.Core.Facturacion
                     //DialogResult dialogResult = MessageBox.Show("Desea imprimir el recibo?", "Imprimir", MessageBoxButtons.YesNo);
                     //if (dialogResult == DialogResult.Yes)
                     //{
-                    //    PrintReceiptForTransaction(DFac);
+                        PrintReceiptForTransaction(DFac);
                     //}
                     AuxiliarBegoSys.EscribirLog(LogCategory.Debug, "Fin SalvarPedido fecha " + DFac.Fecha.ToLongDateString() + ", Pedido Día: " + DFac.IdPedidoDia, false);
                 }
