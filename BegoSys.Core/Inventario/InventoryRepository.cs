@@ -931,5 +931,17 @@ namespace BegoSys.Core.Inventario
             return ListaDatosI;
         }
 
+        public async Task SalvarCompras()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
     }
 }

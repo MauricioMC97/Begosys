@@ -193,6 +193,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

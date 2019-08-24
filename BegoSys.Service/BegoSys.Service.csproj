@@ -251,6 +251,7 @@
     <Compile Include="Controllers\AccountingController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -331,6 +332,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -390,7 +392,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50943</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/BegoSys.Service</IISUrl>
+          <IISUrl>http://localhost/JBDlloService</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://localhost:3445/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

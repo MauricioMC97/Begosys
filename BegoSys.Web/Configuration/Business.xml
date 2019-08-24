@@ -15,4 +15,7 @@
     <constructor-arg ref="RestTemplate" />
   </object>
 
+  <object id="InventoryController" type="BegoSys.Web.Controllers.InventoryController, BegoSys.Web" singleton="false">
+    <constructor-arg ref="RestTemplate" />
+  </object>
 </objects>

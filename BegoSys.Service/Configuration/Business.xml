@@ -16,8 +16,12 @@
     <constructor-arg ref="AccountingRepositoryTarget" />
   </object>
   <object id="HomeController" type="BegoSys.Service.Controllers.HomeController, BegoSys.Service" singleton="false" />
+  
+  <object id="InventoryController" type="BegoSys.Service.Controllers.InventoryController, BegoSys.Service" singleton="false" />
+  
   <!-- Módulos de negocios - Repositorios -->
   <object id="BillingRepositoryTarget" type="BegoSys.Core.Facturacion.BillingRepository, BegoSys.Core"></object>
   <!--<object id="OperationRepositoryTarget" type="BegoSys.Core.MonitorOperaciones.OperationRepository, BegoSys.Core"></object>-->
   <object id="AccountingRepositoryTarget" type="BegoSys.Core.Contabilidad.AccountingRepository, BegoSys.Core"></object>
+  
 </objects>
