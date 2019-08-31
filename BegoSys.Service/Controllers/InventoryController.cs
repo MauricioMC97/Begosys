@@ -30,7 +30,7 @@ namespace BegoSys.Service.Controllers
 
         [HttpPost]
         [ResponseType(typeof(void))]
-        [Route(ConstantesApi.GuardarComprasUri)]
+        [Route(ConstantesApi.RegistrarCompraURI)]
         public async Task<IHttpActionResult> GuardarCompras()
         {
             //if (ModelState.IsValid)

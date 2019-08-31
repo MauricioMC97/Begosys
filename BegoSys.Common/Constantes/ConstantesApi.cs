@@ -23,8 +23,8 @@ namespace BegoSys.Common.Constantes
         #endregion
 
         #region Inventory
-        public const string TrasladarIngredienteURI = "Inventory/TrasladarIngrediente";
-        public const string GuardarComprasUri = "api/Inventory/GuardarCompras";
+        public const string TrasladarIngredienteURI = "api/Inventory/TrasladarIngrediente";
+        public const string RegistrarCompraURI = "api/Inventory/RegistrarCompra";
         #endregion
     }
 }

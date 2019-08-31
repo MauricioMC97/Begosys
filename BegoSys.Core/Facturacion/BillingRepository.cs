@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using BegoSys.Common.Auxiliares;
 using BegoSys.Common.Constantes;
 using BegoSys.Common.Excepciones;
-using BegoSys.TO;
 
 namespace BegoSys.Core.Facturacion
 {

@@ -259,10 +259,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Inventory\Buys.html" />
-    <Content Include="Views\Inventory\CheckInventory.html" />
-    <Content Include="Views\Inventory\MakePulp.html" />
-    <Content Include="Views\Inventory\TranslateInventory.html" />
+    <None Include="Views\Inventory\Buys.cshtml" />
+    <None Include="Views\Inventory\CheckInventory.cshtml" />
+    <None Include="Views\Inventory\MakePulp.cshtml" />
+    <None Include="Views\Inventory\TranslateInventory.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

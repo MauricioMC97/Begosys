@@ -1,4 +1,5 @@
 ﻿using BegoSys.Common.Auxiliares;
+using BegoSys.Common.Constantes;
 using BegoSys.Common.ProveedoresDependencias;
 using Spring.Rest.Client;
 using System;
@@ -34,14 +35,16 @@ namespace BegoSys.Web.Controllers
 
 
         //// GET: Inventory
-        //public ActionResult Index()
-        //{
-        //    return View("Buys");
-        //}
-
-        public ActionResult Buy()
+        public ActionResult Index()
         {
             return View("Buys");
+        }
+
+        [HttpPost]
+        public JsonResult RegistrarCompra(string DatosCompra) //RegistroCompraTo DatosCompra)
+        {
+            _proxy.PostForMessage(ConstantesApi.RegistrarCompraURI, DatosCompra);
+            return Ok();
         }
     }
 }

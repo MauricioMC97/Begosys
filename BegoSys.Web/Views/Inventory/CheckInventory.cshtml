@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <table border="1" id="tblInvProductos">
+        <tr>
+            <th>Fecha último inventario: </th>
+            <th><pre id="lblUltInventario"></pre></th>
+        </tr>
+        <tr>
+            <th>Ingrediente</th>
+            <th>Cantidad Ayer</th>
+            <th>Entregas Hoy</th>
+            <th>Ventas Hoy</th>
+            <th>Conteo Hoy</th>
+            <th>Sistema Hoy</th>
+            <th>Diferencia (Sistema vs Conteo)</th>
+        </tr>
+
+        <!--PEGAR AQUI EL EXCEL-->
+        <tr> <td>Mango en Agua Vaso: </td> <td><pre id="lblCantidadAyer1"></pre></td><td><pre id="lblEntregasHoy1"></pre></td><td><pre id="lblVentasHoy1"></pre></td><td> <input id="btnAdicionMangoenAguaVaso" type="button" class="btn btn-sm btn-sucess" onclick="AdicionarProducto('1')" tabindex="1" data-valoru="1500" value="+1"><input type="text" id="obsbtnMangoenAguaVaso"><input id="btnRetiroJugo" type="button" class="btn btn-sm btn-sucess" onclick="RetirarProducto('1')" tabindex="1" data-valoru="1500" value="-1"></td> <td><pre id="lblSistemaHoy1"></pre></td><td><pre id="lblDiferencia1"></pre></td></tr>
+
+
+        <!--FIN PEGAR AQUI EL EXCEL-->
+    </table>
+
+    <input id="btnVInventario" type="button" class="btn btn-sm btn-success" onclick="VerificarInventario()" value="Verificar Inventario"/>
+
+    <script type="text/javascript">
+        var vDatosInventarioDia = [];
+
+        function VerificarInventario() {
+            var tabla = document.getElementById("tblInvProductos");
+
+            for (var iContFilas = 0, dfila; dfila = tabla.rows[iContFilas]; iContFilas) {
+                for (var iContColumnas = 0, dColumna; dColumna = tabla.cells[iContColumnas]; iContColumnas) {
+                    vDatosInventarioDia = {
+                        fecha = null,
+                        idProducto = document.getElementById("tdid").innerHTML,
+                        ExistenciaUlt = null,
+                        Ventas = null,
+                        ExistenciaHoy = document.getElementById("txtExistH").innerHTML,
+                        Diferencia = null,
+                    };
+
+                    //dColumna.innerHTML = '[Row=' + r + ',Col=' + c + ']'; 
+                }
+            };
+
+
+            //call a function with parameters
+            $.ajax({
+                type: "POST",
+                url: 'Inventory/VerificarInventario',
+                data: vDatosInventarioDia,
+
+                success: function (rtaok) {
+                    if (rtaok.status === "error") {
+                        alert("Error al guardar: " + rtaok.message);
+                    }
+                    else {
+                        rtaok.respuesta = 
+                    }
+                },
+                error: function (rtaerror) {
+                    alert("Error al guardar: " + rtaerror.responseText);
+                }
+            });
+        };
+    </script>
+</body >
+</html >
