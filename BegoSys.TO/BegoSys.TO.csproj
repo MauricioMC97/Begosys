@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddInventarioTO.cs" />
     <Compile Include="DatosLMTO.cs" />
     <Compile Include="DatosLocalTO.cs" />
     <Compile Include="DetalleFacturaTO.cs" />

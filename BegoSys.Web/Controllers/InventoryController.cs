@@ -40,6 +40,21 @@ namespace BegoSys.Web.Controllers
             return View("Buys");
         }
 
+        public ActionResult CheckInventory()
+        {
+            return View("CheckInventory");
+        }
+
+        public ActionResult MakePulp()
+        {
+            return View("MakePulp");
+        }
+
+        public ActionResult TranslateInventory()
+        {
+            return View("TranslateInventory");
+        }
+
         [HttpPost]
         public JsonResult RegistrarCompra(string DatosCompra) //RegistroCompraTo DatosCompra)
         {
