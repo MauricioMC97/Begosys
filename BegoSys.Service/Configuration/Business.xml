@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:aop="http://www.springframework.net/aop"
+         xmlns:db="http://www.springframework.net/database"
+         xmlns:tx="http://www.springframework.net/tx">
+  <description>Declaración de servicios de negocio</description>
+
+  <!-- API Controllers -->
+  <object id="BillingController" type="BegoSys.Service.Controllers.BillingController, BegoSys.Service" singleton="false">
+    <constructor-arg ref="BillingRepositoryTarget" />
+  </object>
+  <object id="OperationController" type="BegoSys.Service.Controllers.OperationController, BegoSys.Service" singleton="false">
+    <constructor-arg ref="OperationRepositoryTarget" />
+  </object>
+  <object id="AccountingController" type="BegoSys.Service.Controllers.AccountingController, BegoSys.Service" singleton="false">
+    <constructor-arg ref="AccountingRepositoryTarget" />
+  </object>
+  <object id="HomeController" type="BegoSys.Service.Controllers.HomeController, BegoSys.Service" singleton="false" />
+  
+  <object id="InventoryController" type="BegoSys.Service.Controllers.InventoryController, BegoSys.Service" singleton="false" />
+  
+  <!-- Módulos de negocios - Repositorios -->
+  <object id="BillingRepositoryTarget" type="BegoSys.Core.Facturacion.BillingRepository, BegoSys.Core"></object>
+  <!--<object id="OperationRepositoryTarget" type="BegoSys.Core.MonitorOperaciones.OperationRepository, BegoSys.Core"></object>-->
+  <object id="AccountingRepositoryTarget" type="BegoSys.Core.Contabilidad.AccountingRepository, BegoSys.Core"></object>
+  
+</objects>
