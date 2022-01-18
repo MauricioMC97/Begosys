@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <table border="1" id="tblComprasProductos">
+        <tr>
+            <th>Compras Materia Prima: </th>
+            <th><pre id="lblComprasMatPrima"></pre></th>
+        </tr>
+        <tr>
+            <th>Ingrediente</th>
+            <th>Cantidad Comprada(Kg/Gr)</th>
+            <th>Valor</th>
+            <th>Bolsas/Unidades</th>
+            <th>Nit Proveedor</th>
+            <th>Ubicación (0: Apto, 1: Local)</th>
+        </tr>
+
+        <!--PEGAR AQUI EL EXCEL-->
+        <tr><td>Limón</td><td><input id="btnAdicion249" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('249')" tabindex="249" value="+1"><input type="number" id="249" min="0" name="txtCompra249"><input id="btnRetiro249" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('249')" tabindex="249" value="-1"></td><td><input type="number" id=1"249" min="0" name="txtPrecio249"></td><td><input id="btnAdicion3249" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('249')" tabindex=3"249" value="+1"><input type="number" id=3"249" min="0" name="txtBolsasU249"><input id="btnRetiro249" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('249')" tabindex=3"249" value="-1"></td><td><input type="text" id=4"249" name="txtNitProveedor249"></td><td><input type="number" id=4"249" min="0" name="txtUbicacion249"></td></tr>
+        <tr><td>Naranja</td><td><input id="btnAdicion250" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('250')" tabindex="250" value="+1"><input type="number" id="250" min="0" name="txtCompra250"><input id="btnRetiro250" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('250')" tabindex="250" value="-1"></td><td><input type="number" id=1"250" min="0" name="txtPrecio250"></td><td><input id="btnAdicion3250" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('250')" tabindex=3"250" value="+1"><input type="number" id=3"250" min="0" name="txtBolsasU250"><input id="btnRetiro250" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('250')" tabindex=3"250" value="-1"></td><td><input type="text" id=4"250" name="txtNitProveedor250"></td><td><input type="number" id=4"250" min="0" name="txtUbicacion250"></td></tr>
+        <tr><td>Mandarina</td><td><input id="btnAdicion251" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('251')" tabindex="251" value="+1"><input type="number" id="251" min="0" name="txtCompra251"><input id="btnRetiro251" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('251')" tabindex="251" value="-1"></td><td><input type="number" id=1"251" min="0" name="txtPrecio251"></td><td><input id="btnAdicion3251" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('251')" tabindex=3"251" value="+1"><input type="number" id=3"251" min="0" name="txtBolsasU251"><input id="btnRetiro251" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('251')" tabindex=3"251" value="-1"></td><td><input type="text" id=4"251" name="txtNitProveedor251"></td><td><input type="number" id=4"251" min="0" name="txtUbicacion251"></td></tr>
+        <tr><td>Papaya en Trozos Vaso</td><td><input id="btnAdicion252" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('252')" tabindex="252" value="+1"><input type="number" id="252" min="0" name="txtCompra252"><input id="btnRetiro252" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('252')" tabindex="252" value="-1"></td><td><input type="number" id=1"252" min="0" name="txtPrecio252"></td><td><input id="btnAdicion3252" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('252')" tabindex=3"252" value="+1"><input type="number" id=3"252" min="0" name="txtBolsasU252"><input id="btnRetiro252" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('252')" tabindex=3"252" value="-1"></td><td><input type="text" id=4"252" name="txtNitProveedor252"></td><td><input type="number" id=4"252" min="0" name="txtUbicacion252"></td></tr>
+        <tr><td>Rodajas de Piña</td><td><input id="btnAdicion253" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('253')" tabindex="253" value="+1"><input type="number" id="253" min="0" name="txtCompra253"><input id="btnRetiro253" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('253')" tabindex="253" value="-1"></td><td><input type="number" id=1"253" min="0" name="txtPrecio253"></td><td><input id="btnAdicion3253" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('253')" tabindex=3"253" value="+1"><input type="number" id=3"253" min="0" name="txtBolsasU253"><input id="btnRetiro253" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('253')" tabindex=3"253" value="-1"></td><td><input type="text" id=4"253" name="txtNitProveedor253"></td><td><input type="number" id=4"253" min="0" name="txtUbicacion253"></td></tr>
+        <tr><td>Banano</td><td><input id="btnAdicion254" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('254')" tabindex="254" value="+1"><input type="number" id="254" min="0" name="txtCompra254"><input id="btnRetiro254" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('254')" tabindex="254" value="-1"></td><td><input type="number" id=1"254" min="0" name="txtPrecio254"></td><td><input id="btnAdicion3254" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('254')" tabindex=3"254" value="+1"><input type="number" id=3"254" min="0" name="txtBolsasU254"><input id="btnRetiro254" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('254')" tabindex=3"254" value="-1"></td><td><input type="text" id=4"254" name="txtNitProveedor254"></td><td><input type="number" id=4"254" min="0" name="txtUbicacion254"></td></tr>
+        <tr><td>Murrapo</td><td><input id="btnAdicion255" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('255')" tabindex="255" value="+1"><input type="number" id="255" min="0" name="txtCompra255"><input id="btnRetiro255" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('255')" tabindex="255" value="-1"></td><td><input type="number" id=1"255" min="0" name="txtPrecio255"></td><td><input id="btnAdicion3255" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('255')" tabindex=3"255" value="+1"><input type="number" id=3"255" min="0" name="txtBolsasU255"><input id="btnRetiro255" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('255')" tabindex=3"255" value="-1"></td><td><input type="text" id=4"255" name="txtNitProveedor255"></td><td><input type="number" id=4"255" min="0" name="txtUbicacion255"></td></tr>
+        <tr><td>Fresa</td><td><input id="btnAdicion256" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('256')" tabindex="256" value="+1"><input type="number" id="256" min="0" name="txtCompra256"><input id="btnRetiro256" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('256')" tabindex="256" value="-1"></td><td><input type="number" id=1"256" min="0" name="txtPrecio256"></td><td><input id="btnAdicion3256" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('256')" tabindex=3"256" value="+1"><input type="number" id=3"256" min="0" name="txtBolsasU256"><input id="btnRetiro256" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('256')" tabindex=3"256" value="-1"></td><td><input type="text" id=4"256" name="txtNitProveedor256"></td><td><input type="number" id=4"256" min="0" name="txtUbicacion256"></td></tr>
+        <tr><td>Guanábana</td><td><input id="btnAdicion368" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('368')" tabindex="368" value="+1"><input type="number" id="368" min="0" name="txtCompra368"><input id="btnRetiro368" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('368')" tabindex="368" value="-1"></td><td><input type="number" id=1"368" min="0" name="txtPrecio368"></td><td><input id="btnAdicion3368" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('368')" tabindex=3"368" value="+1"><input type="number" id=3"368" min="0" name="txtBolsasU368"><input id="btnRetiro368" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('368')" tabindex=3"368" value="-1"></td><td><input type="text" id=4"368" name="txtNitProveedor368"></td><td><input type="number" id=4"368" min="0" name="txtUbicacion368"></td></tr>
+        <tr><td>Maracuyá</td><td><input id="btnAdicion369" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('369')" tabindex="369" value="+1"><input type="number" id="369" min="0" name="txtCompra369"><input id="btnRetiro369" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('369')" tabindex="369" value="-1"></td><td><input type="number" id=1"369" min="0" name="txtPrecio369"></td><td><input id="btnAdicion3369" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('369')" tabindex=3"369" value="+1"><input type="number" id=3"369" min="0" name="txtBolsasU369"><input id="btnRetiro369" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('369')" tabindex=3"369" value="-1"></td><td><input type="text" id=4"369" name="txtNitProveedor369"></td><td><input type="number" id=4"369" min="0" name="txtUbicacion369"></td></tr>
+        <tr><td>Mora</td><td><input id="btnAdicion370" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('370')" tabindex="370" value="+1"><input type="number" id="370" min="0" name="txtCompra370"><input id="btnRetiro370" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('370')" tabindex="370" value="-1"></td><td><input type="number" id=1"370" min="0" name="txtPrecio370"></td><td><input id="btnAdicion3370" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('370')" tabindex=3"370" value="+1"><input type="number" id=3"370" min="0" name="txtBolsasU370"><input id="btnRetiro370" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('370')" tabindex=3"370" value="-1"></td><td><input type="text" id=4"370" name="txtNitProveedor370"></td><td><input type="number" id=4"370" min="0" name="txtUbicacion370"></td></tr>
+        <tr><td>Piña</td><td><input id="btnAdicion371" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('371')" tabindex="371" value="+1"><input type="number" id="371" min="0" name="txtCompra371"><input id="btnRetiro371" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('371')" tabindex="371" value="-1"></td><td><input type="number" id=1"371" min="0" name="txtPrecio371"></td><td><input id="btnAdicion3371" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('371')" tabindex=3"371" value="+1"><input type="number" id=3"371" min="0" name="txtBolsasU371"><input id="btnRetiro371" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('371')" tabindex=3"371" value="-1"></td><td><input type="text" id=4"371" name="txtNitProveedor371"></td><td><input type="number" id=4"371" min="0" name="txtUbicacion371"></td></tr>
+        <tr><td>Lulo</td><td><input id="btnAdicion372" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('372')" tabindex="372" value="+1"><input type="number" id="372" min="0" name="txtCompra372"><input id="btnRetiro372" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('372')" tabindex="372" value="-1"></td><td><input type="number" id=1"372" min="0" name="txtPrecio372"></td><td><input id="btnAdicion3372" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('372')" tabindex=3"372" value="+1"><input type="number" id=3"372" min="0" name="txtBolsasU372"><input id="btnRetiro372" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('372')" tabindex=3"372" value="-1"></td><td><input type="text" id=4"372" name="txtNitProveedor372"></td><td><input type="number" id=4"372" min="0" name="txtUbicacion372"></td></tr>
+        <tr><td>Tomate de Arbol</td><td><input id="btnAdicion373" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('373')" tabindex="373" value="+1"><input type="number" id="373" min="0" name="txtCompra373"><input id="btnRetiro373" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('373')" tabindex="373" value="-1"></td><td><input type="number" id=1"373" min="0" name="txtPrecio373"></td><td><input id="btnAdicion3373" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('373')" tabindex=3"373" value="+1"><input type="number" id=3"373" min="0" name="txtBolsasU373"><input id="btnRetiro373" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('373')" tabindex=3"373" value="-1"></td><td><input type="text" id=4"373" name="txtNitProveedor373"></td><td><input type="number" id=4"373" min="0" name="txtUbicacion373"></td></tr>
+        <tr><td>Guayaba</td><td><input id="btnAdicion374" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('374')" tabindex="374" value="+1"><input type="number" id="374" min="0" name="txtCompra374"><input id="btnRetiro374" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('374')" tabindex="374" value="-1"></td><td><input type="number" id=1"374" min="0" name="txtPrecio374"></td><td><input id="btnAdicion3374" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('374')" tabindex=3"3374" value="+1"><input type="number" id=3"374" min="0" name="txtBolsasU374"><input id="btnRetiro374" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('374')" tabindex=3"374" value="-1"></td><td><input type="text" id=4"374" name="txtNitProveedor374"></td><td><input type="number" id=4"374" min="0" name="txtUbicacion374"></td></tr>
+        <tr><td>Mango</td><td><input id="btnAdicion375" type="button" class="btn btn-sm btn-success" onclick="AdicionarMateriaP('375')" tabindex="375" value="+1"><input type="number" id="375" min="0" name="txtCompra375"><input id="btnRetiro375" type="button" class="btn btn-sm btn-success" onclick="RetirarMateriaP('375')" tabindex="375" value="-1"></td><td><input type="number" id=1"375" min="0" name="txtPrecio375"></td><td><input id="btnAdicion3375" type="button" class="btn btn-sm btn-success" onclick="AdicionarBolsasU('375')" tabindex="3375" value="+1"><input type="number" id=3"375" min="0" name="txtBolsasU375"><input id="btnRetiro375" type="button" class="btn btn-sm btn-success" onclick="RetirarBolsasU('375')" tabindex=3"375" value="-1"></td><td><input type="text" id=4"375" name="txtNitProveedor375"></td><td><input type="number" id=4"375" min="0" name="txtUbicacion375"></td></tr>
+
+
+
+        <!--FIN PEGAR AQUI EL EXCEL-->
+    </table>
+
+    <input id="btnVInventario" type="button" class="btn btn-sm btn-success" onclick="VerificarInventario()" value="Verificar Inventario"/>
+
+    <script type="text/javascript">
+        var vComprasProductosDia = [];
+
+        function AdicionarMateriaP(ControlId) {
+
+
+            vComprasProductosDia = {
+                IdIngrediente: 1,
+                IdEnvase: 1,
+                IdInsumo: "X",
+                Cantidad: "X",
+                Valor: null, //d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+                NroUnidades: 1,
+                CostoUnidades: document.activeElement.dataset.valoru * 0.08,
+                IdMedida: parseInt(document.activeElement.dataset.valoru),
+                IdLocal: 'PENDIENTE',
+                NitProveedor: 3,
+                IdPersona: 1
+            };
+        }
+
+        function VerificarInventario() {
+            var tabla = document.getElementById("tblInvProductos");
+
+            for (var iContFilas = 0, dfila; dfila = tabla.rows[iContFilas]; iContFilas) {
+                for (var iContColumnas = 0, dColumna; dColumna = tabla.cells[iContColumnas]; iContColumnas) {
+                    vDatosInventarioDia = {
+                        fecha = null,
+                        idProducto = document.getElementById("tdid").innerHTML,
+                        ExistenciaUlt = null,
+                        Ventas = null,
+                        ExistenciaHoy = document.getElementById("txtExistH").innerHTML,
+                        Diferencia = null,
+                    };
+
+                    //dColumna.innerHTML = '[Row=' + r + ',Col=' + c + ']'; 
+                }
+            };
+
+
+            //call a function with parameters
+            $.ajax({
+                type: "POST",
+                url: 'api/Inventory/RegistrarCompra',
+                data: vDatosInventarioDia,
+
+                success: function (rtaok) {
+                    if (rtaok.status === "error") {
+                        alert("Error al guardar: " + rtaok.message);
+                    }
+                    else {
+                        rtaok.respuesta = 
+                    }
+                },
+                error: function (rtaerror) {
+                    alert("Error al guardar: " + rtaerror.responseText);
+                }
+            });
+        };
+    </script>
+</body >
+</html >
